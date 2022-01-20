@@ -3,6 +3,7 @@
 
 @endsection
 @section('content')
+
 <!-- Begin Slider With Banner Area -->
 <div class="slider-with-banner">
     <div class="container">
@@ -71,9 +72,21 @@
         </div>
     </div>
 </div>
+<div class="static-top-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="static-top-content mt-sm-30">
+                    Gift Special: Gift every single day on Weekends - New Coupon code "
+                    <span>LimupaSaleoff</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Slider With Banner Area End Here -->
 <!-- Begin Product Area -->
-<div class="product-area pt-60 pb-50">
+<div class="product-area li-laptop-product Special-product pt-60 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -95,7 +108,8 @@
         <div class="tab-content">
             <div id="li-bestseller-product" class="tab-pane active show" role="tabpanel">
                 <div class="row">
-                    <div class="product-active owl-carousel">
+                    {{-- <div class="product-active special-product-active owl-carousel"> --}}
+                    <div class="special-product-active owl-carousel">
                         @foreach ($bestSeller as $best)
                         <div class="col-lg-12">
                             <!-- single-product-wrap start -->
@@ -124,9 +138,12 @@
                                             </div>
                                         </div>
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->TenDT}}</a></h4>
+                                        <div class="countersection">
+                                            <div class="li-countdown wrap-countdown mercado-countdown" data-expire="2022/12/12 12:34:56"></div>
+                                        </div>
                                         <div class="price-box">
                                             @if($best->quantity->count() >0)
-                                            <span class="new-price">{{ number_format($best->quantity[0]->DonGiaBan) }}₫</span>
+                                            <span class="new-price text-danger">{{ number_format($best->quantity[0]->DonGiaBan) }}₫</span>
                                             @else
                                             <span class="new-price">Đang cập nhật</span>
                                             @endif

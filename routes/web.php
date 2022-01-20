@@ -4,10 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StripeController;
-use App\Models\Customer;
 
 
 /*
@@ -21,8 +19,7 @@ use App\Models\Customer;
 |
 */
 
-
-Route::match(['get', 'post'],'/search-product',[HomeController::class,'searchProduct'])->name('searchProduct');
+Route::match(['get', 'post'], '/search-product', [HomeController::class, 'searchProduct'])->name('searchProduct');
 Route::get('/single-product', "SingleProductController@index");
 
 Route::get('/main-page', [HomeController::class, 'index'])->name('main-page');
@@ -34,7 +31,6 @@ Auth::routes(['register' => false]);
 Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function () {
     // Route::get('/dashboard', "AdminController@dashboard");
     Route::get('/dashboard', "OrderController@getAllOrder");
-
     //Supplier-Admin
     Route::get('/supplier-list', "SupplierController@getAllSupplier");
     //Add Supplier
@@ -82,16 +78,16 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
 });
 
 // Customer-Homepage
-Route::get('/confirm',[ShoppingCartController::class,'confirm']);
+Route::get('/confirm', [ShoppingCartController::class, 'confirm']);
 
 // Customer-Homepage
 Route::prefix('user')->name('user.')->group(function () {
-    Route::view('/login', 'Home.login')->name('login');
-    Route::get('/fullcart',[ShoppingCartController::class,'index'])->name('fullcart');
-    Route::get('/add-to-cart/{id}',[ShoppingCartController::class,'addToCart'])->name('addToCart');
-    Route::get('/cart-remove/{id}',[ShoppingCartController::class,'cartRemove'])->name('cartRemove');
-    Route::get('/increase-cart/{rowid}',[ShoppingCartController::class,'increaseCart'])->name('increaseCart');
-    Route::get('/decrease-cart/{rowid}',[ShoppingCartController::class,'decreaseCart'])->name('decreaseCart');
+    // Route::view('/login', 'Home.login')->name('login');
+    Route::get('/fullcart', [ShoppingCartController::class, 'index'])->name('fullcart');
+    Route::get('/add-to-cart/{id}', [ShoppingCartController::class, 'addToCart'])->name('addToCart');
+    Route::get('/cart-remove/{id}', [ShoppingCartController::class, 'cartRemove'])->name('cartRemove');
+    Route::get('/increase-cart/{rowid}', [ShoppingCartController::class, 'increaseCart'])->name('increaseCart');
+    Route::get('/decrease-cart/{rowid}', [ShoppingCartController::class, 'decreaseCart'])->name('decreaseCart');
 
     Route::middleware(['guest:customer', 'prevent-back-history'])->group(function () {
         Route::view('/register', 'Home.register')->name('register');
@@ -100,41 +96,32 @@ Route::prefix('user')->name('user.')->group(function () {
     });
 
     Route::middleware(['auth:customer', 'prevent-back-history'])->group(function () {
-        Route::get('/infocustomer/{id}',[CustomerController::class,'info'])->name('infocustomer');
-        Route::get('/changepass/{id}',[CustomerController::class,'changepass'])->name('changepass');
-        Route::put('/updatepass/{id}',[CustomerController::class,'updatepassword'])->name('updatepass');
-        Route::match(['get', 'post'],'/signout', [CustomerController::class, 'logout'])->name('signout');
+        Route::get('/infocustomer/{id}', [CustomerController::class, 'info'])->name('infocustomer');
+        Route::get('/changepass/{id}', [CustomerController::class, 'changepass'])->name('changepass');
+        Route::put('/updatepass/{id}', [CustomerController::class, 'updatepassword'])->name('updatepass');
+        Route::match(['get', 'post'], '/signout', [CustomerController::class, 'logout'])->name('signout');
 
         // Danh sách hóa đơn của khách hàng
-        Route::get('/order',[CustomerController::class,'orderByUser'])->name('orderByUser');
+        Route::get('/order', [CustomerController::class, 'orderByUser'])->name('orderByUser');
 
         Route::post('/add-feedback', 'ProductController@feedback');
 
-        Route::get('/check-out',[ShoppingCartController::class,'checkout'])->name('checkout');
-        Route::post('/order-add',[ShoppingCartController::class,'orderAdd'])->name('orderadd');
+        Route::get('/check-out', [ShoppingCartController::class, 'checkout'])->name('checkout');
+        Route::post('/order-add', [ShoppingCartController::class, 'orderAdd'])->name('orderadd');
 
         //stripe route
-        Route::post('/payment',[StripeController::class,'index'])->name('payment');
+        Route::post('/payment', [StripeController::class, 'index'])->name('payment');
         // Route::get('/confirm',[ShoppingCartController::class,'confirm']);
-        Route::get('/cancel',[StripeController::class,'cancel']);
+        Route::get('/cancel', [StripeController::class, 'cancel']);
     });
 });
-
-
-// social -login
-// Route::prefix('google')->name('google.')->group(function () {
-//     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-//     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
-// });
-
-// Route::prefix('facebook')->name('facebook.')->group( function(){
-//     Route::get('auth', [FaceBookController::class, 'loginUsingFacebook'])->name('login');
-//     Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
-// });
-
 
 Route::get('/product-detail/{id}', "ProductController@getProductDetail")->name('productDetail');
 Route::get('/product-instock/{id}/{color}', "ProductController@getNumberInstockByColor");
 Route::get('/productBySupplier/{id}', "ProductController@productBySupplier");
-
 Route::get('/json/product-detail/{id}', 'ProductController@getProductDetailJSON');
+
+Route::namespace('Customer')->group(function () {
+    Route::get('/login', 'LoginController@showLoginForm');
+    Route::post('/login', 'LoginController@login')->name('user.login');
+});

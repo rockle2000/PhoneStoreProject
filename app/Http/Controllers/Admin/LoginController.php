@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +29,7 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -43,22 +44,25 @@ class LoginController extends Controller
     {
         return view('admin.login');
     }
+    public function dashboard()
+    {
+        return view("Admin.dashboard");
+    }
     function logout(Request $request)
     {
         // Auth::logout();
         Auth::guard('web')->logout();
-        return redirect('/login');
+        return redirect('/admin/login');
     }
-
-    protected function authenticated()
-    {
-        if (Auth::user()->role == '1') //1 = Admin Login
-        {
-            return redirect('/dashboard');
-        } elseif (Auth::user()->role == '0') // Normal or Default User Login
-        {
-            // return redirect('/home')->with('status', 'Access Denied! as you are not as Admin');
-            return back()->with('status', 'Access Denied! as you are not as Admin');
-        }
-    }
+    // protected function authenticated()
+    // {
+    //     if (Auth::user()->role == '1') //1 = Admin Login
+    //     {
+    //         return redirect('/dashboard');
+    //     } elseif (Auth::user()->role == '0') // Normal or Default User Login
+    //     {
+    //         // return redirect('/home')->with('status', 'Access Denied! as you are not as Admin');
+    //         return back()->with('status', 'Access Denied! as you are not as Admin');
+    //     }
+    // }
 }

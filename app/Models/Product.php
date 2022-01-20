@@ -20,6 +20,7 @@ class Product extends Model
         'ThongSo',
         'TrangThai',
         'DanhGia',
+        'BaoHanh',
     ];
 
     public function supplier()

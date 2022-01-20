@@ -18,12 +18,14 @@ class Customer extends Authenticatable
      * @var string[]
      */
     public $timestamps = false;
+    protected $guard = 'customer';
     protected $fillable = [
         'name',
         'phone',
         'email',
         'password',
         'status',
+        'created_at',
     ];
 
     /**

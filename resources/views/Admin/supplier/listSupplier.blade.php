@@ -152,7 +152,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/active-supplier/' + id
+                    , url: '/PhoneStore/active-supplier/' + id
                     , success: function(result) {
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-success disabled"><i class="fas fa-check-circle"></i> Available</button>';
@@ -192,7 +192,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/delete-supplier/' + id
+                    , url: '/PhoneStore/delete-supplier/' + id
                     , success: function(result) {
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-danger disabled"><i class="far fa-times-circle"></i> Disabled</button>';

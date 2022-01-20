@@ -69,7 +69,7 @@
 
     <div class="body-wrapper">
         <!-- Begin Header Area -->
-        <header>
+        <header class="li-header-4">
             <!-- Begin Header Top Area -->
             <div class="header-top">
                 <div class="container">
@@ -163,7 +163,7 @@
                 <div class="col-lg-3">
                     <div class="logo pb-sm-30 pb-xs-30">
                         <a href="{{url('/main-page')}}">
-                            <img src="{{asset('public/frontend/images/menu/logo/1.jpg')}}" alt="">
+                            <img src="{{asset('public/frontend/images/menu/logo/2.jpg')}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -185,12 +185,12 @@
                     <div class="header-middle-right">
                         <ul class="hm-menu">
                             <!-- Begin Header Middle Wishlist Area -->
-                            {{-- <li class="hm-wishlist">
+                            <li class="hm-wishlist">
                                 <a href="wishlist.html">
                                     <span class="cart-item-count wishlist-item-count">0</span>
                                     <i class="fa fa-heart-o"></i>
                                 </a>
-                            </li> --}}
+                            </li>
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
@@ -339,7 +339,8 @@
                                                 </li>
                                             </ul>
                                         </li> --}}
-
+                                <li><a href="#" class="font-weight-bold">Blog</a></li>
+                                <li><a href="#" class="font-weight-bold">Phụ kiện</a></li>
                                 <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li>
                                 <li><a href="{{ url('contact') }}" class="font-weight-bold">Liên hệ</a></li>
                             </ul>
@@ -363,11 +364,12 @@
     <!-- Mobile Menu Area End Here -->
     </header>
     <!-- Header Area End Here -->
-
+    
     {{-- Main Content --}}
     @yield('content')
     {{-- End Main Content --}}
-
+    <
+    
     <!-- Begin Footer Area -->
     <div class="footer">
         <!-- Begin Footer Static Top Area -->
@@ -651,6 +653,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- SweetAlert2 -->
     <script src="{{asset('public/backend/Admin/Layout/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    {{-- countdown timer --}}
+    <script src="{{asset('public/frontend/js/function.js')}}"></script>
     <script type="text/javascript">
         @if(session('msg'))
         toastr.options = {

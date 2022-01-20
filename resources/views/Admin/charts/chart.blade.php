@@ -199,7 +199,7 @@
         });
 
         function DoanhThuTheoNam(nam) {
-            $.get('/Group8_PhoneStore/chart/revenue/' + nam, function(data) {
+            $.get('/PhoneStore/chart/revenue/' + nam, function(data) {
                 var thang = [];
                 var dulieu = [];
                 var isEmpty = true;
@@ -229,7 +229,7 @@
         }
 
         function ThongKeTheoHang(nam) {
-            $.get('/Group8_PhoneStore/chart/productBySupplier/' + nam, function(data) {
+            $.get('/PhoneStore/chart/productBySupplier/' + nam, function(data) {
                 var tennsx = [];
                 var soluong = [];
                 // console.log(data);

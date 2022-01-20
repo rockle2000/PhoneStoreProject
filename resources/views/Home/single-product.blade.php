@@ -54,7 +54,7 @@
                         <span class="product-details-ref" style="font-size: 16px; color:black">Nhà sản xuất: {{ $product->supplier->TenNSX }}</span>
                         <div class="rating-box pt-20">
                             <ul class="rating rating-with-review-item ">
-                                <span class="h5"> Đánh giá:</span>
+                                <span class="h6"> Đánh giá:</span>
                                 @for($i = 0; $i < 5; $i++) @if($i <floor($product->DanhGia))
                                     <li class="star-large"><i class="fa fa-star-o"></i></li>
                                     @else
@@ -79,89 +79,90 @@
                                 </span>
                             </p> --}}
                         </div>
+                        <span>Bảo hành: {{ $product->BaoHanh}}</span><br>
                         @if($product->quantity->count() >0 )
-                        Số lượng trong kho: 
+                        <span> Số lượng trong kho: </span>
                         @if($product->quantity[0]->SoLuong > 0)
                         <span id="product_instock">{{ $product->quantity[0]->SoLuong }}</span>
                         @elseif($product->quantity[0]->SoLuong == 0)
                         <span id="product_instock"><span class="text-danger">Đã hết hàng</span></span>
                         @endif
                         {{-- <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" method="get"> --}}
-                            @else
-                            Số lượng trong kho: <span id="product_instock">Đang cập nhật</span>
-                            @endif
-                            <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" method="get">
-                                @csrf
-                                <div class="product-variants mt-1">
-                                    <div class="produt-variants-size">
-                                        @if($product->quantity->count() >0)
-                                        <label><strong>Màu sắc</strong></label>
-                                        <select class="nice-select" id="ddlColor" name="color">
-                                            @foreach ($product->quantity as $item)
-                                            {{-- @if($item->SoLuong >0) --}}
-                                            <option value="{{ $item->Mau }}">{{ $item->Mau }}</option>
-                                            {{-- @endif --}}
-                                            @endforeach
-                                        </select>
-                                        @endif
-                                    </div>
-                                </div>
-                                @if($product->quantity->count() >0)
-                                <div class="single-add-to-cart">
-                                    <div class="quantity">
-                                        <label>Số lượng</label>
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" value="{{ !old('qtyproduct') ? 1 : old('qtyproduct') }}" type="text" name="qtyproduct">
-                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                        </div>
-                                    </div>
-                                    <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
-                                </div>
-                                @endif
-                            </form>
-                            <div class="product-additional-info pt-25">
-                                {{-- <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a> --}}
-                                <div class="product-social-sharing pt-25">
-                                    <ul>
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
-                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
-                                        <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
-                                    </ul>
+                        @else
+                        Số lượng trong kho: <span id="product_instock">Đang cập nhật</span>
+                        @endif
+                        <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" method="get">
+                            @csrf
+                            <div class="product-variants mt-1">
+                                <div class="produt-variants-size">
+                                    @if($product->quantity->count() >0)
+                                    <label><strong>Màu sắc</strong></label>
+                                    <select class="nice-select" id="ddlColor" name="color">
+                                        @foreach ($product->quantity as $item)
+                                        {{-- @if($item->SoLuong >0) --}}
+                                        <option value="{{ $item->Mau }}">{{ $item->Mau }}</option>
+                                        {{-- @endif --}}
+                                        @endforeach
+                                    </select>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="block-reassurance">
+                            @if($product->quantity->count() >0)
+                            <div class="single-add-to-cart">
+                                <div class="quantity">
+                                    <label>Số lượng</label>
+                                    <div class="cart-plus-minus">
+                                        <input class="cart-plus-minus-box" value="{{ !old('qtyproduct') ? 1 : old('qtyproduct') }}" type="text" name="qtyproduct">
+                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                    </div>
+                                </div>
+                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                            </div>
+                            @endif
+                        </form>
+                        <div class="product-additional-info pt-25">
+                            {{-- <a class="wishlist-btn" href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a> --}}
+                            <div class="product-social-sharing pt-25">
                                 <ul>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-check-square-o"></i>
-                                            </div>
-                                            {{-- <p>Security policy (edit with Customer reassurance module)</p> --}}
-                                            <p>Chính sách bảo mật (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-truck"></i>
-                                            </div>
-                                            {{-- <p>Delivery policy (edit with Customer reassurance module)</p> --}}
-                                            <p>Chính sách giao hàng (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="reassurance-item">
-                                            <div class="reassurance-icon">
-                                                <i class="fa fa-exchange"></i>
-                                            </div>
-                                            {{-- <p> Return policy (edit with Customer reassurance module)</p> --}}
-                                            <p>Chính sách đổi trả (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
-                                        </div>
-                                    </li>
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                                    <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i>Google +</a></li>
+                                    <li class="instagram"><a href="#"><i class="fa fa-instagram"></i>Instagram</a></li>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="block-reassurance">
+                            <ul>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-check-square-o"></i>
+                                        </div>
+                                        {{-- <p>Security policy (edit with Customer reassurance module)</p> --}}
+                                        <p>Chính sách bảo mật (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-truck"></i>
+                                        </div>
+                                        {{-- <p>Delivery policy (edit with Customer reassurance module)</p> --}}
+                                        <p>Chính sách giao hàng (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="reassurance-item">
+                                        <div class="reassurance-icon">
+                                            <i class="fa fa-exchange"></i>
+                                        </div>
+                                        {{-- <p> Return policy (edit with Customer reassurance module)</p> --}}
+                                        <p>Chính sách đổi trả (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -186,8 +187,16 @@
         </div>
         <div class="tab-content">
             <div id="description" class="tab-pane active show" role="tabpanel">
-                <div class="product-description">
-                    {!! $product->GioiThieu !!}
+                <div class="row">
+                    <div class="product-description col-md-9" >
+                        {!! $product->GioiThieu !!}
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                        <p class="text-danger h5">Thông số kỹ thuật</p>
+                        {!! $product->ThongSo !!}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="product-details" class="tab-pane" role="tabpanel">
@@ -269,45 +278,45 @@
                                                             {{-- <h3 class="feedback-title">Your Feedback</h3> --}}
                                                             {{-- <form action="#" >
                                                                 @csrf --}}
-                                                                <p class="your-opinion">
-                                                                    <label>Đánh giá</label>
-                                                                    <span>
-                                                                        <select class="star-rating" name="txtDanhGia" id="txtDanhGia">
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                            <option value="3">3</option>
-                                                                            <option value="4">4</option>
-                                                                            <option value="5" selected>5</option>
-                                                                        </select>
-                                                                    </span>
-                                                                </p>
-                                                                <p class="feedback-form">
-                                                                    <label for="feedback">Nội dung</label><span class="required">*</span>
-                                                                    <textarea id="txtBinhLuan" name="txtBinhLuan" cols="45" rows="8" aria-required="true" required></textarea>
-                                                                </p>
-                                                                <div class="feedback-input">
-                                                                    {{-- <p class="feedback-form-author">
+                                                            <p class="your-opinion">
+                                                                <label>Đánh giá</label>
+                                                                <span>
+                                                                    <select class="star-rating" name="txtDanhGia" id="txtDanhGia">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5" selected>5</option>
+                                                                    </select>
+                                                                </span>
+                                                            </p>
+                                                            <p class="feedback-form">
+                                                                <label for="feedback">Nội dung</label><span class="required">*</span>
+                                                                <textarea id="txtBinhLuan" name="txtBinhLuan" cols="45" rows="8" aria-required="true" required></textarea>
+                                                            </p>
+                                                            <div class="feedback-input">
+                                                                {{-- <p class="feedback-form-author">
                                                                         <label for="author">Name<span class="required">*</span>
                                                                         </label>
                                                                         <input id="txtName" name="txtName" value="" size="30" aria-required="true" type="text" required>
                                                                     </p> --}}
-                                                                    {{-- <p class="feedback-form-author feedback-form-email">
+                                                                {{-- <p class="feedback-form-author feedback-form-email">
                                                                         <label for="email">Email<span class="required">*</span><span id="validate_email"></span>
                                                                         </label> --}}
-                                                                    @if(Auth::guard('customer')->check())
-                                                                    {{-- <input id="txtEmail" name="txtEmail" value="{{  Auth::guard('customer')->user()->email }}" size="30" aria-required="true" type="hidden" required readonly> --}}
-                                                                    {{-- @else
+                                                                @if(Auth::guard('customer')->check())
+                                                                {{-- <input id="txtEmail" name="txtEmail" value="{{  Auth::guard('customer')->user()->email }}" size="30" aria-required="true" type="hidden" required readonly> --}}
+                                                                {{-- @else
                                                                         <input id="txtEmail" name="txtEmail" value="" size="30" aria-required="true" type="email"> --}}
-                                                                    @endif
-                                                                    <span class="required"><sub>*</sub>Nội dung bắt buộc</span>
-                                                                    {{-- </p> --}}
-                                                                    <div class="feedback-btn pb-15 mt-15">
-                                                                        <a href="#" class="close" data-dismiss="modal" aria-label="Close">Đóng</a>
-                                                                        {{-- <button type="submit" class="btn btn-success">Submit</button> --}}
-                                                                        {{-- <a href="#" onclick="event.preventDefault(); return addFeedback('{{ $product->MaDT }}',this)">Gửi</a> --}}
-                                                                        <a href="#" id="SubmitFeedback">Gửi</a>
-                                                                    </div>
+                                                                @endif
+                                                                <span class="required"><sub>*</sub>Nội dung bắt buộc</span>
+                                                                {{-- </p> --}}
+                                                                <div class="feedback-btn pb-15 mt-15">
+                                                                    <a href="#" class="close" data-dismiss="modal" aria-label="Close">Đóng</a>
+                                                                    {{-- <button type="submit" class="btn btn-success">Submit</button> --}}
+                                                                    {{-- <a href="#" onclick="event.preventDefault(); return addFeedback('{{ $product->MaDT }}',this)">Gửi</a> --}}
+                                                                    <a href="#" id="SubmitFeedback">Gửi</a>
                                                                 </div>
+                                                            </div>
                                                             {{-- </form> --}}
                                                         </div>
                                                     </div>
@@ -407,20 +416,19 @@
 <!-- SweetAlert2 -->
 <script src="{{asset('public/backend/Admin/Layout/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 <script type="text/javascript">
-
     var id = '{{ $product -> MaDT }}';
     $('#ddlColor').on('change', function() {
         // alert(this.value);
-        $.getJSON("/Group8_PhoneStore/product-instock/" + id + "/" + this.value, function(data) {
+        $.getJSON("/PhoneStore/product-instock/" + id + "/" + this.value, function(data) {
             // console.log(data[0].DonGiaBan);
             console.log(data);
             $('#product_price').html(data[0].DonGiaBan.toLocaleString('en') + '₫');
-            if(data[0].SoLuong>0)
+            if (data[0].SoLuong > 0)
                 $('#product_instock').html(data[0].SoLuong);
-            else if(data[0].SoLuong === 0)
+            else if (data[0].SoLuong === 0)
                 $('#product_instock').html('<span class="text-danger">Đã hết hàng</span>');
-        }).fail(function(){
-             alert("Lỗi khi tải dữ liệu"); 
+        }).fail(function() {
+            alert("Lỗi khi tải dữ liệu");
         });
 
     });
@@ -430,56 +438,56 @@
     current_user = "{{ Auth::guard('customer')->user()->name }}";
     @endif
     // console.log('Current:' + current_user);
-    function addNewFeedbackLayout(danhgia,binhluan){
+    function addNewFeedbackLayout(danhgia, binhluan) {
         var ratingsection = '';
-            for(var i=0;i<5;i++){
-                if(i<danhgia){
-                    ratingsection += '<li><i class="fa fa-star-o"></i></li>';
-                }else{
-                    ratingsection += '<li class="no-star"><i class="fa fa-star-o"></i></li>';
-                }
+        for (var i = 0; i < 5; i++) {
+            if (i < danhgia) {
+                ratingsection += '<li><i class="fa fa-star-o"></i></li>';
+            } else {
+                ratingsection += '<li class="no-star"><i class="fa fa-star-o"></i></li>';
             }
-            // console.log(moment().format('D-MM-YYYY, HH:mm:ss'));
-            var comment = '<div class="col-md-4">'+
-                                '<div class="comment-review">'+
-                                    '<span>Đánh giá</span>'+
-                                    '<ul class="rating">'+
-                                       ratingsection + 
-                                    '</ul>'+
-                                '</div>'+
-                               '<div class="comment-author-infos pt-25">'+
-                                    '<h5>Đánh giá bởi: '+ current_user +' </h3>'+
-                                        '<h6><em>Ngày tạo: '+moment().format('D-MM-YYYY, HH:mm:ss') +'</em></h6>'+
-                                '</div>'+
-                                '<div class="comment-details">'+
-                                    '<h4 class="title-block">Nội dung: '+binhluan+'</h4>'+
-                                '</div>'+
-                            '</div>';
-            // console.log($('#feedbackSection').children().length);
-            if($('#feedbackSection').has('#nocomment').length){
-                // $('#feedbackSection').html('');
-                $('#nocomment').remove();
-            }
-            // console.log($('#feedbackSection').has('#nocomment').length);
-            if($('#feedbackSection').children().length == 3){
-                $('#feedbackSection').prepend(comment);
-                $('#feedbackSection').children().last().remove();
-            }else{
-                $('#feedbackSection').prepend(comment);
-            }
+        }
+        // console.log(moment().format('D-MM-YYYY, HH:mm:ss'));
+        var comment = '<div class="col-md-4">' +
+            '<div class="comment-review">' +
+            '<span>Đánh giá</span>' +
+            '<ul class="rating">' +
+            ratingsection +
+            '</ul>' +
+            '</div>' +
+            '<div class="comment-author-infos pt-25">' +
+            '<h5>Đánh giá bởi: ' + current_user + ' </h3>' +
+            '<h6><em>Ngày tạo: ' + moment().format('D-MM-YYYY, HH:mm:ss') + '</em></h6>' +
+            '</div>' +
+            '<div class="comment-details">' +
+            '<h4 class="title-block">Nội dung: ' + binhluan + '</h4>' +
+            '</div>' +
+            '</div>';
+        // console.log($('#feedbackSection').children().length);
+        if ($('#feedbackSection').has('#nocomment').length) {
+            // $('#feedbackSection').html('');
+            $('#nocomment').remove();
+        }
+        // console.log($('#feedbackSection').has('#nocomment').length);
+        if ($('#feedbackSection').children().length == 3) {
+            $('#feedbackSection').prepend(comment);
+            $('#feedbackSection').children().last().remove();
+        } else {
+            $('#feedbackSection').prepend(comment);
+        }
     }
 
-    $('#SubmitFeedback').click(function(e){
+    $('#SubmitFeedback').click(function(e) {
         e.preventDefault();
         var danhgia = $('#txtDanhGia').val();
         var binhluan = $('#txtBinhLuan').val();
-        if(binhluan.length > 255)
+        if (binhluan.length > 255)
             ShowAlert('Lỗi khi gửi yêu cầu', 'Nội dung bình luận quá dài', 'error');
-        if(danhgia >5 || danhgia<1){
+        if (danhgia > 5 || danhgia < 1) {
             ShowAlert('Lỗi khi gửi yêu cầu', 'Nội dung đánh giá không hợp lệ', 'error');
         }
         // addNewFeedbackLayout(danhgia,binhluan);
-        if (id != null  && binhluan != null && id.trim() !== '' && binhluan.trim() !== '') {
+        if (id != null && binhluan != null && id.trim() !== '' && binhluan.trim() !== '') {
             data = {
                 MaDT: id
                 , DanhGia: danhgia
@@ -491,12 +499,12 @@
                 , headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                 }
-                , url: '/Group8_PhoneStore/user/add-feedback'
+                , url: '/PhoneStore/user/add-feedback'
                 , data: JSON.stringify(data)
                 , contentType: 'application/json'
                 , success: function(result) {
                     $('#mymodal').modal('hide');
-                    addNewFeedbackLayout(danhgia,binhluan);
+                    addNewFeedbackLayout(danhgia, binhluan);
                     console.log(result);
                     toastr.options = {
                         "timeOut": 3000 // 3s
@@ -520,10 +528,10 @@
         var danhgia = $('#txtDanhGia').val();
         var binhluan = $('#txtBinhLuan').val();
         var id = "XXX";
-        if(danhgia >5 || danhgia<1){
+        if (danhgia > 5 || danhgia < 1) {
             ShowAlert('Lỗi khi gửi yêu cầu', 'Nội dung đánh giá không hợp lệ', 'error');
         }
-        if (pid != null  && binhluan != null && pid.trim() !== '' && binhluan.trim() !== '') {
+        if (pid != null && binhluan != null && pid.trim() !== '' && binhluan.trim() !== '') {
             // $(ctl).attr("data-dismiss", "modal");
             // $("#add-user-btn").unbind('click').bind('click', function () { });  
             // $('#mymodal').modal('hide');

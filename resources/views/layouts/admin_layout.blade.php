@@ -230,14 +230,13 @@
                                 <p>Đổi mật khẩu</p>
                             </a>
                         </li> --}}
-
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{-- {{ __('Logout') }} --}}
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>Đăng xuất</p>
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </li>

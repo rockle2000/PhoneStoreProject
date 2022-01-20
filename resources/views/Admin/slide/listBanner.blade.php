@@ -112,7 +112,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/delete-banner/' + id
+                    , url: '/PhoneStore/delete-banner/' + id
                     , success: function(result) {
                         if (result.status == 'success') {
                             $(ctl).parent().parent().remove();
