@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/main-page';
+    // protected $redirectTo = '/main-page';
 
     public function guard()
     {

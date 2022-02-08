@@ -339,7 +339,7 @@
                                                 </li>
                                             </ul>
                                         </li> --}}
-                                <li><a href="#" class="font-weight-bold">Blog</a></li>
+                                <li><a href="{{ route('news') }}" class="font-weight-bold">Tin tức</a></li>
                                 <li><a href="#" class="font-weight-bold">Phụ kiện</a></li>
                                 <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li>
                                 <li><a href="{{ url('contact') }}" class="font-weight-bold">Liên hệ</a></li>

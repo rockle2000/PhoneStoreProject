@@ -195,6 +195,28 @@
                                     </a>
                             </ul>
                         </li>
+                        <li class="nav-item {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-newspaper"></i>
+                                <p>
+                                    Quản lý tin tức
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/news-list') }}" class="nav-link {{ Request::path()=='news-list' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách tin tức</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/add-news') }}" class="nav-link {{ Request::path()=='add-news' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm mới tin tức</p>
+                                    </a>
+                            </ul>
+                        </li>
                         <li class="nav-item {{ (Request::path()=='banner-list'||Request::path()=='add-banner') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ (Request::path()=='banner-list'||Request::path()=='add-banner') ? 'active' : '' }}">
 

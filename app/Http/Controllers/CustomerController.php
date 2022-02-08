@@ -141,8 +141,6 @@ class CustomerController extends Controller
         $creds = $request->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($creds)) {
-            // return redirect()->route('main-page');
-            // return redirect()->action([HomeController::class, 'index']);
             return redirect()->intended('main-page');
         } else {
             return redirect()->route('user.login')->with('error', 'Thông tin đăng nhập không chính xác!');

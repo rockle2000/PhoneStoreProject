@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\StripeController;
 
 
@@ -25,6 +27,10 @@ Route::get('/single-product', "SingleProductController@index");
 Route::get('/main-page', [HomeController::class, 'index'])->name('main-page');
 Route::get('/about-us', [HomeController::class, 'about'])->name('about-us');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
+//News-Homepage
+Route::get('/news', [NewsController::class, 'getAllNews'])->name('news');
+Route::get('/news/detail/{id}', 'NewsController@newsDetail');
 
 Auth::routes(['register' => false]);
 
@@ -75,6 +81,13 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::get('/add-banner', 'AdminController@addBannerImage');
     Route::post('/insert-banner', 'AdminController@insertBannerImage');
     Route::delete('/delete-banner/{id}', 'AdminController@deleteBanner');
+
+    //News-Admin
+    Route::get('/add-news', 'NewsController@add');
+    Route::post('/insert-news', "NewsController@insert");
+    //Update News
+    Route::get('/edit-news/{id}', "NewsController@edit");
+    Route::put('/update-news/{id}', "NewsController@update");
 });
 
 // Customer-Homepage
@@ -123,5 +136,6 @@ Route::get('/json/product-detail/{id}', 'ProductController@getProductDetailJSON'
 
 Route::namespace('Customer')->group(function () {
     Route::get('/login', 'LoginController@showLoginForm');
-    Route::post('/login', 'LoginController@login')->name('user.login');
+    // Route::post('/login', 'LoginController@login')->name('user.login');
+    Route::post('/login', [CustomerController::class, 'check'])->name('user.login');
 });
