@@ -83,11 +83,14 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::delete('/delete-banner/{id}', 'AdminController@deleteBanner');
 
     //News-Admin
+    Route::get('/news-list','NewsController@getAllNewsAdmin');
     Route::get('/add-news', 'NewsController@add');
     Route::post('/insert-news', "NewsController@insert");
     //Update News
     Route::get('/edit-news/{id}', "NewsController@edit");
     Route::put('/update-news/{id}', "NewsController@update");
+    Route::put('/active-news/{id}',"NewsController@active");
+    Route::put('/delete-news/{id}',"NewsController@destroy");
 });
 
 // Customer-Homepage

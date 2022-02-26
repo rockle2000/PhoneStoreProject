@@ -200,7 +200,7 @@ class ShoppingCartController extends Controller
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect()->back()->with('error', 'Đã xảy ra lỗi khi xử lý đơn hàng. Vui lòng thử lại sau');
+                return redirect()->back()->with('error', 'Đã xảy ra lỗi khi xử lý đơn hàng này. Vui lòng thử lại sau');
             }
             Cart::destroy();
             return redirect()->route('main-page')->with('msg', 'Đặt hàng thành công');

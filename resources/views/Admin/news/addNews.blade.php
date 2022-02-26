@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label for="txtNoiDung" class="col-sm-2 col-form-label">Danh mục</label>
                             <div class="col-sm-10">
-                            <select class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho bài viết">
+                            <select name="ddlDanhMuc[]" class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho bài viết">
                                 @foreach ($newscategories as $cate)
                                     <option value="{{ $cate->Id }}">{{ $cate->TheLoai }}</option>
                                 @endforeach

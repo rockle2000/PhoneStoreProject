@@ -66,7 +66,7 @@
                         {{-- <div class="li-paginatoin-area text-center pt-25"> --}}
                         <div class="paginatoin-area">
                             <div class="row">
-                                {{ $list_order->appends(request()->except('page'))->links('vendor.pagination.custom_pagination_order') }}
+                                {{ $list_order->appends(request()->except('page'))->links('vendor.pagination.custom',["type"=>"đơn hàng"]) }}
                             </div>
                         </div>
                     </div>

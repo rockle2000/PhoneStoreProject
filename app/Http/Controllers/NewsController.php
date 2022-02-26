@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\News;
+use App\Models\News_NewsCategory;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,19 +15,27 @@ class NewsController extends Controller
     //Home News
     public function getAllNews()
     {
-        $newscategories = NewsCategory::where('TrangThai','=','1')->get();
-        $news = News::where('TrangThai','=','1')->get();
-        return view("Home.news.listNews",compact('news','newscategories'));
+        $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
+        $news = News::where('TrangThai', '=', '1')->paginate(2);
+        return view("Home.news.listNews", compact('news', 'newscategories'));
+    }
+    //Admin News
+    public function getAllNewsAdmin()
+    {
+        $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
+        $news = News::get();
+        return view("Admin.news.listNews", compact('news', 'newscategories'));
     }
     public function add()
     {
         // $blog = Blog::where('TrangThai', '1')->get();
-        $newscategories = NewsCategory::where('TrangThai','=','1')->get();
-        return view("Admin.news.addNews",compact('newscategories'));
+        $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
+        return view("Admin.news.addNews", compact('newscategories'));
     }
 
     public function insert(Request $request)
     {
+        
         $this->validate(
             $request,
             [
@@ -47,27 +56,46 @@ class NewsController extends Controller
                 'ddlTrangThai.in' => 'Trạng thái không hợp lệ',
             ]
         );
-        //Tạo tin tức mới
-        $news = new News();
-        $news->TieuDe  = $request->input('txtTieuDe');
-        $news->TacGia  = $request->input('txtTacGia');
-        $news->NoiDung = $request->input('txtNoiDung');
-        $news->TrangThai  = $request->input('ddlTrangThai');
-        $file = $request->file('image');
-        $original_name = $file->getClientOriginalName();
-        $filename = time() . $original_name;
-        $file->move('public/backend/uploads/news-images/', $filename);
-        $news->Anh = $filename;
-        if (!$news->save()) {
-            return redirect()->action([ProductController::class, 'getAllProduct'])->with('error', 'Lỗi khi thêm tin tức');
+        // //Tạo tin tức mới
+        try {
+            DB::beginTransaction();
+            $news = new News();
+            $news->TieuDe  = $request->input('txtTieuDe');
+            $news->TacGia  = $request->input('txtTacGia');
+            $news->NoiDung = $request->input('txtNoiDung');
+            $news->TrangThai  = $request->input('ddlTrangThai');
+            $file = $request->file('image');
+            $original_name = $file->getClientOriginalName();
+            $filename = time() . $original_name;
+            $file->move('public/backend/uploads/news-images/', $filename);
+            $news->Anh = $filename;
+            if (!$news->save()) {
+                DB::rollBack();
+                return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Lỗi khi thêm tin tức');
+            }
+            $category = $request->input('ddlDanhMuc');
+            foreach ($category as $cate) {
+                $news_cate = new News_NewsCategory();
+                $news_cate->news_id = $news->Id;
+                $news_cate->newscategory_id = $cate;
+                if (!$news_cate->save()) {
+                    DB::rollBack();
+                    return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Lỗi khi xử lí danh mục');
+                }
+            }
+            DB::commit();
+            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Thêm tin tức mới thành công');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
         }
-        return redirect()->action([ProductController::class, 'getAllProduct'])->with('status', 'Thêm tin tức mới thành công');
     }
 
     public function edit($id)
     {
         $news = News::find($id);
-        $newscategories = NewsCategory::where('TrangThai','=','1')->get();
+        $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
         if ($news === null || $id === "") {
             return view('errors.admin_404');
         }
@@ -107,15 +135,77 @@ class NewsController extends Controller
             'NoiDung' => $request->input('txtNoiDung'),
             'TrangThai' => $request->input('ddlTrangThai')
         ]))
-            return redirect()->action([ProductController::class, 'getAllProduct'])->with('status', 'Sửa tin tức mã ' . $id . ' thành công');
+            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Sửa tin tức mã ' . $id . ' thành công');
         else
             return view('errors.admin_404');
     }
 
     public function newsDetail($id)
     {
-        $newscategories = NewsCategory::where('TrangThai','=','1')->get();
+        $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
         $news = News::find($id);
-        return view("Home.news.newsDetail",compact('news','newscategories'));
+        if ($news == null || !$news->TrangThai) {
+            return view("errors.home_404");
+        }
+        return view("Home.news.newsDetail", compact('news', 'newscategories'));
+    }
+
+    public function active($id)
+    {
+        $news = News::where('Id', "=", $id)->first();
+        if ($news === null) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Không tìm thấy bài viết'
+            ]);
+        } else {
+            if ($news->TrangThai == 1) {
+                return response()->json([
+                    'status' => 'disabled',
+                    'message' => 'Bài viết đã được active từ trước'
+                ]);
+            }
+            if ($news->update(['TrangThai' => 1])) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Active bài viết thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Lỗi khi thực hiện thao tác'
+                ]);
+            }
+        }
+    }
+
+    public function destroy($id)
+    {
+        $news = News::where('Id', "=", $id)->first();
+        if ($news === null) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Không tìm thấy bài viết'
+            ]);
+        } else {
+            //Disable sản phẩm
+            if ($news->TrangThai == 0) {
+                return response()->json([
+                    'status' => 'disabled',
+                    'message' => 'Bài viết này đã được ẩn từ trước'
+                ]);
+            }
+            if ($news->update(['TrangThai' => 0])) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Ẩn bài viết thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Lỗi khi thực hiện thao tác'
+                ]);
+            }
+        }
     }
 }

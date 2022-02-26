@@ -167,7 +167,7 @@
                 , headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                 }
-                , url: '/Group8_PhoneStore/update-quantity'
+                , url: '/PhoneStore/update-quantity'
                 , data: JSON.stringify(data)
                 , contentType: 'application/json'
                 , success: function(result) {
@@ -212,7 +212,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/delete-quantity/' + id + "/" + color
+                    , url: '/PhoneStore/delete-quantity/' + id + "/" + color
                     , success: function(result) {
                         if (result.status == 'success') {
                             ShowAlert('Deleted!', result.message, 'success');

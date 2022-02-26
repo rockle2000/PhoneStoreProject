@@ -19,10 +19,10 @@
              <div class="col-lg-12">
                  <div class="error-wrapper text-center ptb-50 pt-xs-20">
                      <div class="error-text">
-                         <h1>404</h1>
+                         <h1 style="color: red">404</h1>
                          <h2>Opps! PAGE NOT BE FOUND</h2>
                          {{-- <p>Sorry but the page you are looking for does not exist, have been removed, <br> name changed or is temporarity unavailable.</p> --}}
-                         <p>Trang mà bạn tìm kiếm không tồn tại, hoặc đã bị xóa, <br> đổi tên hoăc tạm thời không khả dụng </p>
+                         <p>Trang mà bạn tìm kiếm không tồn tại, đã bị xóa, <br> đổi tên hoặc tạm thời không khả dụng </p>
                      </div>
                      {{-- <div class="search-error">
                          <form id="search-form" action="#">
@@ -31,7 +31,7 @@
                          </form>
                      </div> --}}
                      <div class="error-button">
-                         <a href="{{ url('/main-page') }}">Quay về trang chủ</a>
+                         <a class=" bg-primary"href="{{ url('/main-page') }}">Quay về trang chủ</a>
                      </div>
                  </div>
              </div>

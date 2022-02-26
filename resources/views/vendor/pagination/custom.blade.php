@@ -2,7 +2,7 @@
 <div class="col-lg-6 col-md-6">
     {{-- <p>Showing {{ $paginator->count() }} of {{ $paginator->total()}}</p> --}}
     <p>Hiện thị {{ $paginator->firstItem() }} - {{ $paginator->lastItem() }}
-        trong tổng {{$paginator->total()}} sản phẩm</p>
+        trong tổng {{$paginator->total()}} {{ $type }}</p>
 </div>
 <div class="col-lg-6 col-md-6">
     <ul class="pagination-box">

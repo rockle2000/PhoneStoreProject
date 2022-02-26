@@ -282,7 +282,7 @@
             , headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
             }
-            , url: '/Group8_PhoneStore/orderdetail/' + id
+            , url: '/PhoneStore/orderdetail/' + id
             , success: function(result) {
                 var res = '';
                 var total = 0;
@@ -320,7 +320,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/cancel-order/' + id
+                    , url: '/PhoneStore/cancel-order/' + id
                     , success: function(result) {
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-danger disabled"><i class="far fa-times-circle"></i> Canceled</button>';
@@ -359,7 +359,7 @@
                     , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
                     }
-                    , url: '/Group8_PhoneStore/confirm-order/' + id
+                    , url: '/PhoneStore/confirm-order/' + id
                     , success: function(result) {
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-success disabled"><i class="fas fa-check-circle"></i> Finished</button>';

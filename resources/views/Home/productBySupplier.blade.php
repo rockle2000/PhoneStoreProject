@@ -134,7 +134,7 @@
                                         </li>
                                     </ul>
                                 </div> --}}
-                                {{ $product->appends(request()->except('page'))->links('vendor.pagination.custom') }}
+                                {{ $product->appends(request()->except('page'))->links('vendor.pagination.custom',["type"=>"sản phẩm"]) }}
                             </div>
                         </div>
                     </div>
