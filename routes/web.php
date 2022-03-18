@@ -91,6 +91,15 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::put('/update-news/{id}', "NewsController@update");
     Route::put('/active-news/{id}',"NewsController@active");
     Route::put('/delete-news/{id}',"NewsController@destroy");
+    
+    //Discount
+    Route::get('/discount-list','DiscountController@getAllDiscountCode');
+    Route::get('/add-discount',"DiscountController@add");
+    Route::post('/insert-discount',"DiscountController@insert");
+    Route::get('/edit-discount/{id}',"DiscountController@edit");
+    Route::put('/update-discount/{id}',"DiscountController@update");
+    Route::put('/delete-discount/{id}',"DiscountController@destroy");
+    Route::put('/active-discount/{id}',"DiscountController@active");
 });
 
 // Customer-Homepage

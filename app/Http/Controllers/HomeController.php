@@ -33,12 +33,13 @@ class HomeController extends Controller
         );
         $id_bestSeller = json_decode(json_encode($id_bestSeller), true);
         $bestSeller = Product::whereIn('MaDT', $id_bestSeller)->get();
-        $id_supplier = DB::select(
-            'select supplier.MaNSX from supplier,product
-            WHERE supplier.MaNSX = product.MaNSX
-            GROUP BY supplier.MaNSX
-            HAVING COUNT(MaDT) > 1'
-        );
+        
+        // $id_supplier = DB::select(
+        //     'select supplier.MaNSX from supplier,product
+        //     WHERE supplier.MaNSX = product.MaNSX
+        //     GROUP BY supplier.MaNSX
+        //     HAVING COUNT(MaDT) > 1'
+        // );
         $id_supplier = Supplier::join('product', 'product.MaNSX', '=', 'supplier.MaNSX')
             ->where('product.TrangThai', '=', 1)
             ->select('supplier.MaNSX')

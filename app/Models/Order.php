@@ -26,6 +26,7 @@ class Order extends Model
         'SoDienThoai',
         'GhiChu',
         'TongTien',
+        'MaKM',
         'TrangThai',
         'payment_id'
     ];
@@ -37,5 +38,9 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'EmailKH', 'email');
+    }
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class, 'MaKM', 'MaKM');
     }
 }

@@ -138,6 +138,7 @@
                                             </div>
                                         </div>
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->TenDT}}</a></h4>
+                                        <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->product_type->TenLoai}}</a></h4>
                                         <div class="countersection">
                                             <div class="li-countdown wrap-countdown mercado-countdown" data-expire="2022/12/12 12:34:56"></div>
                                         </div>
@@ -386,7 +387,73 @@
     </div>
 </div>
 <!-- Li's Static Home Area End Here -->
-
+<!-- Begin Li's Laptop Product Area -->
+@if(count($accessories)>0)
+<section class="product-area li-laptop-product pt-60 pb-45">
+    <div class="container">
+        <div class="row">
+            <!-- Begin Li's Section Area -->
+            <div class="col-lg-12">
+                <div class="li-section-title">
+                    <h2>
+                        <span>{{ $accessories[0]->product_type->TenLoai }}</span>
+                    </h2>
+                    <ul class="li-sub-category-list">
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="product-active owl-carousel">
+                        @foreach($accessories as $item)
+                        <div class="col-lg-12">
+                            <!-- single-product-wrap start -->
+                            <div class="single-product-wrap">
+                                <div class="product-image">
+                                    <a href="{{  url('product-detail/'.$item->MaDT) }}">
+                                        <img src="{{ asset('public/backend/uploads/product-images/'.$item->image[0]->Anh)}}" alt="">
+                                    </a>
+                                    <span class="sticker">New</span>
+                                </div>
+                                <div class="product_desc">
+                                    <div class="product_desc_info">
+                                        <div class="product-review">
+                                            <h5 class="manufacturer">
+                                                <a href="{{ url('productBySupplier/'. $item->supplier->MaNSX) }}">{{$item->supplier->TenNSX}}</a>
+                                            </h5>
+                                            <div class="rating-box">
+                                                <ul class="rating">
+                                                    @for($i = 0; $i < 5; $i++) @if($i <floor($item->DanhGia))
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        @else
+                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                        @endif
+                                                        @endfor
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <h4><a class="product_name" href="{{  url('product-detail/'.$item->MaDT) }}">{{$item->TenDT}}</a></h4>
+                                        <div class="price-box">
+                                            @if($item->quantity->count() >0)
+                                            <span class="new-price">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
+                                            @else
+                                            <span class="new-price text-danger">Đang cập nhật</span>
+                                            @endif
+                                            <a href="#" class="float-right" onclick="return Detail('{{ $item->MaDT }}',this)" title="Xem nhanh" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single-product-wrap end -->
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <!-- Li's Section Area End Here -->
+        </div>
+    </div>
+</section>
+@endif
+<!-- Li's Laptop Product Area End Here -->
 <!-- Begin Quick View | Modal Area -->
 <div class="modal fade modal-wrapper" id="exampleModalCenter">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -471,7 +538,7 @@
             , headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
             }
-            , url: '/Group8_PhoneStore/json/product-detail/' + id
+            , url: '/PhoneStore/json/product-detail/' + id
             , success: function(result) {
                 if (result.status == 'success') {
                     $('.modal-body #product_code').html(result.message.MaDT);

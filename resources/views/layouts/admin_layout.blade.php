@@ -195,6 +195,28 @@
                                     </a>
                             </ul>
                         </li>
+                        <li class="nav-item {{ (Request::path()=='discount-list'||Request::path()=='add-discount') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (Request::path()=='discount-list'||Request::path()=='add-discount') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tags"></i>
+                                <p>
+                                    Mã khuyến mãi
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ url('/discount-list') }}" class="nav-link {{ Request::path()=='discount-list' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/add-discount') }}" class="nav-link {{ Request::path()=='add-discount' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm mới</p>
+                                    </a>
+                            </ul>
+                        </li>
                         <li class="nav-item {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-newspaper"></i>
