@@ -21,6 +21,7 @@ class Product extends Model
         'TrangThai',
         'DanhGia',
         'BaoHanh',
+        'MaLoai',
     ];
 
     public function supplier()
@@ -40,5 +41,10 @@ class Product extends Model
     public function feedback()
     {
         return $this->hasMany(Feedback::class, 'MaDT', 'MaDT')->orderBy('NgayTao', 'desc');
+    }
+
+    public function product_type()
+    {
+        return $this->belongsTo(Product_Type::class, 'MaLoai', 'MaLoai');
     }
 }

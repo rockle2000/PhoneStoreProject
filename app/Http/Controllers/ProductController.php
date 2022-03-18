@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\SoLuong;
 use App\Models\Customer;
 use App\Models\Feedback;
+use App\Models\Product_Type;
 use App\Models\Quantity;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class ProductController extends Controller
     public function add()
     {
         $supplier = Supplier::where('TrangThai', '1')->get();
-        return view("Admin.product.addProduct", compact('supplier'));
+        $type = Product_Type::where('TrangThai', '1')->get();
+        return view("Admin.product.addProduct", compact('supplier','type'));
     }
 
     public function insert(Request $request)
@@ -42,6 +44,8 @@ class ProductController extends Controller
                 'txtGioiThieu' => ['required'],
                 'txtThongSo' => ['required'],
                 'ddlNhaSanXuat' => ['required','exists:supplier,MaNSX'],
+                'ddlLoai' => ['required','exists:product_type,MaLoai'],
+                'ddlBaoHanh' =>['required'],
                 'ddlTrangThai' => ['required',Rule::in(['0', '1'])]
             ],
             [
@@ -55,6 +59,9 @@ class ProductController extends Controller
                 'txtThongSo.required' => 'Bạn chưa nhập thông số cho sản phẩm',
                 'ddlNhaSanXuat.required' => 'Nhà sản xuất không được để trống',
                 'ddlNhaSanXuat.exists' => 'Nhà sản xuất không tồn tại',
+                'ddlLoai.required' => 'Loại sản phẩm không được để trống',
+                'ddlLoai.exists' => 'Loại sản phẩm không hợp lệ',
+                'ddlBaoHanh.required' => 'Thời gian bảo hành không được để trống',
                 'ddlTrangThai.required' => 'Trạng thái không được để trống',
                 'ddlTrangThai.in' => 'Trạng thái không hợp lệ',
             ]
@@ -68,6 +75,8 @@ class ProductController extends Controller
             $product->GioiThieu = $request->input('txtGioiThieu');
             $product->ThongSo = $request->input('txtThongSo');
             $product->MaNSX  = $request->input('ddlNhaSanXuat');
+            $product->MaLoai = $request->input('ddlLoai');
+            $product->BaoHanh = $request->input('ddlBaoHanh');
             $product->TrangThai  = $request->input('ddlTrangThai');
             if (!$product->save()) {
                 DB::rollBack();
@@ -102,10 +111,11 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $supplier = Supplier::where('TrangThai', '1')->get();
+        $type = Product_Type::where('TrangThai', '1')->get();
         if ($product === null || $id === "") {
             return view('errors.admin_404');
         }
-        return view('Admin.product.editProduct', compact('product', 'supplier'));
+        return view('Admin.product.editProduct', compact('product', 'supplier','type'));
     }
 
     public function update(Request $request, $id)
@@ -121,6 +131,8 @@ class ProductController extends Controller
                 'txtGioiThieu' => ['required'],
                 'txtThongSo' => ['required'],
                 'ddlNhaSanXuat' => ['required','exists:supplier,MaNSX'],
+                'ddlLoai' => ['required','exists:product_type,MaLoai'],
+                'ddlBaoHanh'=>['required'],
                 'ddlTrangThai' => ['required',Rule::in(['0', '1'])]
             ],
             [
@@ -129,6 +141,9 @@ class ProductController extends Controller
                 'txtThongSo.required' => 'Bạn chưa nhập thông số cho sản phẩm',
                 'ddlNhaSanXuat.required' => 'Nhà sản xuất không được để trống',
                 'ddlNhaSanXuat.exists' => 'Nhà sản xuất không tồn tại',
+                'ddlLoai.required' => 'Loại sản phẩm không được để trống',
+                'ddlLoai.exists' => 'Loại sản phẩm không hợp lệ',
+                'ddlBaoHanh.required' => 'Thời gian bảo hành không được để trống',
                 'ddlTrangThai.required' => 'Trạng thái không được để trống',
                 'ddlTrangThai.in' => 'Trạng thái không hợp lệ',
             ]
@@ -138,6 +153,8 @@ class ProductController extends Controller
             'GioiThieu'  => $request->input('txtGioiThieu'),
             'ThongSo' => $request->input('txtThongSo'),
             'MaNSX'  => $request->input('ddlNhaSanXuat'),
+            'MaLoai' => $request->input('ddlLoai'),
+            'BaoHanh' => $request->input('ddlBaoHanh'),
             'TrangThai' => $request->input('ddlTrangThai')
         ]))
             return redirect()->action([ProductController::class, 'getAllProduct'])->with('status', 'Sửa thông tin sản phẩm mã ' . $id . ' thành công');

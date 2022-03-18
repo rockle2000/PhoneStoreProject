@@ -70,6 +70,39 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="ddlLoai" class="col-sm-2 col-form-label">Loại sản phẩm</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="ddlLoai" id="">
+                                    @foreach ($type as $item)
+                                    @if($product->MaLoai == $item->MaLoai)
+                                    <option value="{{ $item->MaLoai }}" selected>{{ $item->TenLoai}}</option>
+                                    @else
+                                    <option value="{{ $item->MaLoai }}">{{ $item->TenLoai}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                @error('ddlLoai')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ddlBaoHanh" class="col-sm-2 col-form-label">Bảo hành</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="ddlBaoHanh" id="">
+                                    <option value="3 tháng">3 tháng</option>
+                                    <option value="6 tháng">6 tháng</option>
+                                    <option value="9 tháng">9 tháng</option>
+                                    <option value="12 tháng">12 tháng</option>
+                                    <option value="18 tháng">18 tháng</option>
+                                    <option value="24 tháng">24 tháng</option>
+                                </select>
+                                @error('ddlBaoHanh')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="ddlTrangThai" class="col-sm-2 col-form-label">Trạng thái</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="ddlTrangThai" id="">

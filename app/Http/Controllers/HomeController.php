@@ -18,7 +18,7 @@ class HomeController extends Controller
             ->where('TrangThai', '1');
         $result_found = $product->count();
         $product = $product->paginate(5);
-        return view('Home.search_product', compact('keyWord', 'product','result_found'));
+        return view('Home.search_product', compact('keyWord', 'product', 'result_found'));
     }
     public function index()
     {
@@ -33,13 +33,12 @@ class HomeController extends Controller
         );
         $id_bestSeller = json_decode(json_encode($id_bestSeller), true);
         $bestSeller = Product::whereIn('MaDT', $id_bestSeller)->get();
-
-        // $id_supplier = DB::select(
-        //     'select supplier.MaNSX from supplier,product
-        //     WHERE supplier.MaNSX = product.MaNSX
-        //     GROUP BY supplier.MaNSX
-        //     HAVING COUNT(MaDT) > 1'
-        // );
+        $id_supplier = DB::select(
+            'select supplier.MaNSX from supplier,product
+            WHERE supplier.MaNSX = product.MaNSX
+            GROUP BY supplier.MaNSX
+            HAVING COUNT(MaDT) > 1'
+        );
         $id_supplier = Supplier::join('product', 'product.MaNSX', '=', 'supplier.MaNSX')
             ->where('product.TrangThai', '=', 1)
             ->select('supplier.MaNSX')
@@ -48,21 +47,31 @@ class HomeController extends Controller
             ->inRandomOrder()
             ->limit(2)
             ->get();
-
+        $accessories = Product::where('MaLoai', '=', 2)->get();
         $first_list = [];
         $second_list = [];
         for ($i = 0; $i < count($id_supplier); $i++) {
             if ($i == 0) {
-                $first_list = Product::where('MaNSX', '=', $id_supplier[$i]->MaNSX)->where('TrangThai', '=', 1)->inRandomOrder()->limit(6)->get();
+                $first_list = Product::where('MaNSX', '=', $id_supplier[$i]->MaNSX)
+                    ->where('TrangThai', '=', 1)
+                    ->where('MaLoai', '=', 1)
+                    ->inRandomOrder()
+                    ->limit(6)
+                    ->get();
             } else {
-                $second_list = Product::where('MaNSX', '=', $id_supplier[$i]->MaNSX)->where('TrangThai', '=', 1)->inRandomOrder()->limit(6)->get();
+                $second_list = Product::where('MaNSX', '=', $id_supplier[$i]->MaNSX)
+                    ->where('TrangThai', '=', 1)
+                    ->where('MaLoai', '=', 1)
+                    ->inRandomOrder()
+                    ->limit(6)
+                    ->get();
             }
         }
         $slide = SlideImage::where('Type', 'Slide Main Page')->limit(2)->get();
         $top_banner = SlideImage::where('Type', 'Top Banner')->limit(2)->get();
         $mid_banner = SlideImage::where('Type', 'Mid Banner')->limit(3)->get();
         $bottom_banner = SlideImage::where('Type', 'Bottom Banner')->inRandomOrder()->limit(1)->first();
-        return view("Home.home", compact('bestSeller', 'first_list', 'second_list', 'slide', 'top_banner', 'mid_banner', 'bottom_banner'));
+        return view("Home.home", compact('bestSeller', 'first_list', 'second_list', 'accessories', 'slide', 'top_banner', 'mid_banner', 'bottom_banner'));
         // print_r(count($listProduct));
     }
 

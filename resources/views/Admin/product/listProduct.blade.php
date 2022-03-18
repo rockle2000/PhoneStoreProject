@@ -20,8 +20,8 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Mã ĐT</th>
-                                    <th>Tên ĐT</th>
+                                    <th>Mã SP</th>
+                                    <th>Tên SP</th>
                                     <th>Nhà sản xuất</th>
                                     <th>Ảnh</th>
                                     <th>Trạng thái</th>
