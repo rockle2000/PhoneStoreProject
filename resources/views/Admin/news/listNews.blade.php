@@ -52,12 +52,12 @@
                                     </td>
                                     <td>
                                         {{-- {{ url('edit-product/'.$item->Id) }} --}}
-                                        <a href="{{ url('edit-news/'.$item->Id) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="{{ url('edit-news/'.$item->MaTinTuc) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
                                         <span>
                                             @if ($item-> TrangThai)
-                                            <a href="#" onclick="return ConfirmDelete('{{ $item->Id }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                                            <a href="#" onclick="return ConfirmDelete('{{ $item->MaTinTuc }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
                                             @elseif(!$item-> TrangThai)
-                                            <a href="#" onclick="return ConfirmActive('{{ $item->Id }}',this)" class="btn btn-success"><i class="fas fa-plus"></i> Active</a>
+                                            <a href="#" onclick="return ConfirmActive('{{ $item->MaTinTuc }}',this)" class="btn btn-success"><i class="fas fa-plus"></i> Active</a>
                                             @endif
                                         </span>
                                     </td>

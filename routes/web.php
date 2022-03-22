@@ -31,6 +31,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 //News-Homepage
 Route::get('/news', [NewsController::class, 'getAllNews'])->name('news');
 Route::get('/news/detail/{id}', 'NewsController@newsDetail');
+//Discount-Homepage
+Route::get('/discount',[HomeController::class,'discount'])->name('discount');
 
 Auth::routes(['register' => false]);
 
@@ -113,6 +115,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/cart-remove/{id}', [ShoppingCartController::class, 'cartRemove'])->name('cartRemove');
     Route::get('/increase-cart/{rowid}', [ShoppingCartController::class, 'increaseCart'])->name('increaseCart');
     Route::get('/decrease-cart/{rowid}', [ShoppingCartController::class, 'decreaseCart'])->name('decreaseCart');
+    Route::post('/add-discount',[ShoppingCartController::class,'addDiscount'])->name('addDiscount');
 
     Route::middleware(['guest:customer', 'prevent-back-history'])->group(function () {
         Route::view('/register', 'Home.register')->name('register');

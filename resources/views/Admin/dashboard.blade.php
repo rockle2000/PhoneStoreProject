@@ -196,11 +196,27 @@
 
                     </tbody>
                     <tfoot>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Tổng tiền hóa đơn</th>
-                        <th id='total'></th>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Tổng tiền hóa đơn</th>
+                            <th id='total'></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Giảm giá</th>
+                            <th id='discount'></th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="text-danger">Thành tiền</th>
+                            <th class="text-danger" id='thanhtien'></th>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
@@ -286,13 +302,21 @@
             , success: function(result) {
                 var res = '';
                 var total = 0;
-                result.forEach(item => {
+                result.detail.forEach(item => {
                     // console.log(item.SoHDB);
                     res += '<tr><td>' + item.TenDT + '</td><td>' + item.Mau + '</td><td>'+ item.SoLuong + '</td><td>' + item.DonGiaBan.toLocaleString('en') + '₫</td><td>' + (item.DonGiaBan * item.SoLuong).toLocaleString('en') + '₫</td></tr>';
                     total += item.DonGiaBan * item.SoLuong;
                 });
                 $('.modal-body tbody').html(res);
                 $('.modal-body tfoot #total').html(total.toLocaleString('en') + '₫');
+                var paid = result.order.ThanhTien;
+                var discount = result.order.GiamGia;
+                if(discount == 0){
+                    $('.modal-body tfoot #discount').html('Không có');    
+                }else{
+                    $('.modal-body tfoot #discount').html(discount + '%');
+                }
+                $('.modal-body tfoot #thanhtien').html(paid.toLocaleString('en') + '₫');
                 // console.log(result);
             }
         }).fail(function(data) {

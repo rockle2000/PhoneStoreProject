@@ -10,7 +10,7 @@ class NewsCategory extends Model
     use HasFactory;
     use HasFactory;
     protected $table = 'newscategory';
-    protected $primaryKey = 'Id';
+    protected $primaryKey = 'MaTheLoai';
     // protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
@@ -20,6 +20,6 @@ class NewsCategory extends Model
 
     public function news_cate()
     {
-        return $this->hasMany(News_NewsCategory::class, 'newscategory_id', 'Id');
+        return $this->hasMany(News_NewsCategory::class, 'newscategory_id', 'MaTheLoai');
     }
 }

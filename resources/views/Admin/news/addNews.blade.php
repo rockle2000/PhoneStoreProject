@@ -61,7 +61,7 @@
                             <div class="col-sm-10">
                             <select name="ddlDanhMuc[]" class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho bài viết">
                                 @foreach ($newscategories as $cate)
-                                    <option value="{{ $cate->Id }}">{{ $cate->TheLoai }}</option>
+                                    <option value="{{ $cate->MaTheLoai }}">{{ $cate->TheLoai }}</option>
                                 @endforeach
                             </select>
                             </div>

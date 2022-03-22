@@ -22,9 +22,11 @@
                     <h3>Có mã khuyến mãi? <span id="showcoupon">Ấn vào đây để sử dụng mã</span></h3>
                     <div id="checkout_coupon" class="coupon-checkout-content">
                         <div class="coupon-info">
-                            <form action="#">
+                            {{-- <form action="#"> --}}
+                            <form action="{{route('user.addDiscount')}}" class="cart-quantity" method="post">
+                                @csrf
                                 <p class="checkout-coupon">
-                                    <input placeholder="Coupon code" type="text">
+                                    <input placeholder="Coupon code" type="text" name="txtDiscount" id="txtDiscount">
                                     <input value="Apply Coupon" type="submit">
                                 </p>
                             </form>
@@ -119,7 +121,25 @@
                                 <tr class="order-total">
                                     <th>Tổng tiền</th>
                                     <td><strong><span class="amount">{{Cart::priceTotal(0)}}₫</span></strong></td>
+                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
                                 </tr>
+                                @if(Cart::discount(0) != 0)
+                                <tr class="order-total">
+                                    <th>Giảm giá</th>
+                                    <td><strong><span class="amount">{{Cart::discount(0)}}₫</span></strong></td>
+                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Mã giảm giá</th>
+                                    <td><strong><span class="amount">{{session('discountCode');}}</span></strong></td>
+                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
+                                </tr>
+                                <tr class="order-total">
+                                    <th>Thành tiền</th>
+                                    <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td>
+                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
+                                </tr>
+                                @endif
 
                             </tfoot>
                         </table>

@@ -263,7 +263,7 @@
                                     <ul class="hb-dropdown">
                                         @foreach ($supplier as $s)
                                         <li><a href="{{ url('productBySupplier/'.$s->MaNSX) }}">{{ $s->TenNSX }}</a>
-                                            @endforeach
+                                        @endforeach
                                     </ul>
                                 </li>
                                 {{-- <li class="dropdown-holder"><a href="blog-left-sidebar.html">Blog</a>
@@ -343,6 +343,7 @@
                                 <li><a href="#" class="font-weight-bold">Phụ kiện</a></li>
                                 <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li>
                                 <li><a href="{{ url('contact') }}" class="font-weight-bold">Liên hệ</a></li>
+                                <li><a href="{{ url('discount') }}" class="font-weight-bold">Giảm giá</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -368,7 +369,6 @@
     {{-- Main Content --}}
     @yield('content')
     {{-- End Main Content --}}
-    <
     
     <!-- Begin Footer Area -->
     <div class="footer">

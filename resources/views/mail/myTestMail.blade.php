@@ -30,6 +30,9 @@
         @endforeach
         </tbody>
     </table>
+    @if($details['discount']!=0)
+        <span>Giảm giá: {{ $details['discount'] }}₫</span><br>
+    @endif
     <h3>Tổng tiền hóa đơn: {{ $details['total'] }}₫</h3>
 
     <span>Địa chỉ nhận hàng: {{ $details['address'] }}</span><br>

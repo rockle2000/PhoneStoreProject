@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
 use App\Models\Product;
 use App\Models\SlideImage;
 use App\Models\Supplier;
@@ -33,7 +34,7 @@ class HomeController extends Controller
         );
         $id_bestSeller = json_decode(json_encode($id_bestSeller), true);
         $bestSeller = Product::whereIn('MaDT', $id_bestSeller)->get();
-        
+
         // $id_supplier = DB::select(
         //     'select supplier.MaNSX from supplier,product
         //     WHERE supplier.MaNSX = product.MaNSX
@@ -90,6 +91,16 @@ class HomeController extends Controller
     public function about()
     {
         return view('Home.about');
+    }
+
+    public function discount()
+    {
+        $discount = Discount::selectRaw('*,TIMEDIFF(NgayKetThuc,NOW()) as time')
+            ->where("TrangThai",'=',1)
+            ->orderByRaw('GiamGia DESC')
+            ->orderByRaw('SoLuong DESC')
+            ->paginate(3);
+        return view("Home.discount",compact('discount'));
     }
 
     // public function __construct()

@@ -76,7 +76,7 @@ class NewsController extends Controller
             $category = $request->input('ddlDanhMuc');
             foreach ($category as $cate) {
                 $news_cate = new News_NewsCategory();
-                $news_cate->news_id = $news->Id;
+                $news_cate->news_id = $news->MaTinTuc;
                 $news_cate->newscategory_id = $cate;
                 if (!$news_cate->save()) {
                     DB::rollBack();
@@ -87,8 +87,8 @@ class NewsController extends Controller
             return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Thêm tin tức mới thành công');
         } catch (\Throwable $th) {
             DB::rollBack();
-            // throw $th;
-            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
+            throw $th;
+            // return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
         }
     }
 
@@ -104,7 +104,7 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $news = News::where('Id', "=", $id)->first();
+        $news = News::where('MaTinTuc', "=", $id)->first();
         if ($news === null || $id === "") {
             return view('errors.admin_404');
         }
@@ -152,7 +152,7 @@ class NewsController extends Controller
 
     public function active($id)
     {
-        $news = News::where('Id', "=", $id)->first();
+        $news = News::where('MaTinTuc', "=", $id)->first();
         if ($news === null) {
             return response()->json([
                 'status' => 'failed',
@@ -181,7 +181,7 @@ class NewsController extends Controller
 
     public function destroy($id)
     {
-        $news = News::where('Id', "=", $id)->first();
+        $news = News::where('MaTinTuc', "=", $id)->first();
         if ($news === null) {
             return response()->json([
                 'status' => 'failed',

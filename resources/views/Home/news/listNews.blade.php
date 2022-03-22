@@ -104,7 +104,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="li-blog-single-item pb-25">
                             <div class="li-blog-banner">
-                                <a href="{{ url('/news/detail/'.$item->Id) }}"><img class="img-full" src="{{ asset('public/backend/uploads/news-images/'.$item->Anh) }}" alt=""></a>
+                                <a href="{{ url('/news/detail/'.$item->MaTinTuc) }}"><img class="img-full" src="{{ asset('public/backend/uploads/news-images/'.$item->Anh) }}" alt=""></a>
                             </div>
                             <div class="li-blog-content">
                                 <div class="li-blog-details">

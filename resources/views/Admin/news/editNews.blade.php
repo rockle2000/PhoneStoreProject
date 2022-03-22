@@ -11,11 +11,11 @@
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm mới tin tức</h3>
+                    <h3 class="card-title">Chỉnh sửa tin tức</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ url('update-news/'.$news->Id) }}" method="POST" >
+                <form class="form-horizontal" action="{{ url('update-news/'.$news->MaTinTuc) }}" method="POST" >
                     @method('PUT')
                     @csrf
                     <div class="card-body">
@@ -28,7 +28,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="image" class="col-sm-2 col-form-label">Thumbnail</label>
                             <div class="col-sm-10">
                                 <input type="file" multiple class="form-control" name="image">
@@ -36,7 +36,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label for="txtTacGia" class="col-sm-2 col-form-label">Tác giả</label>
                             <div class="col-sm-10">
@@ -61,13 +61,11 @@
                             <label for="txtNoiDung" class="col-sm-2 col-form-label">Danh mục</label>
                             <div class="col-sm-10">
                             <select class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho bài viết">
-                                @foreach ($newscategories as $cate)
-                                    <option value="{{ $cate->Id }}">{{ $cate->TheLoai }}</option>
+                                @foreach ($news->news_newscategory as $item)
+                                    <option value="{{ $item->newscategory->MaTheLoai }}" selected>{{ $item->newscategory->TheLoai}}</option>
                                 @endforeach
-                            </select>
+                            </select>   
                             </div>
-                            {{-- <label class="mdb-main-label">Label example</label> --}}
-                            {{-- <button class="btn-save btn btn-primary btn-sm">Save</button> --}}
                         </div>
                         <div class="form-group row">
                             <label for="ddlTrangThai" class="col-sm-2 col-form-label">Trạng thái</label>

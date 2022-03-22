@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
 use Carbon\Carbon;
 use Omnipay\Omnipay;
 use App\Models\Order;
@@ -114,6 +115,7 @@ class ShoppingCartController extends Controller
             return back()->with('error', 'Không đủ số lượng trong kho!');
         }
     }
+
     function decreaseCart($rowid)
     {
         $ww = Cart::get($rowid);
@@ -126,6 +128,31 @@ class ShoppingCartController extends Controller
     {
         Cart::remove($id);
         return back();
+    }
+
+    public function addDiscount(Request $req)
+    {
+        $id = $req->input('txtDiscount');
+        $discount = Discount::where('MaKM','=',$id)
+                ->first();
+        if ($discount->TrangThai != 1){
+            return back()->with('error','Mã giảm giá không hợp lệ');
+        }
+        if($discount->SoLuong <= 0){
+            return back()->with('error','Mã giảm giá này đã được dùng hết');
+        }
+        $endDate = strtotime(date('Y-m-d H:i:s', strtotime($discount->NgayKetThuc)));
+        $startDate = strtotime(date('Y-m-d H:i:s',  strtotime($discount->NgayBatDau)));
+        $currentDate = strtotime(date('Y-m-d H:i:s'));
+        if($startDate > $currentDate) {
+            return back()->with('error','Mã giảm giá này chưa có hiệu lực, thử lại sau');
+        }
+        if($endDate < $currentDate) {
+            return back()->with('error','Mã giảm giá này đã hết hạn');
+        }
+        Cart::setGlobalDiscount($discount->GiamGia);
+        session(['discountCode' => $id]);
+        return back()->with('msg', 'Sử dụng mã giảm giá thành công');
     }
 
     public function checkout()
@@ -155,6 +182,30 @@ class ShoppingCartController extends Controller
             'phone_number.regex' => "Số điện thoại không hợp lệ",
         ]);
         if ($checkpayment == 'tructiep') {
+            $discount = Discount::where('MaKM','=',session('discountCode'))->first();
+            if ($discount->TrangThai != 1){
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá không hợp lệ');
+            }
+            if($discount->SoLuong <= 0){
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này đã được dùng hết');
+            }
+            $endDate = strtotime(date('Y-m-d H:i:s', strtotime($discount->NgayKetThuc)));
+            $startDate = strtotime(date('Y-m-d H:i:s',  strtotime($discount->NgayBatDau)));
+            $currentDate = strtotime(date('Y-m-d H:i:s'));
+            if($startDate > $currentDate) {
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này chưa có hiệu lực, thử lại sau');
+            }
+            if($endDate < $currentDate) {
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này đã hết hạn');
+            }
             try {
                 DB::beginTransaction();
                 $order = new Order();
@@ -163,6 +214,7 @@ class ShoppingCartController extends Controller
                 $order->SoDienThoai = $req->phone_number;
                 $order->GhiChu = $req->order_note;
                 $order->TrangThai = 0;
+                $order->MaKM = session('discountCode');
                 // $order->EmailKH = $req->email;
                 $order->EmailKH = Auth::guard('customer')->user()->email;
                 $order->save();
@@ -191,7 +243,8 @@ class ShoppingCartController extends Controller
                 $details = [
                     'title' => 'Chi tiết đơn hàng',
                     'body' => Cart::content(),
-                    'total' => Cart::priceTotal(0),
+                    'discount' => Cart::discount(0),
+                    'total' => Cart::subTotal(0),
                     'address' =>$req->address,
                     'note' => $req->order_note,
                     'date' => Carbon::now()
@@ -203,13 +256,39 @@ class ShoppingCartController extends Controller
                 return redirect()->back()->with('error', 'Đã xảy ra lỗi khi xử lý đơn hàng này. Vui lòng thử lại sau');
             }
             Cart::destroy();
+            $req->session()->forget('discountCode');
             return redirect()->route('main-page')->with('msg', 'Đặt hàng thành công');
         }
 
         if ($checkpayment == 'stripe') {
+            $discount = Discount::where('MaKM','=',session('discountCode'))->first();
+            if ($discount->TrangThai != 1){
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá không hợp lệ');
+            }
+            if($discount->SoLuong <= 0){
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này đã được dùng hết');
+            }
+            $endDate = strtotime(date('Y-m-d H:i:s', strtotime($discount->NgayKetThuc)));
+            $startDate = strtotime(date('Y-m-d H:i:s',  strtotime($discount->NgayBatDau)));
+            $currentDate = strtotime(date('Y-m-d H:i:s'));
+            if($startDate > $currentDate) {
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này chưa có hiệu lực, thử lại sau');
+            }
+            if($endDate < $currentDate) {
+                Cart::setGlobalDiscount(0);
+                $req->session()->forget('discountCode');
+                return back()->with('error','Mã giảm giá này đã hết hạn');
+            }
             if ($req->input('stripeToken')) {
                 $token = $req->input('stripeToken');
-                $total = str_replace(',', '', Cart::priceTotal(0));
+                // $total = str_replace(',', '', Cart::priceTotal(0));
+                $total = str_replace(',', '', Cart::subTotal(0));
                 $response = $this->gateway->authorize([
                     'amount' => $total,
                     'currency' => env('STRIPE_CURRENCY'),
@@ -221,7 +300,8 @@ class ShoppingCartController extends Controller
 
                 if ($response->isSuccessful()) {
                     $response = $this->gateway->capture([
-                        'amount' => str_replace(',', '', Cart::priceTotal(0)),
+                        //'amount' => str_replace(',', '', Cart::priceTotal(0)),
+                        'amount' => str_replace(',', '', Cart::subTotal(0)),
                         'currency' => env('STRIPE_CURRENCY'),
                         'paymentIntentReference' => $response->getPaymentIntentReference(),
                     ])->send();
@@ -232,6 +312,7 @@ class ShoppingCartController extends Controller
                         'payer_diachi' => $req->input('address'),
                         'payer_sdt' => $req->input('phone_number'),
                         'payer_ordernote' =>  $req->input('order_note'),
+                        'payer_discount_code' =>  session('discountCode'),
                         'amount' => $arr_payment_data['amount'],
                         'payer_status' => 1,
                         'payer_email' =>  Auth::guard('customer')->user()->email,
@@ -239,6 +320,7 @@ class ShoppingCartController extends Controller
                     ]);
                     if($result === 'success'){
                         Cart::destroy();
+                        $req->session()->forget('discountCode');
                         return redirect()->route('main-page')->with('msg', 'Đặt hàng thành công');
                     }else{
                         return redirect()->back()->with('error', $result);
@@ -266,7 +348,7 @@ class ShoppingCartController extends Controller
 
         if ($response->isSuccessful()) {
             $response = $this->gateway->capture([
-                'amount' => str_replace(',', '', Cart::priceTotal(0)),
+                'amount' => str_replace(',', '', Cart::subTotal(0)),
                 'currency' => env('STRIPE_CURRENCY'),
                 'paymentIntentReference' => $request->input('payment_intent'),
             ])->send();
@@ -309,7 +391,7 @@ class ShoppingCartController extends Controller
                 // $payment->currency = env('STRIPE_CURRENCY');
                 $payment->TrangThai = $arr_data['payer_status'];
                 $payment->EmailKH = $arr_data['payer_email'];
-                // $payment->TenKH = $arr_data['payer_tenkh'];
+                $payment->MaKM = $arr_data['payer_discount_code'];
                 $payment->payment_id = $arr_data['payment_id'];
                 $payment->save();
 
@@ -339,7 +421,8 @@ class ShoppingCartController extends Controller
                 $details = [
                     'title' => 'Chi tiết đơn hàng',
                     'body' => Cart::content(),
-                    'total' => Cart::priceTotal(0),
+                    'total' => Cart::subTotal(0),
+                    'discount' => Cart::discount(0),
                     'address' =>$arr_data['payer_diachi'],
                     'note' => $arr_data['payer_ordernote'],
                     'date' => $arr_data['payer_ngaydathang']

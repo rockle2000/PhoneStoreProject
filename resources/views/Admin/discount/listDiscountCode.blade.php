@@ -40,9 +40,15 @@
                                     <td>{{ $item->GiamGia }}%</td>
                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->NgayBatDau));}}</td>
                                     <td>{{ date('d-m-Y H:i:s', strtotime($item->NgayKetThuc));}}</td>
-                                    <td>{{ $item->SoLuong }}</td>
                                     <td>
-                                        @if ($item->TrangThai)
+                                        @if($item->SoLuong >0 )
+                                            {{$item->SoLuong}}
+                                        @else
+                                        <span class="text-danger">Hết</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->TrangThai)
                                         <button class="btn btn-success disabled">
                                             <i class="fas fa-check-circle"></i>
                                             Available

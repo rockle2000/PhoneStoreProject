@@ -39,7 +39,17 @@ class OrderController extends Controller
                 'orderdetail.DonGiaBan as DonGiaBan',
             )
             ->get();
-        return response()->json($order_detail, 200);
+        $order = Order::where('SoHDB','=',$order_id)
+                ->leftjoin('discount_code','order.MaKM','=','discount_code.MaKM')
+                ->select(
+                    DB::raw('IFNULL (discount_code.GiamGia,0) as GiamGia'),
+                    'order.TongTien as ThanhTien'
+                )
+                ->first();
+        return response()->json([
+            'detail'=>$order_detail,
+            'order' =>$order
+        ], 200);
     }
 
     public function confirmOrder($id)
