@@ -40,8 +40,7 @@ class NewsController extends Controller
             $request,
             [
                 'image' => ['required', 'mimes:jpg,png,jpeg'],
-                // 'image.*' => ['required','mimes:jpg,png,jpeg'],
-                'txtTieuDe' => ['required', 'unique:product,MaDT'],
+                'txtTieuDe' => ['required', 'unique:news,TieuDe'],
                 'txtTacGia' => ['required'],
                 'txtNoiDung' => ['required'],
                 'ddlTrangThai' => ['required', Rule::in(['0', '1'])]
@@ -50,6 +49,7 @@ class NewsController extends Controller
                 'image.required' => 'Bạn chưa thêm ảnh cho tin tức này',
                 'image.mimes' => 'Upload file không hợp lệ',
                 'txtTieuDe.required' => 'Bạn chưa nhập tiêu đề cho bài viết',
+                'txtTieuDe.unique' => 'Bài viết với tiêu đề này đã tồn tại',
                 'txtTacGia.required' => 'Bạn chưa nhập tên tác giả',
                 'txtNoiDung.required' => 'Bạn chưa nhập nội dung tin tức này',
                 'ddlTrangThai.required' => 'Trạng thái không được để trống',
@@ -87,8 +87,8 @@ class NewsController extends Controller
             return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Thêm tin tức mới thành công');
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
-            // return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
+            // throw $th;
+            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
         }
     }
 
@@ -113,7 +113,7 @@ class NewsController extends Controller
             [
                 // 'image' => ['required', 'mimes:jpg,png,jpeg'],
                 // 'image.*' => ['required','mimes:jpg,png,jpeg'],
-                'txtTieuDe' => ['required', 'unique:product,MaDT'],
+                'txtTieuDe' => ['required'],
                 'txtTacGia' => ['required'],
                 'txtNoiDung' => ['required'],
                 'ddlTrangThai' => ['required', Rule::in(['0', '1'])]
@@ -121,7 +121,6 @@ class NewsController extends Controller
             [
                 // 'image.required' => 'Bạn chưa thêm ảnh cho tin tức này',
                 // 'image.mimes' => 'Upload file không hợp lệ',
-                'txtMaDT.unique' => 'Mã sản phẩm đã tồn tại',
                 'txtTieuDe.required' => 'Bạn chưa nhập tiêu đề cho bài viết',
                 'txtTacGia.required' => 'Bạn chưa nhập tên tác giả',
                 'txtNoiDung.required' => 'Bạn chưa nhập nội dung tin tức này',

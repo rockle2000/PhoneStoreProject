@@ -93,6 +93,14 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::put('/update-news/{id}', "NewsController@update");
     Route::put('/active-news/{id}',"NewsController@active");
     Route::put('/delete-news/{id}',"NewsController@destroy");
+    //NewsCategory-Admin
+    Route::get('/newscategory-list',"NewsCategoryController@getAllNewsCategory");
+    Route::get('/add-newscategory',"NewsCategoryController@add");
+    Route::post('/insert-newscategory', "NewsCategoryController@insert");
+    Route::get('/edit-newscategory/{id}', "NewsCategoryController@edit");
+    Route::put('/update-newscategory/{id}', "NewsCategoryController@update");
+    Route::put('/active-newscategory/{id}',"NewsCategoryController@active");
+    Route::put('/delete-newscategory/{id}',"NewsCategoryController@destroy");
     
     //Discount
     Route::get('/discount-list','DiscountController@getAllDiscountCode');

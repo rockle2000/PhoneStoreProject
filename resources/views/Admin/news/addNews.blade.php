@@ -84,7 +84,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Thêm mới</button>
-                        <a href="#" id="test">Test</a>
+                        {{-- <a href="#" id="test">Test</a> --}}
                     </div>
                     <!-- /.card-footer -->
                 </form>

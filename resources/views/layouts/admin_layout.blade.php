@@ -163,6 +163,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới nhà sản xuất</p>
                                     </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -193,6 +194,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới sản phẩm</p>
                                     </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item {{ (Request::path()=='discount-list'||Request::path()=='add-discount') ? 'menu-open' : '' }}">
@@ -215,10 +217,11 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới</p>
                                     </a>
+                                </li>
                             </ul>
                         </li>
-                        <li class="nav-item {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ (Request::path()=='news-list'||Request::path()=='add-news') ? 'active' : '' }}">
+                        <li class="nav-item {{ (Request::path()=='news-list'||Request::path()=='add-news'||Request::path()=="newscategory-list"||Request::path()=="add-newscategory") ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (Request::path()=='news-list'||Request::path()=='add-news' ||Request::path()=="newscategory-list"||Request::path()=="add-newscategory") ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-newspaper"></i>
                                 <p>
                                     Quản lý tin tức
@@ -237,6 +240,19 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới tin tức</p>
                                     </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/newscategory-list') }}" class="nav-link {{ Request::path()=='newscategory-list' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách thể loại</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ url('/add-newscategory') }}" class="nav-link {{ Request::path()=='add-newscategory' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thêm thể loại bài viết</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item {{ (Request::path()=='banner-list'||Request::path()=='add-banner') ? 'menu-open' : '' }}">
@@ -260,6 +276,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm mới Banner/Slide</p>
                                     </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
