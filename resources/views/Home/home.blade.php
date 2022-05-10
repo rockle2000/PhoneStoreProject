@@ -138,10 +138,10 @@
                                             </div>
                                         </div>
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->TenDT}}</a></h4>
-                                        <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->product_type->TenLoai}}</a></h4>
-                                        <div class="countersection">
+                                        {{-- <h4><a class="product_name" href="{{  url('product-detail/'.$best->MaDT) }}">{{$best->product_type->TenLoai}}</a></h4> --}}
+                                        {{-- <div class="countersection">
                                             <div class="li-countdown wrap-countdown mercado-countdown" data-expire="2022/12/12 12:34:56"></div>
-                                        </div>
+                                        </div> --}}
                                         <div class="price-box">
                                             @if($best->quantity->count() >0)
                                             <span class="new-price text-danger">{{ number_format($best->quantity[0]->DonGiaBan) }}₫</span>

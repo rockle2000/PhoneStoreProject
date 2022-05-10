@@ -64,6 +64,7 @@ class NewsController extends Controller
             $news->TacGia  = $request->input('txtTacGia');
             $news->NoiDung = $request->input('txtNoiDung');
             $news->TrangThai  = $request->input('ddlTrangThai');
+            $news->NgayTao = date('Y-m-d H:i:s');
             $file = $request->file('image');
             $original_name = $file->getClientOriginalName();
             $filename = time() . $original_name;
@@ -87,8 +88,8 @@ class NewsController extends Controller
             return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Thêm tin tức mới thành công');
         } catch (\Throwable $th) {
             DB::rollBack();
-            // throw $th;
-            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
+            throw $th;
+            // return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
         }
     }
 

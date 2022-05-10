@@ -13,16 +13,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header bg-primary">
-                        <h4 class="card-title">Danh sách nhà sản xuất</h4>
-                        {{-- <a href="{{ url('/add-supplier') }}" class="btn btn-primary">Thêm mới</a> --}}
+                        <h4 class="card-title">Danh sách nhà cung cấp</h4>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Mã NSX</th>
-                                    <th>Tên NSX</th>
+                                    <th>Mã</th>
+                                    <th>Tên</th>
                                     <th>Địa chỉ</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>

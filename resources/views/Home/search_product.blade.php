@@ -25,7 +25,7 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="{{url('/main-page')}}">Trang chủ</a></li>
                 <li class="active">Tìm kiếm</li>
             </ul>
         </div>

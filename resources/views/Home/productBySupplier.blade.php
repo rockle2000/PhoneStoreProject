@@ -73,7 +73,7 @@
                                         <div class="single-product-wrap">
                                             <div class="product-image">
                                                 <a href="{{ url('product-detail/'.$item->MaDT) }}">
-                                                    <img src="{{asset('public/backend/uploads/product-images/'.$item->image[0]->Anh)}}">
+                                                    <img src="{{asset('public/backend/uploads/product-images/'.$item->image[0]->Anh)}}" style="height: 270px">
                                                 </a>
                                             </div>
                                             <div class="product_desc">

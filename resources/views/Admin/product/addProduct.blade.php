@@ -15,7 +15,7 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="txtMaDT" class="col-sm-2 col-form-label">Mã điện thoại</label>
+                            <label for="txtMaDT" class="col-sm-2 col-form-label">Mã sản phẩm</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="txtMaDT" name="txtMaDT" value="{{ old('txtMaDT') }}" placeholder=" Mã sản phẩm">
                                 @error('txtMaDT')
@@ -24,9 +24,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="txtTenDT" class="col-sm-2 col-form-label">Tên điện thoại</label>
+                            <label for="txtTenDT" class="col-sm-2 col-form-label">Tên sản phẩm</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtTenDT" name="txtTenDT" value="{{ old('txtTenDT') }}" placeholder=" Tên điện thoại">
+                                <input type="text" class="form-control" id="txtTenDT" name="txtTenDT" value="{{ old('txtTenDT') }}" placeholder=" Tên sản phẩm">
                                 @error('txtTenDT')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ddlNhaSanXuat" class="col-sm-2 col-form-label">Nhà sản xuất</label>
+                            <label for="ddlNhaSanXuat" class="col-sm-2 col-form-label">Nhà cung cấp</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="ddlNhaSanXuat" id="">
                                     @foreach ($supplier as $item)

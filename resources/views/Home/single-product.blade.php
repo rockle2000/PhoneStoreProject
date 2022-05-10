@@ -91,17 +91,15 @@
                         @else
                         Số lượng trong kho: <span id="product_instock">Đang cập nhật</span>
                         @endif
-                        <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" method="get">
+                        <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" style=" overflow: visible !important; " method="get">
                             @csrf
-                            <div class="product-variants mt-1">
+                            <div class="product-variants">
                                 <div class="produt-variants-size">
                                     @if($product->quantity->count() >0)
                                     <label><strong>Màu sắc</strong></label>
                                     <select class="nice-select" id="ddlColor" name="color">
                                         @foreach ($product->quantity as $item)
-                                        {{-- @if($item->SoLuong >0) --}}
                                         <option value="{{ $item->Mau }}">{{ $item->Mau }}</option>
-                                        {{-- @endif --}}
                                         @endforeach
                                     </select>
                                     @endif

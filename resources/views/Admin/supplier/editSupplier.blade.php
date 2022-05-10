@@ -7,7 +7,7 @@
             <!-- Horizontal Form -->
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Sửa thông tin nhà sản xuất</h3>
+                    <h3 class="card-title">Sửa thông tin nhà cung cấp</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -16,18 +16,18 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="txtMaNSX" class="col-sm-2 col-form-label">Mã nhà sản xuất</label>
+                            <label for="txtMaNSX" class="col-sm-2 col-form-label">Mã nhà cung cấp</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtMaNSX" name="txtMaNSX" value="{{ $supplier->MaNSX }}" disabled placeholder="Mã nhà sản xuất">
+                                <input type="text" class="form-control" id="txtMaNSX" name="txtMaNSX" value="{{ $supplier->MaNSX }}" disabled placeholder="Mã nhà cung cấp">
                                 @error('txtMaNSX')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="txtTenNSX" class="col-sm-2 col-form-label">Tên nhà sản xuất</label>
+                            <label for="txtTenNSX" class="col-sm-2 col-form-label">Tên nhà cung cấp</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtTenNSX" name="txtTenNSX" value="{{ $supplier->TenNSX }}" placeholder="Tên nhà sản xuất">
+                                <input type="text" class="form-control" id="txtTenNSX" name="txtTenNSX" value="{{ $supplier->TenNSX }}" placeholder="Tên nhà cung cấp">
                                 @error('txtTenNSX')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

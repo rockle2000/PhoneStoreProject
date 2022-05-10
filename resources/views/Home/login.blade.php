@@ -5,7 +5,7 @@
     <div class="container">
         <div class="breadcrumb-content">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{url('/main-page')}}">Trang chủ</a></li>
                 <li class="active">Đăng nhập</li>
             </ul>
         </div>

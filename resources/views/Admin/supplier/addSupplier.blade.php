@@ -14,7 +14,7 @@
             @endif
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm mới nhà sản xuất</h3>
+                    <h3 class="card-title">Thêm mới nhà cung cấp</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -26,9 +26,9 @@
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                             </div> --}}
-                            <label for="txtMaNSX" class="col-sm-2 col-form-label">Mã nhà sản xuất</label>
+                            <label for="txtMaNSX" class="col-sm-2 col-form-label">Mã nhà cung cấp</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtMaNSX" name="txtMaNSX" placeholder="Mã nhà sản xuất" value="{{ old('txtMaNSX') }}">
+                                <input type="text" class="form-control" id="txtMaNSX" name="txtMaNSX" placeholder="Mã nhà cung cấp" value="{{ old('txtMaNSX') }}">
                                 @error('txtMaNSX')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -37,7 +37,7 @@
                         <div class=" form-group row">
                             <label for="txtTenNSX" class="col-sm-2 col-form-label">Tên nhà sản xuất</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtTenNSX" name="txtTenNSX" placeholder="Tên nhà sản xuất" value="{{ old('txtTenNSX') }}">
+                                <input type="text" class="form-control" id="txtTenNSX" name="txtTenNSX" placeholder="Tên nhà cung cấp" value="{{ old('txtTenNSX') }}">
                                 @error('txtTenNSX')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror

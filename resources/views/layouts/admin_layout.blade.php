@@ -143,11 +143,11 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ (Request::path()=='supplier-list'||Request::path()=='add-supplier') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ (Request::path()=='supplier-list'||Request::path()=='add-supplier'||Str::contains(Request::path(), 'edit-supplier')) ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ (Request::path()=='supplier-list'||Request::path()=='add-supplier') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-copy"></i>
                                 <p>
-                                    Quản lý nhà sản xuất
+                                    Quản lý nhà cung cấp
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -155,13 +155,13 @@
                                 <li class="nav-item">
                                     <a href="{{ url('/supplier-list') }}" class="nav-link {{ Request::path()=='supplier-list' ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách nhà sản xuất</p>
+                                        <p>Danh sách nhà cung cấp</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ url('/add-supplier') }}" class="nav-link {{ Request::path()=='add-supplier' ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm mới nhà sản xuất</p>
+                                        <p>Thêm mới nhà cung cấp</p>
                                     </a>
                                 </li>
                             </ul>
@@ -174,7 +174,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ (Request::path()=='product-list'||Request::path()=='add-product') ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ (Request::path()=='product-list'||Request::path()=='add-product' ||Str::contains(Request::path(), 'edit-product')) ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ (Request::path()=='product-list'||Request::path()=='add-product') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-boxes"></i>
                                 <p>

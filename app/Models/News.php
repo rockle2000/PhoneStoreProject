@@ -11,13 +11,14 @@ class News extends Model
     protected $table = 'news';
     protected $primaryKey = 'MaTinTuc';
     // protected $keyType = 'string';
-    // public $timestamps = false;
+    public $timestamps = false;
     protected $fillable = [
         'TieuDe',
         'Anh',
         'TacGia',
         'NoiDung',
         'TrangThai',
+        'NgayTao',
     ];
 
     public function news_newscategory()
