@@ -88,8 +88,8 @@ class NewsController extends Controller
             return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('status', 'Thêm tin tức mới thành công');
         } catch (\Throwable $th) {
             DB::rollBack();
-            throw $th;
-            // return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
+            // throw $th;
+            return redirect()->action([NewsController::class, 'getAllNewsAdmin'])->with('error', 'Đã xảy ra lỗi');
         }
     }
 
