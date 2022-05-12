@@ -3,6 +3,7 @@
 
 <!-- index28:48-->
 <head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Phone Store</title>
