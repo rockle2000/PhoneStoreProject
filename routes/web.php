@@ -110,6 +110,10 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::put('/update-discount/{id}',"DiscountController@update");
     Route::put('/delete-discount/{id}',"DiscountController@destroy");
     Route::put('/active-discount/{id}',"DiscountController@active");
+
+    //Warranty
+    Route::get('/warranty','WarrantyController@getAllWarranty');
+    Route::get('/warranty-detail/{id}','WarrantyController@warrantyDetail');
 });
 
 // Customer-Homepage

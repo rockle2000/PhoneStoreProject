@@ -281,6 +281,14 @@
                             </ul>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ url('/warranty') }}" class="nav-link {{ Request::path()=='warranty' ? 'active' : '' }}">
+                                {{-- <i class="nav-icon fa fa-chart-pie"></i> --}}
+                                {{-- <i class="nav-icon far fa-box-check"></i> --}}
+                                <i class="fa fa-check nav-icon"></i>
+                                <p>Bảo hành</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ url('/chart') }}" class="nav-link {{ Request::path()=='chart' ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-chart-pie"></i>
                                 <p>Thống kê</p>
