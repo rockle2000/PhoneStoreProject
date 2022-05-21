@@ -151,7 +151,7 @@
                                         <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
                                         <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
                                         @else
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
                                         @endif
                                         {{-- <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success"><i class="fas fa-check"></i> </a>
                                         <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
@@ -252,37 +252,7 @@
     $(function() {
         
         $("#example1").DataTable({
-            "order": [],
-            "columnDefs": [{
-                    "width": "5%"
-                    , "targets": 0
-                }
-                , {
-                    "width": "10%"
-                    , "targets": 1
-                }, {
-                    "width": "10%"
-                    , "targets": 2
-                    
-                }, {
-                    "width": "20%"
-                    , "targets": 3
-                }, {
-                    "width": "10%"
-                    , "targets": 4
-                }, {
-                    "width": "15%"
-                    , "targets": 5
-                }, {
-                    "width": "10%"
-                    , "targets": 6
-                }
-                , {
-                    "width": "20%"
-                    , "targets": 7
-                }
-            , ]
-            , "responsive": true
+            "order": []
                 // , "lengthChange": false
             , "pageLength": 6
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

@@ -5,7 +5,7 @@
      <div class="container">
          <div class="breadcrumb-content">
              <ul>
-                 <li><a href="index.html">Home</a></li>
+                 <li><a href="{{ route('main-page') }}">Trang chủ</a></li>
                  <li class="active">404 Error</li>
              </ul>
          </div>
@@ -31,7 +31,7 @@
                          </form>
                      </div> --}}
                      <div class="error-button">
-                         <a class=" bg-primary"href="{{ url('/main-page') }}">Quay về trang chủ</a>
+                         <a class="" style="background-color: #293a6c" href="{{ url('/main-page') }}">Quay về trang chủ</a>
                      </div>
                  </div>
              </div>

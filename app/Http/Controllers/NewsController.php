@@ -16,8 +16,9 @@ class NewsController extends Controller
     public function getAllNews()
     {
         $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
-        $news = News::where('TrangThai', '=', '1')->paginate(2);
-        return view("Home.news.listNews", compact('news', 'newscategories'));
+        $news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->paginate(2);
+        $recent_news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->limit(3)->get();
+        return view("Home.news.listNews", compact('news', 'newscategories','recent_news'));
     }
     //Admin News
     public function getAllNewsAdmin()
@@ -144,10 +145,11 @@ class NewsController extends Controller
     {
         $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
         $news = News::find($id);
+        $recent_news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->limit(3)->get();
         if ($news == null || !$news->TrangThai) {
             return view("errors.home_404");
         }
-        return view("Home.news.newsDetail", compact('news', 'newscategories'));
+        return view("Home.news.newsDetail", compact('news', 'newscategories','recent_news'));
     }
 
     public function active($id)

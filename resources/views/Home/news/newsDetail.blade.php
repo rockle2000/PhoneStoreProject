@@ -22,81 +22,30 @@
             <div class="col-lg-3 order-lg-1 order-2">
                 <div class="li-blog-sidebar-wrapper">
                     <div class="li-blog-sidebar">
-                        <div class="li-sidebar-search-form">
-                            <form action="#">
-                                <input type="text" class="li-search-field" placeholder="search here">
-                                <button type="submit" class="li-search-btn"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
                     </div>
                     <div class="li-blog-sidebar pt-25">
-                        <h4 class="li-blog-sidebar-title">Categories</h4>
+                        <h4 class="li-blog-sidebar-title" style="font-family: Roboto,Helvetica,Arial,sans-serif">Danh mục</h4>
                         <ul class="li-blog-archive">
-                            <li><a href="#">Laptops (10)</a></li>
-                            <li><a href="#">TV & Audio (08)</a></li>
-                            <li><a href="#">reach (07)</a></li>
-                            <li><a href="#">Smartphone (14)</a></li>
-                            <li><a href="#">Cameras (10)</a></li>
-                            <li><a href="#">Headphone (06)</a></li>
+                            @foreach ($newscategories as $category)
+                            <li><a href="#">{{ $category->TheLoai }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="li-blog-sidebar">
-                        <h4 class="li-blog-sidebar-title">Blog Archives</h4>
-                        <ul class="li-blog-archive">
-                            <li><a href="#">January (10)</a></li>
-                            <li><a href="#">February (08)</a></li>
-                            <li><a href="#">March (07)</a></li>
-                            <li><a href="#">April (14)</a></li>
-                            <li><a href="#">May (10)</a></li>
-                            <li><a href="#">June (06)</a></li>
-                        </ul>
-                    </div>
-                    <div class="li-blog-sidebar">
-                        <h4 class="li-blog-sidebar-title">Recent Post</h4>
+                        <h4 class="li-blog-sidebar-title" style="font-family: Roboto,Helvetica,Arial,sans-serif">Tin tức gần đây</h4>
+                        @foreach ($recent_news as $recent)
                         <div class="li-recent-post pb-30">
-                            <div class="li-recent-post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-full" src="images/product/small-size/3.jpg" alt="Li's Product Image">
+                            <div class="li-recent-post-thumb" style="height: 100%">
+                                <a href="{{ url('/news/detail/'.$recent->MaTinTuc) }}">
+                                    <img class="img-full" src="{{ asset('public/backend/uploads/news-images/'.$recent->Anh) }}" alt="Recent news image">
                                 </a>
                             </div>
                             <div class="li-recent-post-des">
-                                <span><a href="blog-details.html">First Blog Post</a></span>
-                                <span class="li-post-date">25.11.2018</span>
+                                <span><a href="{{ url('/news/detail/'.$recent->MaTinTuc) }}">{{ Str::of($recent->TieuDe)->limit(20) }}</a></span>
+                                <span class="li-post-date">{{ date('d-m-Y', strtotime($recent->NgayTao)) }}</span>
                             </div>
                         </div>
-                        <div class="li-recent-post pb-30">
-                            <div class="li-recent-post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-full" src="images/product/small-size/2.jpg" alt="Li's Product Image">
-                                </a>
-                            </div>
-                            <div class="li-recent-post-des">
-                                <span><a href="blog-details.html">First Blog Post</a></span>
-                                <span class="li-post-date">25.11.2018</span>
-                            </div>
-                        </div>
-                        <div class="li-recent-post pb-30">
-                            <div class="li-recent-post-thumb">
-                                <a href="blog-details.html">
-                                    <img class="img-full" src="images/product/small-size/5.jpg" alt="Li's Product Image">
-                                </a>
-                            </div>
-                            <div class="li-recent-post-des">
-                                <span><a href="blog-details.html">First Blog Post</a></span>
-                                <span class="li-post-date">25.11.2018</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="li-blog-sidebar">
-                        <h4 class="li-blog-sidebar-title">Tags</h4>
-                        <ul class="li-blog-tags">
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Chromebook</a></li>
-                            <li><a href="#">Refurbished</a></li>
-                            <li><a href="#">Touchscreen</a></li>
-                            <li><a href="#">Ultrabooks</a></li>
-                            <li><a href="#">Sound Cards</a></li>
-                        </ul>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -115,7 +64,7 @@
                                     <div class="li-blog-meta">
                                         <a class="author" href="#"><i class="fa fa-user"></i>{{ $news->TacGia }}</a>
                                         <a class="comment" href="#"><i class="fa fa-comment-o"></i> 3 comment</a>
-                                        <a class="post-time" href="#"><i class="fa fa-calendar"></i> {{ $news->created_at }}</a>
+                                        <a class="post-time" href="#"><i class="fa fa-calendar"></i> {{ date('d-m-Y', strtotime($recent->NgayTao)) }}</a>
                                     </div>
                                     {{-- <p>Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. Cras pretium arcu ex.</p> --}}
                                     <!-- Begin Blog Blockquote Area -->
@@ -140,7 +89,7 @@
                                         <a href="#">Wireless Speakers</a> --}}
                                     </div>
                                     <div class="li-blog-sharing text-center pt-30">
-                                        <h4>share this post:</h4>
+                                        <h4>Chia sẻ bài viết này:</h4>
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
                                         <a href="#"><i class="fa fa-pinterest"></i></a>

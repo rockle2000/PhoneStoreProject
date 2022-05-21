@@ -77,8 +77,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="static-top-content mt-sm-30">
-                    Gift Special: Gift every single day on Weekends - New Coupon code "
-                    <span>LimupaSaleoff</span>
+                    {{-- Gift Special: Gift every single day on Weekends - New Coupon code "
+                    <span>LimupaSaleoff</span> --}}
+                    Quà tặng miễn phí vào ngày cuối tuần - Mã giảm giá cho mọi đơn hàng
                 </div>
             </div>
         </div>
@@ -146,7 +147,7 @@
                                             @if($best->quantity->count() >0)
                                             <span class="new-price text-danger">{{ number_format($best->quantity[0]->DonGiaBan) }}₫</span>
                                             @else
-                                            <span class="new-price">Đang cập nhật</span>
+                                            <span class="new-price text-danger">Đang cập nhật</span>
                                             @endif
                                             <a href="#" class="float-right" onclick="return Detail('{{ $best->MaDT }}',this)" title="Xem nhanh" class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-eye"></i></a>
                                         </div>
@@ -263,7 +264,7 @@
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$item->MaDT) }}">{{$item->TenDT}}</a></h4>
                                         <div class="price-box">
                                             @if($item->quantity->count() >0)
-                                            <span class="new-price">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
+                                            <span class="new-price text-danger">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
                                             @else
                                             <span class="new-price text-danger">Đang cập nhật</span>
                                             @endif
@@ -340,7 +341,7 @@
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$item->MaDT) }}">{{$item->TenDT}}</a></h4>
                                         <div class="price-box">
                                             @if($item->quantity->count() >0)
-                                            <span class="new-price">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
+                                            <span class="new-price text-danger">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
                                             @else
                                             <span class="new-price text-danger">Đang cập nhật</span>
                                             @endif
@@ -433,7 +434,7 @@
                                         <h4><a class="product_name" href="{{  url('product-detail/'.$item->MaDT) }}">{{$item->TenDT}}</a></h4>
                                         <div class="price-box">
                                             @if($item->quantity->count() >0)
-                                            <span class="new-price">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
+                                            <span class="new-price text-danger">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
                                             @else
                                             <span class="new-price text-danger">Đang cập nhật</span>
                                             @endif

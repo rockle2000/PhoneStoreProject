@@ -11,13 +11,13 @@
     }
 
     .profile-button {
-        background: #BA68C8;
+        /* background: #293a6c; */
         box-shadow: none;
         border: none
     }
 
     .profile-button:hover {
-        background: #682773
+        background: #1b2953
     }
 
     .profile-button:focus {
@@ -36,20 +36,23 @@
     }
 
 </style>
-<div class="container rounded bg-white mt-5">
+<div class="container rounded bg-white mt-50 mb-50">
     <div class="row mb-5">
         <div class="col-md-2"></div>
         <div class="col-md-4 border">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://picsum.photos/200/200" width="90"><span class="font-weight-bold">{{$customer ->
-                    name}}</span><span class="text-black-50">{{$customer -> email}}</span><span>{{$customer->
-                    phone}}</span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                {{-- <img class="rounded-circle mt-5" src="https://picsum.photos/200/200" width="90"> --}}
+                <img class="" src="{{asset('public/frontend/images/about-us/user.png')}}" width="90">
+                <span class="font-weight-bold">{{$customer->name}}</span>
+                <span class="text-black-50">{{$customer->email}}</span>
+                <span>{{$customer->phone}}</span>
+            </div>
         </div>
 
         <div class="col-md-4 border">
             <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
-                        <h6> <a href="{{route('main-page')}}">Quay lại</a></h6>
+                <div class="d-flex mb-3">
+                    <div class="d-flex flex-row align-items-center back">
                     </div>
                     <h6 class="text-right">Thông tin tài khoản</h6>
                 </div>
@@ -83,7 +86,7 @@
         <div class="row mt-3">
             <input type="hidden" name="hiddeninput" value="checkreturn">
             <div class="col-md-3">
-                <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="submit">Lưu thông tin</button></div>
+                <div class="mt-5 text-right"><button class="btn btn-success profile-button" type="submit">Lưu thông tin</button></div>
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-3">

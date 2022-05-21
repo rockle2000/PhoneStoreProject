@@ -79,7 +79,7 @@
                         <div class="col-lg-3 col-md-4">
                             <div class="header-top-left">
                                 <ul class="phone-wrap">
-                                    <li><span>Số điện thoại:</span><a href="#">(+84) 964 027 677</a></li>
+                                    <li><span>Chào mừng bạn đến với PhoneStore</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -341,8 +341,8 @@
                                             </ul>
                                         </li> --}}
                                 <li><a href="{{ route('news') }}" class="font-weight-bold">Tin tức</a></li>
-                                <li><a href="#" class="font-weight-bold">Phụ kiện</a></li>
-                                <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li>
+                                {{-- <li><a href="#" class="font-weight-bold">Phụ kiện</a></li> --}}
+                                {{-- <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li> --}}
                                 <li><a href="{{ url('contact') }}" class="font-weight-bold">Liên hệ</a></li>
                                 <li><a href="{{ url('discount') }}" class="font-weight-bold">Giảm giá</a></li>
                             </ul>
