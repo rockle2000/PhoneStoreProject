@@ -114,6 +114,7 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     //Warranty
     Route::get('/warranty','WarrantyController@getAllWarranty');
     Route::get('/warranty-detail/{id}','WarrantyController@warrantyDetail');
+    Route::put('/update-warranty', "WarrantyController@updateWarranty");
 });
 
 // Customer-Homepage

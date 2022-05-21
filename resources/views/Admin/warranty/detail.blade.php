@@ -29,7 +29,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-bordered table-striped" >
                             <thead>
                                 <tr>
                                     <th>Mã SP</th>
@@ -38,6 +38,7 @@
                                     <th>Số lượng</th>
                                     <th>Đơn giá</th>
                                     <th>Bảo hành</th>
+                                    <th>Hạn bảo hành</th>
                                     <th>Tình trạng bảo hành</th>
                                     <th>Action</th>
                                 </tr>
@@ -45,26 +46,29 @@
                             <tbody>
                                 @foreach ($order_detail as $item)
                                 <tr>
-                                    {{-- <td>{{ $item->SoHDB}}</td> --}}
-                                    {{-- <td>{{ $item->customer->name}}</td> --}}
-                                    {{-- <td>{{ date('d-m-Y H:i:s', strtotime($item->NgayDatHang));}}</td> --}}
                                     <td>{{ $item->MaDT}}</td>
                                     <td>{{ $item->TenDT}}</td>
                                     <td>{{ $item->Mau }}</td>
                                     <td>{{ $item->SoLuong}}</td>
                                     <td>{{ number_format($item->DonGiaBan)}}₫</td>
                                     <td>{{ $item->ThoiGianBaoHanh}}</td>
+                                    <td>{{ date('d-m-Y', strtotime("+".explode(" ", $item->ThoiGianBaoHanh)[0] ." months", strtotime($order->NgayDatHang))); }}</td>
                                     @if($item->BaoHanh ==0)
-                                    <td>Chưa kích hoạt</td>    
+                                    <td>Chưa kích hoạt</td>   
+                                    @else
+                                    <td>{{ $item->BaoHanh }}</td> 
                                     @endif
-                                    
+                                    @php
+                                    $currentDate = strtotime(date('Y-m-d'));
+                                    $expire = strtotime("+".explode(" ", $item->ThoiGianBaoHanh)[0] ." months", strtotime($order->NgayDatHang));
+                                    @endphp
                                     <td>
-                                        {{-- <a href="{{ url('edit-quantity/'.$item->MaDT) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a> --}}
-                                        <a onclick="return EditQuantity('{{$item->MaDT }}','{{ $item->Mau }}','{{ $order->SoHDB }}',this)" class="btn btn-primary">Edit</a>
+                                            @if($expire < $currentDate)
+                                            <span class="text-danger"> Quá hạn</span>
+                                            @else
+                                            <a onclick="return EditWarranty('{{$item->MaDT }}','{{ $item->Mau }}','{{ $order->SoHDB }}',this)" class="btn btn-primary">Edit</a>
+                                            @endif
                                     </td>
-                                    {{-- <td>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
-                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -97,85 +101,61 @@
 <script src="{{asset('public/backend/Admin/Layout/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
 <script type="text/javascript">
-    $(function() {
-        
-        $("#example1").DataTable({
-            "order": [],
-            "columnDefs": [{
-                    "width": "10%"
-                    , "targets": [0,1,2]
-                }
-                ,  {
-                    "width": "15%"
-                    , "targets": 4
-                }
-                ,  {
-                    "width": "10%"
-                    , "targets": 3
-                }, {
-                    "width": "10%"
-                    , "targets": [5,7]
-                }, {
-                    "width": "35%"
-                    , "targets": 6
-                }
-            , ]
-            , "responsive": true
-            ,searching: false
-            , paging: false
-            , info: false
-        })
+    
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            paging: false,
+            searching: false,
+        });
     });
 
-    function EditQuantity(id, color,orderid, ctl) {
+    function EditWarranty(pid, color,orderid, ctl) {
         if ($(ctl).text() == 'Edit') {
             $(ctl).text('Save');
-                var val = $(ctl).parent().parent().children('td:nth-child(7)').text().trim();
+                var val = $(ctl).parent().parent().children('td:nth-child(8)').text().trim();
                 // console.log(i + ":" + val);
                 // $(ctl).parent().parent().children('td:nth-child(7)').html('<input type="text" style="width:450px" value="' + val + '" />');
-                $(ctl).parent().parent().children('td:nth-child(7)').html('<textarea style="width:350px; height:100px">' + val + '</textarea>');
+                $(ctl).parent().parent().children('td:nth-child(8)').html('<textarea style="width:200px; height:100px">' + val + '</textarea>');
         } else {
             var elem = $(ctl).parent().parent();
-            // data = {
-            //     MaDT: id
-            //     , Mau: color
-            //     , SoLuong: $(elem).children('td:nth-child(2)').children().val()
-            //     , DonGiaNhap: $(elem).children('td:nth-child(3)').children().val()
-            //     , DonGiaBan: $(elem).children('td:nth-child(4)').children().val()
-            // }
-            $(ctl).text('Edit');
-            $(elem).children('td:nth-child(7)').text($(ctl).parent().parent().children('td:nth-child(7)').children('textarea').val());
+            data = {
+                MaDT: pid
+                , Mau: color
+                , SoHDB:orderid
+                , BaoHanh: $(elem).children('td:nth-child(8)').children().val()
+            }
+            // console.log(data)
+            // $(ctl).text('Edit');
+            // $(elem).children('td:nth-child(8)').text($(ctl).parent().parent().children('td:nth-child(8)').children('textarea').val());
             // console.log(data);
-            // $.ajax({
-            //     type: 'PUT'
-            //     , headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
-            //     }
-            //     , url: '/PhoneStore/update-quantity'
-            //     , data: JSON.stringify(data)
-            //     , contentType: 'application/json'
-            //     , success: function(result) {
-            //         console.log(result);
-            //         if (result.status === 'success') {
-            //             toastr.options = {
-            //                 "timeOut": 3000 // 3s
-            //                 , "progressBar": true
-            //             }
-            //             toastr.success(result.message);
-            //             for (var i = 0; i < 3; i++) {
-            //                 $(elem).children('td:nth-child(' + (2 + i) + ')').text($(ctl).parent().parent().children('td:nth-child(' + (2 + i) + ')').children('input').val());
-            //             }
-            //             $(ctl).text('Edit');
-            //         }
-            //     }
-            //     , error: function(xhr, ajaxOptions, thrownError) {
-            //         toastr.options = {
-            //             "timeOut": 3000
-            //             , "progressBar": true
-            //         }
-            //         toastr.error(JSON.parse(xhr.responseText).message);
-            //     }
-            // });
+            $.ajax({
+                type: 'PUT'
+                , headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
+                }
+                , url: '/PhoneStore/update-warranty'
+                , data: JSON.stringify(data)
+                , contentType: 'application/json'
+                , success: function(result) {
+                    console.log(result);
+                    if (result.status === 'success') {
+                        toastr.options = {
+                            "timeOut": 3000 // 3s
+                            , "progressBar": true
+                        }
+                        toastr.success(result.message);
+                        $(elem).children('td:nth-child(8)').text($(ctl).parent().parent().children('td:nth-child(8)').children('textarea').val());
+                        $(ctl).text('Edit');
+                    }
+                }
+                , error: function(xhr, ajaxOptions, thrownError) {
+                    toastr.options = {
+                        "timeOut": 3000
+                        , "progressBar": true
+                    }
+                    toastr.error(JSON.parse(xhr.responseText).message);
+                }
+            });
         }
         return false;
     }
@@ -188,6 +168,7 @@
         });
     }
 
+    
 </script>
 
 @endsection

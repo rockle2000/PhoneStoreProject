@@ -53,7 +53,7 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                                        <a href="{{ url('warranty-detail/'.$item->SoHDB) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -72,63 +72,6 @@
 </section>
 <!-- /.content -->
 
-<div class="modal fade" id="modal-xl">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Chi tiết hóa đơn <strong id="order_id"></strong></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <th>Tên</th>
-                        <th>Màu</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Tổng tiền hóa đơn</th>
-                            <th id='total'></th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Giảm giá</th>
-                            <th id='discount'></th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="text-danger">Thành tiền</th>
-                            <th class="text-danger" id='thanhtien'></th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-            {{-- justify-content-between --}}
-            <div class="modal-footer ">
-                {{-- <button type="button"  class="btn btn-primary">Save changes</button> --}}
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 @endsection
 
 @section('js')
@@ -148,37 +91,7 @@
     $(function() {
         
         $("#example1").DataTable({
-            "order": [],
-            "columnDefs": [{
-                    "width": "5%"
-                    , "targets": 0
-                }
-                , {
-                    "width": "10%"
-                    , "targets": 1
-                }, {
-                    "width": "10%"
-                    , "targets": 2
-                    
-                }, {
-                    "width": "20%"
-                    , "targets": 3
-                }, {
-                    "width": "10%"
-                    , "targets": 4
-                }, {
-                    "width": "15%"
-                    , "targets": 5
-                }, {
-                    "width": "10%"
-                    , "targets": 6
-                }
-                , {
-                    "width": "20%"
-                    , "targets": 7
-                }
-            , ]
-            , "responsive": true
+            "order": []
                 // , "lengthChange": false
             , "pageLength": 6
         })

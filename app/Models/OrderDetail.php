@@ -18,6 +18,7 @@ class OrderDetail extends Model
         'Mau',
         'SoLuong',
         'DonGiaBan',
+        'BaoHanh',
     ];
 
     protected function setKeysForSaveQuery($query)
