@@ -1,5 +1,17 @@
 @extends('layouts.home_layout')
 @section('css')
+<style>
+    .content {
+        display: none;
+    }
+
+    #loadMore {
+        text-align: center;
+        font-weight: 700;
+        animation: blur .75s ease-out;
+        text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
+    }
+</style>
 @endsection
 @section("content")
 <!-- Begin Li's Breadcrumb Area -->
@@ -26,6 +38,7 @@
                     <div class="li-blog-sidebar pt-25">
                         <h4 class="li-blog-sidebar-title" style="font-family: Roboto,Helvetica,Arial,sans-serif">Danh mục</h4>
                         <ul class="li-blog-archive">
+                            <li><a href="{{ route('news') }}">Tất cả</a></li>
                             @foreach ($newscategories as $category)
                             <li><a href="#">{{ $category->TheLoai }}</a></li>
                             @endforeach
@@ -100,76 +113,74 @@
                         </div>
                         <!-- Begin Li's Blog Comment Section -->
                         <div class="li-comment-section">
-                            <h3>03 comment</h3>
+                            <h3>03 bình luận</h3>
                             <ul>
-                                <li>
+                                <li class="content">
                                     <div class="author-avatar pt-15">
                                         <img src="{{ asset('public/frontend/images/product-details/user.png') }}" alt="User">
                                     </div>
                                     <div class="comment-body pl-15">
-                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>
-                                        <h5 class="comment-author pt-15">admin</h5>
+                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">phản hồi</a></span>
+                                        <h5 class="comment-author pt-15">user</h5>
                                         <div class="comment-post-date">
-                                            20 nov, 2018 at 9:30pm
+                                            20/11/2018 21:30
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                        <p>Bình luận nhận xét về tin tức</p>
                                     </div>
                                 </li>
-                                <li class="comment-children">
+                                <li class="comment-children content">
                                     <div class="author-avatar pt-15">
                                         <img src="{{ asset('public/frontend/images/product-details/admin.png') }}" alt="Admin">
                                     </div>
                                     <div class="comment-body pl-15">
-                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>
+                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">phản hồi</a></span>
                                         <h5 class="comment-author pt-15">admin</h5>
                                         <div class="comment-post-date">
-                                            20 nov, 2018 at 9:30pm
+                                            20/11/2018 21:45
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                        <p>Phản hồi bình luận của bài viết</p>
                                     </div>
                                 </li>
-                                <li>
+                                <li class="content">
                                     <div class="author-avatar pt-15">
                                         <img src="{{ asset('public/frontend/images/product-details/admin.png') }}" alt="Admin">
                                     </div>
                                     <div class="comment-body pl-15">
-                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">reply</a></span>
+                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">phản hồi</a></span>
                                         <h5 class="comment-author pt-15">admin</h5>
                                         <div class="comment-post-date">
-                                            20 nov, 2018 at 9:30pm
+                                            23/11/2018 21:30
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci optio ex, laboriosam facilis non pariatur itaque illo sunt?</p>
+                                        <p>Bình luận của admin về tin tức</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
+                        <a href="#" id="loadMore" style="display:block; text-decoration:none">Ẩn bình luận</a>
                         <!-- Li's Blog Comment Section End Here -->
                         <!-- Begin Blog comment Box Area -->
                         <div class="li-blog-comment-wrapper">
-                            <h3>leave a reply</h3>
-                            <p>Your email address will not be published. Required fields are marked *</p>
+                            <h3>để lại bình luận</h3>
+                            {{-- <p>Your email address will not be published. Required fields are marked *</p> --}}
+                            <p>Email của bạn sẽ được bảo mật. Những trường bắt buộc *</p>
                             <form action="#">
                                 <div class="comment-post-box">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <label>comment</label>
-                                            <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                            <label>bình luận</label>
+                                            <textarea name="commnet" placeholder="Bình luận của bạn..."></textarea>
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 mt-5 mb-sm-20 mb-xs-20">
-                                            <label>Name</label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
+                                            <label>Tên</label>
                                             <input type="text" class="coment-field" placeholder="Name">
                                         </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 mt-5 mb-sm-20 mb-xs-20">
-                                            <label>Email</label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
+                                            <label>Email <span class="text-danger">*</span></label>
                                             <input type="text" class="coment-field" placeholder="Email">
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 mt-5 mb-sm-20">
-                                            <label>Website</label>
-                                            <input type="text" class="coment-field" placeholder="Website">
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="coment-btn pt-30 pb-sm-30 pb-xs-30 f-left">
-                                                <input class="li-btn-2" type="submit" name="submit" value="post comment">
+                                                <input class="li-btn-2" type="submit" name="submit" value="bình luận">
                                             </div>
                                         </div>
                                     </div>
@@ -188,5 +199,25 @@
 @endsection
 
 @section('js')
+<script type="text/javascript">
+    $(".content").slice(0, 3).show();
+    $("#loadMore").on("click", function(e) {
+        e.preventDefault();
+        //console.log($(this).text());
+        if ($(this).text() == "Hiển thị bình luận") {
+            $(".content:hidden").slice(0, 4).slideDown();
+            if ($(".content:hidden").length == 0) {
+                $("#loadMore").text("Ẩn bình luận").addClass("noContent");
+            }
+        } else {
+            // var count = $(".feedback_custom").children(".commentlist").length;
+            //console.log(count);
+            //console.log($(".feedback_custom").children(".commentlist"));
+            $(".content").slideUp();
+            $("#loadMore").text("Hiển thị bình luận").removeClass("noContent");
+        }
+    });
+
+</script>
 
 @endsection

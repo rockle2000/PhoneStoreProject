@@ -31,8 +31,9 @@
                     <div class="li-blog-sidebar pt-25">
                         <h4 class="li-blog-sidebar-title" style="font-family: Roboto,Helvetica,Arial,sans-serif">Danh mục</h4>
                         <ul class="li-blog-archive">
+                            <li><a href="{{ route('news') }}">Tất cả</a></li>
                             @foreach ($newscategories as $category)
-                            <li><a href="#">{{ $category->TheLoai }}</a></li>
+                            <li><a href="?category={{ $category->MaTheLoai }}">{{ $category->TheLoai }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -80,6 +81,11 @@
             <!-- Begin Li's Main Content Area -->
             <div class="col-lg-9 order-lg-2 order-1" > 
                 <div class="row li-main-content">
+                    @if($news->count()==0)
+                    <div class="col">
+                        <h4 class="text-center text-danger">Danh mục này chưa có tin tức nào vui lòng quay lại sau.</h4>
+                    </div>
+                    @else
                     @foreach ($news as $item)
                     <div class="col-lg-6 col-md-6">
                         <div class="li-blog-single-item pb-25">
@@ -88,7 +94,7 @@
                             </div>
                             <div class="li-blog-content">
                                 <div class="li-blog-details">
-                                    <h3 class="li-blog-heading pt-25"><a href="#" style="font-family: Roboto,Helvetica,Arial,sans-serif">{{ $item->TieuDe }}</a></h3>
+                                    <h3 class="li-blog-heading pt-25"><a href="{{ url('/news/detail/'.$item->MaTinTuc) }}" style="font-family: Roboto,Helvetica,Arial,sans-serif">{{ $item->TieuDe }}</a></h3>
                                     <div class="li-blog-meta">
                                         <a class="author" href="#"><i class="fa fa-user"></i>{{ $item->TacGia }}</a>
                                         <a class="comment" href="#"><i class="fa fa-comment-o"></i> 3 comment</a>
@@ -99,7 +105,7 @@
                                     @foreach ($item->news_newscategory as $category)
                                     <span class="badge badge-primary" style="padding: 5px">{{ $category->newscategory->TheLoai }}</span>
                                     @endforeach
-                                    <br><br><a class="read-more" href="#">Đọc thêm...</a>
+                                    {{-- <br><br><a class="read-more" href="#">Đọc thêm...</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -114,6 +120,7 @@
                         </div>
                     </div>
                     <!-- Li's Pagination End Here Area -->
+                    @endif
                 </div>
             </div>
             <!-- Li's Main Content Area End Here -->

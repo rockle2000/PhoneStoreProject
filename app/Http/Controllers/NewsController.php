@@ -13,11 +13,22 @@ use Illuminate\Validation\Rule;
 class NewsController extends Controller
 {
     //Home News
-    public function getAllNews()
+    public function getAllNews(Request $request)
     {
         $newscategories = NewsCategory::where('TrangThai', '=', '1')->get();
-        $news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->paginate(2);
+        $news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC");
         $recent_news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->limit(3)->get();
+
+        if ($request->exists('category')){
+            $cateid = $request->get('category');
+            $category = NewsCategory::find($cateid);
+            if (!is_numeric($cateid) || $category === null)
+                return view('errors.home_404');
+            $news_id = DB::select("SELECT DISTINCT(news_id) FROM `news_newscategory` where newscategory_id = :id",["id"=>$cateid]);
+            $ids_news = json_decode(json_encode($news_id), true);
+            $news = News::where('TrangThai', '=', '1')->orderBy("MaTinTuc","DESC")->whereIn('MaTinTuc',$ids_news);
+        }
+        $news = $news->paginate(2);
         return view("Home.news.listNews", compact('news', 'newscategories','recent_news'));
     }
     //Admin News
