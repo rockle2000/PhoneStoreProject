@@ -132,7 +132,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class=" card-footer">
-                        <button type="submit" class="btn btn-success">Sửa</button>
+                        <button type="submit" class="btn btn-success">Lưu</button>
                     </div>
                     <!-- /.card-footer -->
                 </form>

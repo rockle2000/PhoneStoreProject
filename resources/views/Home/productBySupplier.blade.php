@@ -41,6 +41,7 @@
                         </div>
                     </div>
                     <!-- product-select-box start -->
+                    @if($product->count()>0)
                     <div class="product-select-box">
                         <div class="product-short">
                             <p>Sắp xếp theo:</p>
@@ -53,6 +54,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                     <!-- product-select-box end -->
                 </div>
                 <!-- shop-top-bar end -->

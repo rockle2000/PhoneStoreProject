@@ -75,7 +75,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Sửa</button>
+                        <button type="submit" class="btn btn-success">Lưu</button>
                         <a class="btn btn-danger float-right" href="{{ url('/supplier-list') }}">Quay lại</a>
                     </div>
                     <!-- /.card-footer -->

@@ -34,29 +34,30 @@
                         <h4 class="login-title">Đăng ký</h4>
                         <div class="row">
                             <div class="col-md-12 col-12 mb-20">
-                                <label>Fullname <span class="text-danger">*</span></label>
+                                <label>Họ tên <span class="text-danger">*</span></label>
                                 <input class="mb-0" type="text" class="form-control" name="name" placeholder="Nhập họ tên..." value="{{ old('name') }}">
                                 <span class="text-danger">@error('name'){{ $message }} @enderror</span>
                             </div>
                             <div class="col-md-12 col-12 mb-20">
 
-                                <label>Phone Number <span class="text-danger">*</span></label>
+                                <label>Số điện thoại <span class="text-danger">*</span></label>
                                 <input class="mb-0" type="text" class="form-control" name="phone_number" placeholder="Nhập số điện thoại..." value="{{ old('phone_number') }}">
 
                                 <span class="text-danger">@error('phone_number'){{ $message }} @enderror</span>
                             </div>
                             <div class="col-md-12 mb-20">
-                                <label>Email Address <span class="text-danger">*</span></label>
+                                <label>Email <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="email" placeholder="Địa chỉ email..." value="{{ old('email') }}">
                                 <span class="text-danger">@error('email'){{ $message }} @enderror</span>
                             </div>
                             <div class="col-md-6 mb-20">
-                                <label>Password <span class="text-danger">*</span></label>
+                                <label>Mật khẩu <span class="text-danger">*</span></label>
                                 <input class="mb-0" type="password" class="form-control" name="password" placeholder="Nhập mật khẩu..." value="">
+                                {{-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span> --}}
                                 <span class="text-danger">@error('password'){{ $message }} @enderror</span>
                             </div>
                             <div class="col-md-6 mb-20">
-                                <label>Confirm Password <span class="text-danger">*</span></label>
+                                <label>Xác nhận mật khẩu <span class="text-danger">*</span></label>
                                 <input class="mb-0" type="password" class="form-control" name="cpassword" placeholder="Xác nhận mật khẩu..." value="">
                                 <span class="text-danger">@error('cpassword'){{ $message }} @enderror</span>
                             </div>

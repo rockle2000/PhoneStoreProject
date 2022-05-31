@@ -135,6 +135,11 @@ class ShoppingCartController extends Controller
         $id = $req->input('txtDiscount');
         $discount = Discount::where('MaKM','=',$id)
                 ->first();
+        if ($discount === null){
+            Cart::setGlobalDiscount(0);
+            $req->session()->forget('discountCode');
+            return back()->with('error','Mã giảm giá không hợp lệ');
+        }
         if ($discount->TrangThai != 1){
             return back()->with('error','Mã giảm giá không hợp lệ');
         }
@@ -182,29 +187,32 @@ class ShoppingCartController extends Controller
             'phone_number.regex' => "Số điện thoại không hợp lệ",
         ]);
         if ($checkpayment == 'tructiep') {
-            $discount = Discount::where('MaKM','=',session('discountCode'))->first();
-            if ($discount->TrangThai != 1){
-                Cart::setGlobalDiscount(0);
-                $req->session()->forget('discountCode');
-                return back()->with('error','Mã giảm giá không hợp lệ');
-            }
-            if($discount->SoLuong <= 0){
-                Cart::setGlobalDiscount(0);
-                $req->session()->forget('discountCode');
-                return back()->with('error','Mã giảm giá này đã được dùng hết');
-            }
-            $endDate = strtotime(date('Y-m-d H:i:s', strtotime($discount->NgayKetThuc)));
-            $startDate = strtotime(date('Y-m-d H:i:s',  strtotime($discount->NgayBatDau)));
-            $currentDate = strtotime(date('Y-m-d H:i:s'));
-            if($startDate > $currentDate) {
-                Cart::setGlobalDiscount(0);
-                $req->session()->forget('discountCode');
-                return back()->with('error','Mã giảm giá này chưa có hiệu lực, thử lại sau');
-            }
-            if($endDate < $currentDate) {
-                Cart::setGlobalDiscount(0);
-                $req->session()->forget('discountCode');
-                return back()->with('error','Mã giảm giá này đã hết hạn');
+            if(session('discountCode')){
+                $discount = Discount::where('MaKM','=',session('discountCode'))->first();
+                
+                if ($discount->TrangThai != 1){
+                    Cart::setGlobalDiscount(0);
+                    $req->session()->forget('discountCode');
+                    return back()->with('error','Mã giảm giá không hợp lệ');
+                }
+                if($discount->SoLuong <= 0){
+                    Cart::setGlobalDiscount(0);
+                    $req->session()->forget('discountCode');
+                    return back()->with('error','Mã giảm giá này đã được dùng hết');
+                }
+                $endDate = strtotime(date('Y-m-d H:i:s', strtotime($discount->NgayKetThuc)));
+                $startDate = strtotime(date('Y-m-d H:i:s',  strtotime($discount->NgayBatDau)));
+                $currentDate = strtotime(date('Y-m-d H:i:s'));
+                if($startDate > $currentDate) {
+                    Cart::setGlobalDiscount(0);
+                    $req->session()->forget('discountCode');
+                    return back()->with('error','Mã giảm giá này chưa có hiệu lực, thử lại sau');
+                }
+                if($endDate < $currentDate) {
+                    Cart::setGlobalDiscount(0);
+                    $req->session()->forget('discountCode');
+                    return back()->with('error','Mã giảm giá này đã hết hạn');
+                }
             }
             try {
                 DB::beginTransaction();

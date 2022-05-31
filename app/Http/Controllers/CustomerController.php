@@ -54,13 +54,13 @@ class CustomerController extends Controller
             'cpassword' => 'required|same:password'
         ],
         [
-            'oldpass.required' => 'Chưa nhập mật khẩu cũ',
-            'password.required' => 'Chưa nhập mật khẩu mới',
+            'oldpass.required' => 'Mật khẩu cũ không được để trống',
+            'password.required' => 'Mật khẩu mới không được để trống',
             'password.different' => 'Mật khẩu mới không được trùng với mật khẩu cũ',
             'password.min' => 'Mật khẩu tối thiểu 6 kí tự',
             'password.max' => 'Mật khẩu không vượt quá 30 kí tự',
             'password.regex' => 'Mật khẩu nên gồm 1 chữ cái hoa, 1 kí tự đặc biệt',
-            'cpassword.same' => 'Xác nhận mật khẩu mới không khớp',
+            'cpassword.same' => 'Xác nhận mật khẩu mới không chính xác',
             'cpassword.required' => 'Chưa nhập lại mật khẩu',
         ]
     );
@@ -70,14 +70,9 @@ class CustomerController extends Controller
            $customer->fill([
             'password' => Hash::make($request->password)
             ])->save();
-
-        //    $request->session()->flash('msg', 'Đổi mật khẩu thành công');
-            // return redirect()->route('user.signout')->with('msg', 'Đổi mật khẩu thành công');
             return redirect()->back()->with('msg', 'Đổi mật khẩu thành công');
         } else {
-            // $request->session()->flash('fail', 'Mật khẩu cũ không khớp');
-            // return redirect()->route('user.changepass',['id' => $id]);
-            return redirect()->back()->with('error', 'Mật khẩu cũ không khớp');
+            return redirect()->back()->with('error', 'Mật khẩu cũ không chính xác');
         }
     }
 
@@ -103,13 +98,12 @@ class CustomerController extends Controller
             'email.unique' => 'Email này đã được sử dụng',
             'phone_number.required' => "Số điện thoại không được để trống",
             'phone_number.regex' => "Số điện thoại không hợp lệ",
-            // 'phone_number.max' => "Số điện thoại không vượt quá 11 số",
             'password.required' => 'Mật khẩu không được để trống',
             'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
             'password.max' => 'Mật khẩu không vượt quá 30 kí tự',
             'password.regex' => 'Mật khẩu nên gồm 1 chữ cái hoa, 1 kí tự đặc biệt',
             'cpassword.required' => 'Chưa nhập lại mật khẩu',
-            'cpassword.same' => 'Xác nhận mật khẩu mới không khớp',
+            'cpassword.same' => 'Xác nhận mật khẩu mới không chính xác',
             
         ]);
         $user = new Customer();

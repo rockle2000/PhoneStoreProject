@@ -33,12 +33,12 @@
                         <h4 class="login-title">Đăng nhập</h4>
                         <div class="row">
                             <div class="col-md-12 col-12 mb-20">
-                                <label>Email Address <span class="text-danger">*</span></label>
+                                <label>Email <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="email" placeholder="Địa chỉ email..." value="{{ old('email') }}">
                                 <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                             </div>
                             <div class="col-12 mb-20">
-                                <label>Password <span class="text-danger">*</span></label>
+                                <label>Mật khẩu <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu..." value="{{ old('password') }}">
                                 <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                             </div>

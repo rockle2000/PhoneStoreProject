@@ -1,8 +1,8 @@
 @extends('layouts.admin_layout')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-end mb-4">
-    <a href="{{route('customers.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-arrow-left fa-sm text-white-50"></i> Back</a>
+    {{-- <a href="{{route('customers.index')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-arrow-left fa-sm text-white-50"></i> Back</a> --}}
 </div>
 <div class="container-fluid ">
     <div class="row">
@@ -69,6 +69,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Lưu</button>
+                        <a class="btn btn-danger float-right" href="{{ route('customers.index') }}">Quay lại</a>
                     </div>
                     <!-- /.card-footer -->
                 </form>
@@ -82,18 +83,29 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    @if(count($errors) > 0)
+    // @if(count($errors) > 0)
+    // toastr.options = {
+    //     "timeOut": 3000
+    //     , "preventDuplicates": true
+    //     , "closeButton": true
+    // , }
+    // toastr.error($('#error_message').html());
+    // @endif
+
+    // $('.summernote').summernote({
+    //     disableGrammar: true
+    // });
+
+    @if(session('error'))
+    // toastr.options.timeOut = 3000;
     toastr.options = {
-        "timeOut": 3000
+        "timeOut": 3000 // 3s
+        , "progressBar": true
         , "preventDuplicates": true
         , "closeButton": true
-    , }
-    toastr.error($('#error_message').html());
+    }
+    toastr.error("{{ session('error') }}");
     @endif
-
-    $('.summernote').summernote({
-        disableGrammar: true
-    });
 
 </script>
 @endsection
