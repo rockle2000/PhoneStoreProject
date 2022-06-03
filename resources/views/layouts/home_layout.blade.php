@@ -585,16 +585,16 @@
                         </div>
                         <!-- Footer Links Area End Here -->
                         <!-- Begin Footer Payment Area -->
-                        <div class="copyright text-center">
+                        {{-- <div class="copyright text-center">
                             <a href="#">
                                 <img src="{{asset('public/frontend/images/payment/1.png')}}" alt="">
                             </a>
-                        </div>
+                        </div> --}}
                         <!-- Footer Payment Area End Here -->
                         <!-- Begin Copyright Area -->
-                        <div class="copyright text-center pt-25">
+                        {{-- <div class="copyright text-center pt-25">
                             <span><a href="https://www.templatespoint.net" target="_blank">Templates Point</a></span>
-                        </div>
+                        </div> --}}
                         <!-- Copyright Area End Here -->
                     </div>
                 </div>

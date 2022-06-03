@@ -49,7 +49,7 @@
                                     <td class="d-flex">
                                         <a href="{{ route('customers.edit' ,['customer' => $customer->id] )}}"
                                             class="btn btn-primary m-2"><i class="fas fa-edit"></i>Edit</a>
-                                        @if($customer->status == 1)
+                                        {{-- @if($customer->status == 1)
                                         <a href="{{ route('customers.status.update', ['customer_id' => $customer->id, 'status_code' => 0]) }}"
                                             class="btn  btn-danger m-2" onclick="return confirm('Bạn có chắc muốn khóa tài khoản người dùng này ?')">
                                             <i class="fa fa-ban"></i>
@@ -61,7 +61,7 @@
                                             <i class="fa fa-check"></i>
                                             Active
                                         </a>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                                 @endforeach

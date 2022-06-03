@@ -95,7 +95,7 @@
                     <ul class="nav ">
                         <div class="li-section-title">
                             <h2>
-                                <span>BestSeller</span>
+                                <span>Bán chạy</span>
                             </h2>
                         </div>
                         {{-- <li><a class="active" data-toggle="tab" href="#li-new-product"><span>New Arrival</span></a></li> --}}

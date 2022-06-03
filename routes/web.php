@@ -74,6 +74,7 @@ Route::middleware(['auth', 'isAdmin', 'prevent-back-history'])->group(function (
     Route::get('/orderdetail/{id}', "OrderController@getOrderDetail");
     Route::put('/confirm-order/{id}', "OrderController@confirmOrder");
     Route::put('/cancel-order/{id}', "OrderController@cancelOrder");
+    Route::put('/deliver-order/{id}',"OrderController@deliverOrder");
     //Chart
     Route::get('/chart', 'ChartController@index');
     Route::get('/chart/revenue/{year}', 'ChartController@revenueByYear');

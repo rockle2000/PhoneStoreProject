@@ -35,12 +35,16 @@
                                             <h4 class="text-primary pt-xs-25 pt-sm-25"><a href="#">Đơn hàng #{{ $order->SoHDB }}</a></h4>
                                             <div class="li-blog-meta">
                                                 {{-- <a class="author" href="#"><i class="fa fa-user"></i>Admin</a> --}}
-                                                @if($order->TrangThai == 1)
-                                                <span class="text-success"><i class="fa fa-check-circle"></i> Hoàn tất</span>
+                                                @if($order->TrangThai == -1)
+                                                <span class="text-danger"><i class="fa fa-times"></i> Đã hủy</span>
                                                 @elseif($order->TrangThai == 0)
                                                 <span class="text-warning"><i class="fa fa-question-circle"></i> Đang chờ xử lý</span>
-                                                @elseif($order->TrangThai == -1)
-                                                <span class="text-danger"><i class="fa fa-times"></i> Đã hủy</span>
+                                                @elseif($order->TrangThai == 1)
+                                                <span class="text-primary"><i class="fa fa-credit-card"></i> Đã thanh toán</span>
+                                                @elseif($order->TrangThai == 2)
+                                                <span class="text-info"><i class="fa fa-truck"></i> Đang giao</span>
+                                                @elseif($order->TrangThai == 3)
+                                                <span class="text-success"><i class="fa fa-check-circle"></i> Hoàn tất </span>
                                                 @endif
                                                 <a class="comment" style="color:black" href="#"><i class="fa fa-mobile"></i>{{ $order->orderdetail->sum('SoLuong') }} sản phẩm</a>
                                                 <a class="post-time" style="color:black" href="#"><i class="fa fa-calendar"></i>{{ date('d-m-Y H:i:s', strtotime($order->NgayDatHang)); }}</a>
@@ -50,7 +54,11 @@
                                                     <span  style="color:black">+ {{ $detail->product->TenDT }} - {{ $detail->Mau }} x {{ $detail->SoLuong }} - {{ number_format($detail->DonGiaBan) }}₫<span><br>
                                                 @endforeach
                                             </p>
-                                            <span class="font-weight-bold">Tổng tiền: {{ number_format($order->TongTien) }}₫</span>
+                                            @if( $order->discount)
+                                            <span class="font-weight-bold">Tổng tiền: </span><span style="margin-right: 50px">{{ number_format($order->TongTien/(1-($order->discount->GiamGia/100 )))}}₫</span>
+                                            <span class="font-weight-bold">Giảm giá: </span> <span>{{$order->discount->GiamGia }}%</span>
+                                            @endif
+                                            <br><br><span class="font-weight-bold text-danger" style="margin-right: 50px">Thành tiền: {{ number_format($order->TongTien) }}₫</span>
                                         </div>
                                     </div>
                                 </div>

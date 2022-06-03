@@ -61,7 +61,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ url('edit-discount/'.$item->MaKM) }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="{{ url('edit-discount/'.$item->MaKM) }}" class="btn btn-primary"><i class="fas fa-edit"></i>Edit</a>
                                         <span>
                                             @if ($item->TrangThai)
                                             <a href="" onclick="return ConfirmDelete('{{ $item->MaKM }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
@@ -108,22 +108,7 @@
 <script type="text/javascript">
     $(function() {
         $("#example1").DataTable({
-            "columnDefs": [{
-                "width": "5%"
-                , "targets": [3,6]
-            }, {
-                "width": "10%"
-                , "targets": [0,4,5,7]
-            }, {
-                "width": "15%"
-                , "targets": [1,8]
-            },{
-                "width": "20%"
-                , "targets": 2
-            }]
-            , "responsive": true
-            // , "lengthChange": false
-            , "pageLength": 6
+            "pageLength": 6
         });
     });
     @if(session('status'))

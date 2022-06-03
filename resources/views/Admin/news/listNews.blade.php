@@ -36,7 +36,7 @@
                                         <img src="{{ asset('public/backend/uploads/news-images/'.$item->Anh)}}" style="width: 50px; height: 50px" alt="">
                                     </td>
                                     <td>{{ $item-> TacGia}}</td>
-                                    <td><a class="btn btn-primary">Xem chi tiết</a></td>
+                                    <td><a class="btn btn-primary" href="{{ url('/news/detail/'.$item->MaTinTuc) }}" target="blank">Xem chi tiết</a></td>
                                     <td>
                                         @if ($item-> TrangThai)
                                         <button class="btn btn-success disabled">

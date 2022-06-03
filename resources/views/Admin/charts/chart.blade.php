@@ -257,7 +257,7 @@
                 , data: {
                     labels: label
                     , datasets: [{
-                        label: "Doanh thu nhập(VNĐ)"
+                        label: "Doanh thu nhập (VNĐ)"
                         , data: data
                         , backgroundColor: [
                             "rgba(224, 86, 253,0.5)"

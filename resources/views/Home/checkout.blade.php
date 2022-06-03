@@ -23,11 +23,12 @@
                     <div id="checkout_coupon" class="coupon-checkout-content">
                         <div class="coupon-info">
                             {{-- <form action="#"> --}}
-                            <form action="{{route('user.addDiscount')}}" class="cart-quantity" method="post">
+                            <form action="{{route('user.addDiscount')}}" class="cart-quantity" method="post" style="margin-top:0px">
                                 @csrf
-                                <p class="checkout-coupon">
-                                    <input placeholder="Coupon code" type="text" name="txtDiscount" id="txtDiscount">
-                                    <input value="Apply Coupon" type="submit">
+                                <p class="checkout-coupon" style="margin-bottom: 20px">
+                                    <input required oninvalid="this.setCustomValidity('Vui lòng nhập mã giảm giá')"
+                                    oninput="this.setCustomValidity('')" placeholder="Mã giảm giá" type="text" name="txtDiscount" id="txtDiscount">
+                                    <input value="Áp dụng" type="submit">
                                 </p>
                             </form>
                         </div>
@@ -119,6 +120,11 @@
                             </tbody>
                             <tfoot>
                                 <tr class="order-total">
+                                    <th>Mã giảm giá</th>
+                                    <td><strong><span class="amount">{{session('discountCode');}}</span></strong></td>
+                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
+                                </tr>
+                                <tr class="order-total">
                                     <th>Tổng tiền</th>
                                     <td><strong><span class="amount">{{Cart::priceTotal(0)}}₫</span></strong></td>
                                     {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
@@ -127,11 +133,6 @@
                                 <tr class="order-total">
                                     <th>Giảm giá</th>
                                     <td><strong><span class="amount">{{Cart::discount(0)}}₫</span></strong></td>
-                                    {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
-                                </tr>
-                                <tr class="order-total">
-                                    <th>Mã giảm giá</th>
-                                    <td><strong><span class="amount">{{session('discountCode');}}</span></strong></td>
                                     {{-- <td><strong><span class="amount">{{Cart::subTotal(0)}}₫</span></strong></td> --}}
                                 </tr>
                                 <tr class="order-total">

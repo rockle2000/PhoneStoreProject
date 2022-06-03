@@ -38,7 +38,7 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         if($customer == null || $id == '')
             return view("errors.home_404");
-        $list_order = Order::where('EmailKH',$customer->email)->orderBy('NgayDatHang','DESC')->paginate(6);
+        $list_order = Order::where('EmailKH',$customer->email)->orderBy('SoHDB','DESC')->paginate(6);
         return view('Home.orderByUser',compact('list_order'));
     }
 

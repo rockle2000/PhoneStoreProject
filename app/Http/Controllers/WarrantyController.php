@@ -12,7 +12,7 @@ class WarrantyController extends Controller
     //
     public function getAllWarranty()
     {
-        $order = Order::where("TrangThai", "=", 1)->orderBy("SoHDB","DESC")->get();
+        $order = Order::where("TrangThai", "=", 3)->orderBy("SoHDB","DESC")->get();
         return view("Admin.warranty.listWarranty", compact('order'));
     }
 

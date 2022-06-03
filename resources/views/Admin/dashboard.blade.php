@@ -127,35 +127,54 @@
                                     <td>{{ $item->SoDienThoai}}</td>
                                     <td>{{ $item->GhiChu}}</td>
                                     <td>
-                                        @if ($item->TrangThai == 1)
-                                        <button class="btn btn-success  disabled">
-                                            <i class="fas fa-check-circle"></i>
-                                            Finished
-                                        </button>
-                                        @elseif ($item->TrangThai==-1)
+                                        {{-- Đã hủy --}}
+                                        @if ($item->TrangThai == -1)
                                         <button class="btn btn-danger disabled">
                                             <i class="far fa-times-circle"></i>
                                             Canceled
                                         </button>
+                                        {{-- Đang chờ xử lý (ship COD) --}}
                                         @elseif ($item->TrangThai==0)
                                         <button class="btn btn-warning disabled">
                                             <i class="far fa-times-circle text-dark"></i>
                                             <span class="text-dark">Pending</span>
                                         </button>
+                                        {{-- Đã thanh toán online --}}
+                                        @elseif ($item->TrangThai==1)
+                                        <button class="btn btn-primary disabled">
+                                            <i class="fas fa-wallet"></i>
+                                            Paid
+                                        </button>
+                                        {{-- Đang giao hàng --}}
+                                        @elseif ($item->TrangThai==2)
+                                        <button class="btn btn-info disabled">
+                                            <i class="fas fa-truck-loading"></i>
+                                            <span class="text-white">Delivery</span>
+                                        </button>
+                                        {{-- Đã giao hàng --}}
+                                        @elseif ($item->TrangThai==3)
+                                        <button class="btn btn-success disabled">
+                                            <i class="fas fa-check-circle"></i>
+                                            Finished
+                                        </button>
                                         @endif
                                     </td>
                                     <td>
                                         {{-- Finished --}}
-                                        @if ($item->TrangThai == 0)
-                                        <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success"><i class="fas fa-check"></i> </a>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
-                                        <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
+                                        @if ($item->TrangThai == 0 || $item->TrangThai ==1)
+                                        {{-- <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success"><i class="fas fa-check"></i> </a> --}}
+                                        <a href="" onclick="return ConfirmDelivery('{{ $item->SoHDB }}',this)" class="btn btn-info" title="Giao hàng"><i class="fas fa-truck-loading"></i> </a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" title="Chi tiết" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                                        <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" title="Hủy" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
+                                        {{-- Đang giao chờ hoàn tất --}}
+                                        @elseif($item->TrangThai == 2)
+                                        <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success" title="Hoàn tất"><i class="fas fa-check"></i></a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
+                                        <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" title="Hủy" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
+                                        {{-- Đã giao hàng hoặc bị hủy --}}
                                         @else
                                         <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
                                         @endif
-                                        {{-- <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success"><i class="fas fa-check"></i> </a>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
-                                        <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a> --}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -318,7 +337,7 @@
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-danger disabled"><i class="far fa-times-circle"></i> Canceled</button>';
                             $(ctl).parent().parent().children('td:nth-child(7)').html(disabled);
-                            var info = '<a href="" onclick="return OrderDetail('+id+',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>';
+                            var info = '<a href="" title="Chi tiết" onclick="return OrderDetail('+id+',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>';
                             $(ctl).parent().html(info);
                             ShowAlert('Hủy!', result.message, 'success');
                         } else if (result.status == 'disabled') {
@@ -357,11 +376,50 @@
                         if (result.status == 'success') {
                             var disabled = '<button class="btn btn-success disabled"><i class="fas fa-check-circle"></i> Finished</button>';
                             $(ctl).parent().parent().children('td:nth-child(7)').html(disabled);
-                            var info = '<a href="" onclick="return OrderDetail('+id+',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>';
+                            var info = '<a href="" title="Chi tiết" onclick="return OrderDetail('+id+',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>';
                             $(ctl).parent().html(info);
                             ShowAlert('Hoàn thành!', result.message, 'success');
                         } else if (result.status == 'disabled') {
                             ShowAlert('Đã được xác nhận', result.message, 'info');
+                        } else {
+                            ShowAlert('Lỗi...', result.message, 'error');
+                        }
+                    }
+                }).fail(function(data) {
+                    ShowAlert('Oops...', 'Đã có lỗi xảy ra!. Vui lòng thử lại sau', 'error');
+                });
+            }
+        })
+        return false;
+    }
+
+    function ConfirmDelivery(id, ctl) {
+        Swal.fire({
+            title: 'Xác nhận đã giao đơn hàng cho người vận chuyển?'
+            , text: "Đơn hàng sẽ được đánh dấu là đang vận chuyển"
+            , icon: 'info'
+            , showCancelButton: true
+            , confirmButtonColor: '#3085d6'
+            , cancelButtonColor: '#d33'
+            , cancelButtonText:'Đóng'
+            , confirmButtonText: 'Xác nhận'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'PUT'
+                    , headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('value')
+                    }
+                    , url: '/PhoneStore/deliver-order/' + id
+                    , success: function(result) {
+                        if (result.status == 'success') {
+                            var disabled = '<button class="btn btn-primary disabled"><i class="fas fa-truck-loading"></i> Delivery</button>';
+                            $(ctl).parent().parent().children('td:nth-child(7)').html(disabled);
+                            var info = '<a title="Hoàn tất" style="margin-right:5px" href="" onclick="return ConfirmFinish('+id+',this)" class="btn btn-success"><i class="fas fa-check"></i> </a><a href="" title="Chi tiết" onclick="return OrderDetail('+id+',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a><a href="" onclick="return ConfirmCancel('+id+',this)" title="Hủy" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>';
+                            $(ctl).parent().html(info);
+                            ShowAlert('Đang giao!', result.message, 'success');
+                        } else if (result.status == 'disabled') {
+                            ShowAlert('Lỗi xảy ra', result.message, 'info');
                         } else {
                             ShowAlert('Lỗi...', result.message, 'error');
                         }

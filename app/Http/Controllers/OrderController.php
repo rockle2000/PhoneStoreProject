@@ -119,4 +119,38 @@ class OrderController extends Controller
             }
         }
     }
+
+    public function deliverOrder($id)
+    {
+        if (!is_numeric($id))
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Error'
+            ], 500);
+        $order = Order::find($id);
+        if ($order == null) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Not found'
+            ], 404);
+        } else {
+            if ($order->TrangThai == 2) {
+                return response()->json([
+                    'status' => 'disabled',
+                    'message' => 'Đơn hàng đã được giao cho bên vận chuyển từ trước!'
+                ]);
+            }
+            if ($order->update(['TrangThai' => 2])) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Đơn hàng được giao cho bên vận chuyển thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Lỗi khi thực hiện thao tác'
+                ]);
+            }
+        }
+    }
 }

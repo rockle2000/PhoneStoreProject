@@ -269,6 +269,7 @@ class ShoppingCartController extends Controller
         }
 
         if ($checkpayment == 'stripe') {
+            if(session('discountCode')){
             $discount = Discount::where('MaKM','=',session('discountCode'))->first();
             if ($discount->TrangThai != 1){
                 Cart::setGlobalDiscount(0);
@@ -293,6 +294,7 @@ class ShoppingCartController extends Controller
                 $req->session()->forget('discountCode');
                 return back()->with('error','Mã giảm giá này đã hết hạn');
             }
+        }
             if ($req->input('stripeToken')) {
                 $token = $req->input('stripeToken');
                 // $total = str_replace(',', '', Cart::priceTotal(0));

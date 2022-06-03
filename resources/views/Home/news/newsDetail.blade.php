@@ -172,11 +172,11 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
                                             <label>Tên</label>
-                                            <input type="text" class="coment-field" placeholder="Name">
+                                            <input type="text" class="coment-field" placeholder="Họ tên...">
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
                                             <label>Email <span class="text-danger">*</span></label>
-                                            <input type="text" class="coment-field" placeholder="Email">
+                                            <input type="text" class="coment-field" placeholder="Email...">
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="coment-btn pt-30 pb-sm-30 pb-xs-30 f-left">

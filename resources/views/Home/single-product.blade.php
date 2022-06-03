@@ -176,7 +176,7 @@
                 <div class="li-product-tab">
                     <ul class="nav li-product-menu">
                         <li><a class="active" data-toggle="tab" href="#description"><span>Giới thiệu</span></a></li>
-                        <li><a data-toggle="tab" href="#product-details"><span>Thông số</span></a></li>
+                        {{-- <li><a data-toggle="tab" href="#product-details"><span>Thông số</span></a></li> --}}
                         <li><a data-toggle="tab" href="#reviews"><span>Đánh giá</span></a></li>
                     </ul>
                 </div>
