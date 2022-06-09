@@ -56,12 +56,11 @@
                     </div>
                     <h6 class="text-right">Thông tin tài khoản</h6>
                 </div>
-                <form method="POST" action="{{route('customers.update',['customer' => $customer->id])}}">
+                <form method="POST" action="{{route('user.updateinfo',['id' => $customer->id])}}">
                     @csrf
                     @method('PUT')
                     <div class="row mt-2">
                         <div class="col-md-12"> <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" id="exampleName" placeholder="Họ tên" name="name" value="{{ old('name') ? old('name') : $customer-> name}}">
-
                             @error('name')
                             <span class="text-danger">{{$message}}</span>
                             @enderror

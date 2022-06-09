@@ -79,6 +79,7 @@ class ShoppingCartController extends Controller
             // $cartitem = Cart::content()->where('id', $id)
             //     ->where('options',$req->color);
             // $checksl = $cartitem->flatten(0)[0]->qty ? $cartitem->flatten(0)[0]->qty : 0;
+            // số lượng trong giỏ hàng
             if (count($cartitem) == 0)
                 $checksl = 0;
             else
@@ -98,7 +99,7 @@ class ShoppingCartController extends Controller
                 Cart::add(['id' => $listProduct->MaDT, 'name' => $listProduct->TenDT, 'qty' => !$reqQty ? 1 : $reqQty, 'price' => $listProduct->quantity[0]->DonGiaBan, 'weight' => $listProduct->quantity[0]->SoLuong, 'options' => ['photo' => $listProduct->image[0]->Anh, 'color' => $listProduct->quantity[0]->Mau]]);
                 return back()->with('msg', 'Đã thêm vào giỏ hàng!');
             } else {
-                return back()->with('error', 'Không đủ lượng trong kho!');
+                return back()->with('error', 'Không đủ số lượng trong kho!');
             }
         }
     }

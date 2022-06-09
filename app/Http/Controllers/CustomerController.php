@@ -211,6 +211,7 @@ class CustomerController extends Controller
         return view('Admin.customers.editCustomer', compact('customer'));
     }
 
+    //admin update
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -230,17 +231,37 @@ class CustomerController extends Controller
                 'name' => $request->name,
                 'phone' => $request->phone,
             ]);
-            // if (!$update_user) {
-            //     DB::rollBack();
-
-            //     return back()->with('error', 'Something went wrong while update user data');
-            // }
-
             DB::commit();
             if($request->hiddeninput) {
                 return redirect()->route('main-page')->with('msg', 'Cập nhật thông tin thành công');
             }
             return redirect()->route('customers.index')->with('status', 'Cập nhật thông tin thành công');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // throw $th;
+            return redirect()->back()->with('error','Đã có lỗi xảy ra');
+        }
+    }
+
+    public function updateinfo(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => ['required', 'regex:/^(([+]{0,1}\d{2})|\d?)[\s-]?[0-9]{2}[\s-]?[0-9]{3}[\s-]?[0-9]{4}$/'],
+        ],[
+            'name.required' => 'Tên không được để trống',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'phone.regex' =>'Số điện thoại không hợp lệ',
+            // 'phone.max' =>'Số điện thoại không vượt quá 11 kí tự'
+        ]
+        );
+
+        try {
+            $update_user = Customer::where('id', $id)->update([
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]);
+            return redirect()->route('main-page')->with('msg', 'Cập nhật thông tin thành công');
         } catch (\Throwable $th) {
             DB::rollBack();
             // throw $th;

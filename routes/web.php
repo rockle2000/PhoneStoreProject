@@ -141,6 +141,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/infocustomer/{id}', [CustomerController::class, 'info'])->name('infocustomer');
         Route::get('/changepass/{id}', [CustomerController::class, 'changepass'])->name('changepass');
         Route::put('/updatepass/{id}', [CustomerController::class, 'updatepassword'])->name('updatepass');
+        Route::put('/updateinfo/{id}', [CustomerController::class, 'updateinfo'])->name('updateinfo');
         Route::match(['get', 'post'], '/signout', [CustomerController::class, 'logout'])->name('signout');
 
         // Danh sách hóa đơn của khách hàng
