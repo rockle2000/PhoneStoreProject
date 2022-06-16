@@ -178,20 +178,20 @@
                             <option value="0">All</option>
                             <option value="10">Laptops</option>
                         </select> --}}
-                        <input type="text" required placeholder="Nhập từ khóa để tìm kiếm ..." name="keyword" value="{{ old('keyword') }}" oninvalid="this.setCustomValidity('Chưa nhập từ khóa để tìm kiếm')" oninput="this.setCustomValidity('')">
-                        <button class=" li-btn" type="submit"><i class="fa fa-search"></i></button>
+                        <input type="text" required placeholder="Nhập tên sản phẩm cần tìm kiếm ..." name="keyword" value="{{ old('keyword') }}" oninvalid="this.setCustomValidity('Vui lòng nhập từ khóa để tìm kiếm')" oninput="this.setCustomValidity('')">
+                        <button class="bg-danger text-white li-btn" type="submit"><i class="fa fa-search"></i></button>
                     </form>
                     <!-- Header Middle Searchbox Area End Here -->
                     <!-- Begin Header Middle Right Area -->
                     <div class="header-middle-right">
                         <ul class="hm-menu">
                             <!-- Begin Header Middle Wishlist Area -->
-                            <li class="hm-wishlist">
+                            {{-- <li class="hm-wishlist">
                                 <a href="wishlist.html">
                                     <span class="cart-item-count wishlist-item-count">0</span>
                                     <i class="fa fa-heart-o"></i>
                                 </a>
-                            </li>
+                            </li> --}}
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
                             <li class="hm-minicart">
@@ -234,7 +234,7 @@
                                         {{-- <form action="/create-checkout-session" method="POST">
                                                     <button type="submit">Checkout</button>
                                                   </form> --}}
-                                        <a href="{{ route('user.checkout') }}" class="li-button li-button-fullwidth">
+                                        <a href="{{ route('user.checkout') }}" class="li-button li-button-fullwidth bg-danger">
                                             <span style="font-family: Roboto,Helvetica,Arial,sans-serif">Thanh toán</span>
                                         </a>
                                     </div>
@@ -387,7 +387,7 @@
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Miễn phí vận chuyển</h2>
-                                    <p>Miễn phí trả hàng. Kiểm tra hóa đơn để xem ngày giao hàng</p>
+                                    <p>Miễn phí vận chuyển với mọi đơn hàng</p>
                                 </div>
                             </div>
                         </div>
@@ -401,7 +401,7 @@
                                 <div class="shipping-text">
                                     <h2>Thanh toán an toàn</h2>
                                     {{-- <p>Pay with the world's most popular and secure payment methods.</p> --}}
-                                    <p>Thanh toán bằng phương thức an toàn và bảo mật nhất</p>
+                                    <p>Thanh toán bằng phương thức an toàn và bảo mật</p>
                                 </div>
                             </div>
                         </div>
@@ -416,7 +416,7 @@
                                     {{-- <h2>Shop with Confidence</h2>
                                     <p>Our Buyer Protection covers your purchasefrom click to delivery.</p> --}}
                                     <h2>Mua bán đảm bảo</h2>
-                                    <p>Hệ thông bảo vệ người mua quản lý thanh toán của bạn từ click đến việc vận chuyển</p>
+                                    <p>Mọi mặt hàng trong cửa hàng đều là chính hãng có đầy đủ hóa đơn, tem bảo hành</p>
                                 </div>
                             </div>
                         </div>

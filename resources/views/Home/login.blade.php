@@ -30,7 +30,7 @@
                     @endif --}}
                     @csrf
                     <div class="login-form">
-                        <h4 class="login-title">Đăng nhập</h4>
+                        <h4 class="login-title text-center">Đăng nhập</h4>
                         <div class="row">
                             <div class="col-md-12 col-12 mb-20">
                                 <label>Email <span class="text-danger">*</span></label>

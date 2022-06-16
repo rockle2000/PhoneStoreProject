@@ -19,7 +19,7 @@
                             <div class="slider-content">
                                 <h5>{!! $slide->NoiDung !!}</h5>
                                 <div class="default-btn slide-btn">
-                                    <a class="links" href="#">Mua ngay</a>
+                                    {{-- <a class="links" href="#">Mua ngay</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -379,6 +379,7 @@
                 <!-- Begin Li's Static Home Image Area -->
                 @if($bottom_banner)
                 <div class="li-static-home-image" style="background-image: url('{{ asset('public/backend/uploads/banners/'.$bottom_banner->Anh)}}');"></div>
+                {{-- <div class="li-static-home-image" style="background-image: url('{{ asset('public/frontend/images/banner/bottom_banner.png')}}');"></div> --}}
                 @else
                 <div class="li-static-home-image" style="background-image: url('{{ asset('public/frontend/images/banner/bottom_banner.png')}}');"></div>
                 @endif

@@ -133,7 +133,7 @@
                                         <img src="{{ asset('public/frontend/images/product-details/admin.png') }}" alt="Admin">
                                     </div>
                                     <div class="comment-body pl-15">
-                                        <span class="reply-btn pt-15 pt-xs-5"><a href="#">phản hồi</a></span>
+                                        <span class="reply-btn pt-15 pt-xs-5" ><a href="#">phản hồi</a></span>
                                         <h5 class="comment-author pt-15">admin</h5>
                                         <div class="comment-post-date">
                                             20/11/2018 21:45
@@ -162,16 +162,16 @@
                         <div class="li-blog-comment-wrapper">
                             <h3>để lại bình luận</h3>
                             {{-- <p>Your email address will not be published. Required fields are marked *</p> --}}
-                            <p>Email của bạn sẽ được bảo mật. Những trường bắt buộc *</p>
+                            <p>Email của bạn sẽ được bảo mật. Những trường bắt buộc <span class="text-danger">*</span></p>
                             <form action="#">
                                 <div class="comment-post-box">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <label>bình luận</label>
+                                            <label>Bình luận</label>
                                             <textarea name="commnet" placeholder="Bình luận của bạn..."></textarea>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
-                                            <label>Tên</label>
+                                            <label>Họ tên</label>
                                             <input type="text" class="coment-field" placeholder="Họ tên...">
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 mt-5 mb-sm-20 mb-xs-20">
@@ -180,7 +180,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="coment-btn pt-30 pb-sm-30 pb-xs-30 f-left">
-                                                <input class="li-btn-2" type="submit" name="submit" value="bình luận">
+                                                <input class="li-btn-2" style="background-color: #293a6c" type="submit" name="submit" value="bình luận">
                                             </div>
                                         </div>
                                     </div>

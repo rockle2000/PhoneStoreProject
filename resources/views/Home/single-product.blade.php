@@ -72,24 +72,18 @@
                             @endif
                         </div>
                         <div class="product-desc">
-                            {{-- <p>
-                                <span>100% cotton double printed dress. Black and white striped top and orange high waisted skater
-                                    skirt bottom. Lorem ipsum dolor sit amet, consectetur adipisicing elit. quibusdam corporis, earum
-                                    facilis et nostrum dolorum accusamus similique eveniet quia pariatur.
-                                </span>
-                            </p> --}}
                         </div>
-                        <span>Bảo hành: {{ $product->BaoHanh}}</span><br>
+                        <span style="font-size: 16px">Bảo hành: {{ $product->BaoHanh}}</span><br>
                         @if($product->quantity->count() >0 )
-                        <span> Số lượng trong kho: </span>
+                        <span style="font-size: 16px"> Số lượng trong kho: </span>
                         @if($product->quantity[0]->SoLuong > 0)
-                        <span id="product_instock">{{ $product->quantity[0]->SoLuong }}</span>
+                        <span style="font-size: 16px" id="product_instock">{{ $product->quantity[0]->SoLuong }}</span>
                         @elseif($product->quantity[0]->SoLuong == 0)
-                        <span id="product_instock"><span class="text-danger">Đã hết hàng</span></span>
+                        <span style="font-size: 16px" id="product_instock"><span class="text-danger">Đã hết hàng</span></span>
                         @endif
                         {{-- <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" method="get"> --}}
                         @else
-                        Số lượng trong kho: <span id="product_instock">Đang cập nhật</span>
+                        <span style="font-size: 16px"> Số lượng trong kho: <span id="product_instock">Đang cập nhật</span></span>
                         @endif
                         <form action="{{route('user.addToCart',['id' => $product->MaDT])}}" class="cart-quantity" style=" overflow: visible !important; " method="get">
                             @csrf
@@ -105,6 +99,7 @@
                                     @endif
                                 </div>
                             </div>
+                            <br><br><br>
                             @if($product->quantity->count() >0)
                             <div class="single-add-to-cart">
                                 <div class="quantity">
@@ -115,7 +110,7 @@
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
-                                <button class="add-to-cart" type="submit">Thêm vào giỏ hàng</button>
+                                <button class="add-to-cart" style="background-color: #293a6c; color:white; font-weight:bold"  type="submit">Thêm vào giỏ hàng</button>
                             </div>
                             @endif
                         </form>
@@ -138,7 +133,7 @@
                                             <i class="fa fa-check-square-o"></i>
                                         </div>
                                         {{-- <p>Security policy (edit with Customer reassurance module)</p> --}}
-                                        <p>Chính sách bảo mật (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                        <p>Chính sách bảo mật, không để lộ thông tin người dùng</p>
                                     </div>
                                 </li>
                                 <li>
@@ -147,7 +142,7 @@
                                             <i class="fa fa-truck"></i>
                                         </div>
                                         {{-- <p>Delivery policy (edit with Customer reassurance module)</p> --}}
-                                        <p>Chính sách giao hàng (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                        <p>Chính sách giao hàng nhanh chóng, an toàn</p>
                                     </div>
                                 </li>
                                 <li>
@@ -156,7 +151,7 @@
                                             <i class="fa fa-exchange"></i>
                                         </div>
                                         {{-- <p> Return policy (edit with Customer reassurance module)</p> --}}
-                                        <p>Chính sách đổi trả (chỉnh sửa với mô-đun bảo hiểm cho khách hàng)</p>
+                                        <p>Chính sách đổi trả với sản phẩm gặp lỗi trong vòng 7 ngày</p>
                                     </div>
                                 </li>
                             </ul>
@@ -186,7 +181,7 @@
         <div class="tab-content">
             <div id="description" class="tab-pane active show" role="tabpanel">
                 <div class="row">
-                    <div class="product-description col-md-9" >
+                    <div class="product-description col-md-9">
                         {!! $product->GioiThieu !!}
                     </div>
                     <div class="col-md-3">

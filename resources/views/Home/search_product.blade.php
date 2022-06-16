@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <!-- shop-top-bar start -->
-                <div class="shop-top-bar mt-30">
+                <div class="shop-top-bar mt-30" style="border:1px solid #293a6c">
                     <div class="shop-bar-inner">
                         <div class="product-view-mode">
                             <!-- shop-item-filter-list start -->
@@ -47,7 +47,7 @@
                             </ul>
                             <!-- shop-item-filter-list end -->
                         </div>
-                        <div class="toolbar-amount">
+                        <div class="toolbar-amount" >
                             <span class="h6">Tìm thấy {{ $result_found }} kết quả với từ khóa <span class="text-danger">{{ $keyWord }}</span></span>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                                 {{-- <span class="sticker">New</span> --}}
                                             </div>
                                         </div>
-                                        <div class="col-lg-8 col-md-7">
+                                        <div class="col-lg-6">
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
@@ -109,21 +109,10 @@
                                                     <div class="price-box">
                                                         <span style="font-size: 20px" class="new-price text-danger">{{ number_format($s->quantity[0]->DonGiaBan) }}₫</span>
                                                     </div>
-                                                    
-                                                    {{-- <p>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360
-                                                        R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite
-                                                        Sound via Ring Radiator Technology. Stream And Control R3
-                                                        Speakers Wirelessly With Your Smartphone. Sophisticated, Modern
-                                                        Desig</p> --}}
-                                                    {{-- <p>{!! Str::limit('Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360
-                                                        R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite
-                                                        Sound via Ring Radiator Technology. Stream And Control R3
-                                                        Speakers Wirelessly With Your Smartphone. Sophisticated, Modern
-                                                        Desig', 200, ' ...') !!}</p> --}}
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="shop-add-action mb-xs-30">
                                                 <ul class="add-actions-link">
                                                     <li class="add-cart"><a href="{{ url('product-detail/'.$s->MaDT) }}">Chi tiết</a></li>
@@ -131,7 +120,7 @@
                                                     <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
                                                 </ul>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     @endforeach
                                 </div>
