@@ -341,8 +341,6 @@
                                             </ul>
                                         </li> --}}
                                 <li><a href="{{ route('news') }}" class="font-weight-bold">Tin tức</a></li>
-                                {{-- <li><a href="#" class="font-weight-bold">Phụ kiện</a></li> --}}
-                                {{-- <li><a href="{{ url('about-us') }}" class="font-weight-bold">Giới thiệu</a></li> --}}
                                 <li><a href="{{ url('contact') }}" class="font-weight-bold">Liên hệ</a></li>
                                 <li><a href="{{ url('discount') }}" class="font-weight-bold">Giảm giá</a></li>
                             </ul>
@@ -400,7 +398,6 @@
                                 </div>
                                 <div class="shipping-text">
                                     <h2>Thanh toán an toàn</h2>
-                                    {{-- <p>Pay with the world's most popular and secure payment methods.</p> --}}
                                     <p>Thanh toán bằng phương thức an toàn và bảo mật</p>
                                 </div>
                             </div>
@@ -413,8 +410,6 @@
                                     <img src="{{asset('public/frontend/images/shipping-icon/3.png')}}" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
-                                    {{-- <h2>Shop with Confidence</h2>
-                                    <p>Our Buyer Protection covers your purchasefrom click to delivery.</p> --}}
                                     <h2>Mua bán đảm bảo</h2>
                                     <p>Mọi mặt hàng trong cửa hàng đều là chính hãng có đầy đủ hóa đơn, tem bảo hành</p>
                                 </div>
@@ -428,10 +423,8 @@
                                     <img src="{{asset('public/frontend/images/shipping-icon/4.png')}}" alt="Shipping Icon">
                                 </div>
                                 <div class="shipping-text">
-                                    {{-- <h2>24/7 Help Center</h2>
-                                    <p>Have a question? Call a Specialist or chat online.</p> --}}
                                     <h2>Trung tâm hỗ trợ 24/7</h2>
-                                    <p>Nếu có câu hỏi liên hệ đường dây nóng</p>
+                                    <p>Nếu có câu hỏi hãy liên hệ đường dây nóng để được hỗ trợ</p>
                                 </div>
                             </div>
                         </div>
@@ -458,7 +451,7 @@
                             <ul class="des">
                                 <li>
                                     <span>Địa chỉ: </span>
-                                    Số 123 đường 456, quận 789, Hà Nội
+                                    Số 123 ngõ 35 Kim Mã Thượng, quận Ba Đình, Hà Nội
                                 </li>
                                 <li>
                                     <span>Số điện thoại: </span>

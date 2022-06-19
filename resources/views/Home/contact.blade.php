@@ -29,7 +29,8 @@
             <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                 <div class="team-member mb-60 mb-sm-30 mb-xs-30">
                     <div class="team-thumb">
-                        <img src="{{ asset('public/frontend/images/team/1.png') }}" alt="Our Team Member">
+                        {{-- <img src="{{ asset('public/frontend/images/team/1.png') }}" alt="Our Team Member"> --}}
+                        <img src="{{ asset('public/frontend/images/team/cv.jpg') }}" alt="Our Team Member">
                     </div>
                     <div class="team-content text-center">
                         <h3>Hoàng Quang Huy - 181210015</h3>

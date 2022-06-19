@@ -19,19 +19,25 @@
             <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
                 <form action="{{ route('user.create') }}" method="post" autocomplete="off">
                     @if (Session::get('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" id="success_messsage">
                         {{ Session::get('success') }}
                     </div>
+                    <script type="text/javascript">
+                        setTimeout(function () { $('#success_messsage').fadeOut("slow"); }, 3000)
+                    </script>
                     @endif
                     @if (Session::get('fail'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger"  id="failed_messsage">
                         {{ Session::get('fail') }}
                     </div>
+                    <script type="text/javascript">
+                        setTimeout(function () { $('#failed_messsage').fadeOut("slow"); }, 3000)
+                    </script>
                     @endif
-
                     @csrf
                     <div class="login-form">
-                        <h4 class="login-title text-center">Đăng ký</h4>
+                        <h4 class="login-title text-center mb-5">Đăng ký</h4>
+                        <hr class="mb-20 mt-10" style="color:#29306c; height: 2px; width: 100px; background-color: #29306c; margin:auto">
                         <div class="row">
                             <div class="col-md-12 col-12 mb-20">
                                 <label>Họ tên <span class="text-danger">*</span></label>

@@ -99,7 +99,7 @@
                                                     <h4><a class="product_name" href="single-product.html">{{ $item->TenDT }}</a></h4>
                                                     <div class="price-box">
                                                         @if($item->quantity->count() >0 )
-                                                        <span class="new-price">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
+                                                        <span class="new-price text-danger">{{ number_format($item->quantity[0]->DonGiaBan) }}₫</span>
                                                         @else
                                                         <span class="new-price text-danger">Liên hệ</span>
                                                         @endif

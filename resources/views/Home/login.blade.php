@@ -31,6 +31,7 @@
                     @csrf
                     <div class="login-form">
                         <h4 class="login-title text-center">Đăng nhập</h4>
+                        <hr class="mb-20 mt-10" style="color:#29306c; height: 2px; width: 100px; background-color: #29306c; margin:auto">
                         <div class="row">
                             <div class="col-md-12 col-12 mb-20">
                                 <label>Email <span class="text-danger">*</span></label>
