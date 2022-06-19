@@ -123,11 +123,11 @@ class CustomerController extends Controller
     function check(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:customers,email',
-            'password' => 'required|min:5|max:30'
+            'email' => 'required|email',
+            'password' => 'required'
         ], [
             'email.required' => 'Email không được để trống',
-            'email.exists' => 'Email này chưa được đăng ký!',
+            // 'email.exists' => 'Email này chưa được đăng ký!',
             'email.email' =>'Email không hợp lệ',
             'password.required' => 'Mật khẩu không được để trống',
         ]);

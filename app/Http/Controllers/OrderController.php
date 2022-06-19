@@ -14,9 +14,9 @@ class OrderController extends Controller
     //
     public function getAllOrder()
     {
-        $order = Order::orderByRaw('TrangThai=0 DESC,SOHDB ASC')->get();
+        $order = Order::orderByRaw('SOHDB DESC')->get();
         // $order = DB::select('select * from `order` ORDER BY TrangThai=0 DESC,SOHDB ASC')->ge();
-        $order_count = Order::where('TrangThai', '=', '0')->count();
+        $order_count = Order::where('TrangThai', '=', '0')->orWhere('TrangThai', '=', '1')->count();
         $customer_count = Customer::where('status', '=', '1')->count();
         $product_count = Product::where('TrangThai', '=', '1')->count();
         return view("Admin.dashboard", compact('order', 'order_count', 'customer_count', 'product_count'));

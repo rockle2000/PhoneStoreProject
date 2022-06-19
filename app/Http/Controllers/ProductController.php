@@ -338,12 +338,13 @@ class ProductController extends Controller
         $this->validate(
             $request,
             [
-                'txtMau' => ['required'],
+                'txtMau' => ['required','regex:/^([a-zA-Z]+\s)*[a-zA-Z]+$/'],
                 'txtSoLuong' => ['required','numeric','gt:0'],
                 'txtDonGiaNhap' => ['required','numeric','gt:0'],
                 'txtDonGiaBan' => ['required','numeric','gt:0'],
             ],
             [
+                'txtMau.regex' => 'Màu sắc không hợp lệ',
                 'txtMau.required' => 'Bạn chưa nhập màu',
                 'txtSoLuong.required' => 'Bạn chưa nhập số lượng ',
                 'txtSoLuong.numeric' => 'Số lượng không hợp lệ ',
