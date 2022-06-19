@@ -172,7 +172,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item {{ (Request::path()=='product-list'||Request::path()=='add-product' ||Str::contains(Request::path(), 'edit-product')) ? 'menu-open' : '' }}">
+                        <li class="nav-item {{ (Request::path()=='product-list'||Request::path()=='add-product' ||Str::contains(Request::path(), 'edit-product'))||Str::contains(Request::path(), 'product-quantity')? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ (Request::path()=='product-list'||Request::path()=='add-product') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-boxes"></i>
                                 <p>
@@ -248,7 +248,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('/add-newscategory') }}" class="nav-link {{ Request::path()=='add-newscategory' ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm thể loại bài viết</p>
+                                        <p>Thêm thể loại tin tức</p>
                                     </a>
                                 </li>
                             </ul>

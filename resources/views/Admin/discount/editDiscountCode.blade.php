@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <!-- Horizontal Form -->
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Sửa thông tin mã khuyến mãi</h3>
                 </div>
                 <!-- /.card-header -->

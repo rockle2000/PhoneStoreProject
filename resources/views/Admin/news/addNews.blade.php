@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <!-- Horizontal Form -->
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Thêm mới tin tức</h3>
                 </div>
                 <!-- /.card-header -->
@@ -59,7 +59,7 @@
                         <div class="form-group row">
                             <label for="txtNoiDung" class="col-sm-2 col-form-label">Danh mục</label>
                             <div class="col-sm-10">
-                            <select name="ddlDanhMuc[]" class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho bài viết">
+                            <select name="ddlDanhMuc[]" class="selectpicker form-control dropdown-primary " multiple data-live-search="true" title="Chọn danh mục cho tin tức">
                                 @foreach ($newscategories as $cate)
                                     <option value="{{ $cate->MaTheLoai }}">{{ $cate->TheLoai }}</option>
                                 @endforeach

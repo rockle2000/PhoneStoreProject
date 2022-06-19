@@ -23,9 +23,9 @@
                         <h3 class="card-title">Chi tiết bảo hành hóa đơn <span class="text-warning">#{{$order->SoHDB}}</span></h3>
                     </div>
                     <div style="padding: 1.25rem">
-                        <h5>Ngày đặt hàng: {{ date('d-m-Y H:i:s', strtotime($order->NgayDatHang)) }}</h5>
-                        <h5>Khách hàng: {{$order->customer->name  }}</h5>
-                        <h5>Số điện thoại: {{$order->SoDienThoai  }}</h5>
+                        <h5><strong>Ngày đặt hàng:</strong> {{ date('d-m-Y H:i:s', strtotime($order->NgayDatHang)) }}</h5>
+                        <h5><strong>Khách hàng: </strong>{{$order->customer->name  }}</h5>
+                        <h5><strong>Số điện thoại:</strong> {{$order->SoDienThoai  }}</h5>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -52,6 +52,7 @@
                                     <td>{{ $item->SoLuong}}</td>
                                     <td>{{ number_format($item->DonGiaBan)}}₫</td>
                                     <td>{{ $item->ThoiGianBaoHanh}}</td>
+                                    {{-- Hạn bảo hành --}}
                                     <td>{{ date('d-m-Y', strtotime("+".explode(" ", $item->ThoiGianBaoHanh)[0] ." months", strtotime($order->NgayDatHang))); }}</td>
                                     @if($item->BaoHanh ==0)
                                     <td>Chưa kích hoạt</td>   

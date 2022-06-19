@@ -6,11 +6,11 @@
 @section('content')
 <div class="container-fluid ">
     <div class="row">
-        {{-- <div class="col-md-2"></div> --}}
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             <!-- Horizontal Form -->
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Thêm mới thể loại</h3>
                 </div>
                 <!-- /.card-header -->
@@ -21,7 +21,7 @@
                         <div class="form-group row">
                             <label for="txtTheLoai" class="col-sm-2 col-form-label">Thể loại</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtTheLoai" name="txtTheLoai" value="{{ old('txtTheLoai') }}" placeholder="Thể loại">
+                                <input type="text" class="form-control" id="txtTheLoai" name="txtTheLoai" value="{{ old('txtTheLoai') }}" placeholder="Tên thể loại">
                                 @error('txtTheLoai')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -48,7 +48,7 @@
                 </form>
             </div>
             <!-- /.card -->
-            {{-- <div class="col-md-2"></div> --}}
+            <div class="col-md-2"></div>
         </div>
         <!--/.col (left) -->
     </div>

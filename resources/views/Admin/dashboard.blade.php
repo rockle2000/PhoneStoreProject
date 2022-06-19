@@ -30,14 +30,13 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-primary">
+                <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $order_count }}</h3>
                         <p>Hóa đơn mới</p>
                     </div>
                     <div class="icon">
-                        {{-- <i class="ion ion-bag"></i> --}}
-                        <i class="fas fa-receipt"></i>
+                        <i class="fas fa-shopping-bag"></i>
                     </div>
                     <a href="#" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -45,14 +44,13 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-success">
+                <div class="small-box bg-danger">
                     <div class="inner">
                         <h3>2<sup style="font-size: 20px"></sup></h3>
                         <p>Thống kê</p>
                     </div>
                     <div class="icon">
-                        {{-- <i class="ion ion-stats-bars"></i> --}}
-                        <i class="fas fa-chart-pie"></i>
+                        <i class="fas fa-chart-bar"></i>
                     </div>
                     <a href="{{ url('chart') }}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -60,13 +58,12 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $customer_count }}</h3>
                         <p>Người dùng</p>
                     </div>
                     <div class="icon">
-                        {{-- <i class="ion ion-person-add"></i> --}}
                         <i class="fas fa-user"></i>
                     </div>
                     <a href="{{ url('customers') }}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
@@ -75,7 +72,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-danger">
+                <div class="small-box bg-dark">
                     <div class="inner">
                         <h3>{{ $product_count }}</h3>
                         <p>Sản phẩm</p>
@@ -164,16 +161,16 @@
                                         @if ($item->TrangThai == 0 || $item->TrangThai ==1)
                                         {{-- <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success"><i class="fas fa-check"></i> </a> --}}
                                         <a href="" onclick="return ConfirmDelivery('{{ $item->SoHDB }}',this)" class="btn btn-info" title="Giao hàng"><i class="fas fa-truck-loading"></i> </a>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" title="Chi tiết" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}','{{ $item->payment_id }}',this)" title="Chi tiết" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info"></i></a>
                                         <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" title="Hủy" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
                                         {{-- Đang giao chờ hoàn tất --}}
                                         @elseif($item->TrangThai == 2)
                                         <a href="" onclick="return ConfirmFinish('{{ $item->SoHDB }}',this)" class="btn btn-success" title="Hoàn tất"><i class="fas fa-check"></i></a>
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}','{{ $item->payment_id }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
                                         <a href="" onclick="return ConfirmCancel(' {{ $item->SoHDB }}',this)" title="Hủy" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
                                         {{-- Đã giao hàng hoặc bị hủy --}}
                                         @else
-                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
+                                        <a href="" onclick="return OrderDetail('{{ $item->SoHDB }}','{{ $item->payment_id }}',this)" role="button" data-toggle="modal" data-target="#modal-xl" class="btn btn-primary"><i class="fas fa-info" ></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -197,7 +194,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Chi tiết hóa đơn <strong id="order_id"></strong></h4>
+                <h4 class="modal-title">Chi tiết hóa đơn <strong id="order_id"></strong>- <span class="text-primary" id="payment_type"></span></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -277,10 +274,13 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
-    function OrderDetail(id, ctl) {
+    function OrderDetail(id, payment_type,ctl) {
         // console.log('id' + id);
         $('#order_id').html("#" + id);
         $('.modal-body tbody').html();
+        const hinhthuc = payment_type?"Thanh toán online":"COD";
+        // console.log(hinhthuc);
+        $('#payment_type').html(hinhthuc);
         $.ajax({
             type: 'GET'
             , headers: {

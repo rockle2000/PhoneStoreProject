@@ -7,8 +7,8 @@
         <div class="col-md-7">
             <!-- general form elements -->
             <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Kho điện thoại mã {{ $id }}</h3>
+                <div class="card-header bg-dark">
+                    <h3 class="card-title">Kho điện thoại mã <span class="text-warning">#{{ $id }}<span></h3>
                 </div>
                 <!-- /.card-header -->
                 <table id="example1" class="table table-bordered table-striped">
@@ -57,7 +57,7 @@
         <div class="col-md-5">
             <!-- Form Element sizes -->
             <div class="card card-success">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Thêm mới</h3>
                 </div>
                 <div class="card-body">
@@ -125,16 +125,6 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    // @if(count($errors) > 0)
-    // toastr.options = {
-    //     "timeOut": 5000
-    //         // , "progressBar": true
-    //     , "preventDuplicates": true
-    //     , "closeButton": true
-    // , }
-    // toastr.error($('#error_message').html());
-    // @endif
-
     @if(session('msg'))
     toastr.options = {
         "timeOut": 3000 
@@ -147,8 +137,11 @@
     function EditQuantity(id, color, ctl) {
         if ($(ctl).text() == 'Edit') {
             $(ctl).text('Save');
+            // $(ctl).parent().parent().children('td:nth-child(5)').append('<a onclick="return Cancel(\''+id +'\',\''+ color +'\',this)" class="btn btn-success"><i class="fas fa-redo"></i></a>');
             for (var i = 0; i < 3; i++) {
                 var val = $(ctl).parent().parent().children('td:nth-child(' + (2 + i) + ')').text().trim();
+                if (val == "Hết hàng") 
+                    val = 0;
                 // console.log(i + ":" + val);
                 $(ctl).parent().parent().children('td:nth-child(' + (2 + i) + ')').html('<input type="text" style="width:100px" value="' + val + '" />');
             }
@@ -226,6 +219,16 @@
         })
         return false;
     }
+
+    // function Cancel(id, color, ctl) {
+    //     var elem = $(ctl).parent().parent();
+    //     for (var i = 0; i < 3; i++) {
+    //         $(elem).children('td:nth-child(' + (2 + i) + ')').text($(ctl).parent().parent().children('td:nth-child(' + (2 + i) + ')').children('input').val());
+    //     }
+    //     $(ctl).remove();
+    //     $(ctl).parent().parent().children('td:nth-child(5)').append('<a onclick="return Cancel(\''+id +'\',\''+ color +'\',this)" class="btn btn-success"><i class="fas fa-redo"></i></a>');
+    //     return false;
+    // }
 
     function ShowAlert(title, text, icon) {
         Swal.fire({

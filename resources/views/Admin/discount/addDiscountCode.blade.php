@@ -2,11 +2,11 @@
 @section('content')
 <div class="container-fluid ">
     <div class="row">
-        {{-- <div class="col-md-2"></div> --}}
-        <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             <!-- Horizontal Form -->
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Thêm mã khuyến mãi mới</h3>
                 </div>
                 <!-- /.card-header -->
@@ -104,7 +104,7 @@
                 </form>
             </div>
             <!-- /.card -->
-            {{-- <div class="col-md-2"></div> --}}
+            <div class="col-md-2"></div>
         </div>
         <!--/.col (left) -->
     </div>

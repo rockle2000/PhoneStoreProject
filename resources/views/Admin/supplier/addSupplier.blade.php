@@ -13,7 +13,7 @@
             </ul>
             @endif
             <div class="card card-info">
-                <div class="card-header">
+                <div class="card-header bg-dark">
                     <h3 class="card-title">Thêm mới nhà cung cấp</h3>
                 </div>
                 <!-- /.card-header -->

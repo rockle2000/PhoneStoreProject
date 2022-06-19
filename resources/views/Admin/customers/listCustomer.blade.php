@@ -15,7 +15,7 @@
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between bg-primary ">
+                    <div class="card-header d-flex justify-content-between bg-dark">
                         <h3 class="card-title mr-2 flex-grow-1">Danh sách người dùng</h3>
                         {{-- <a href="{{ route('customers.create') }}" class="btn btn-primary">
                             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -32,11 +32,11 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID </th>
+                                    <th>Id</th>
                                     <th>Email</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Actions</th>
+                                    <th>Tên</th>
+                                    <th>Số điên thoại</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,12 +125,6 @@
     }
     toastr.error("{{ session('error') }}");
     @endif
-
-    $('a.deletConfirm').click(function() {
-        // prompt('bạn có chắc muốn xóa nhà sản xuất này?');
-        alert('ok');
-        console.log($(this));
-    });
 
 </script>
 

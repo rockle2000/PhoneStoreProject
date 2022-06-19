@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header bg-primary">
+                    <div class="card-header bg-dark">
                         <h3 class="card-title">Danh sách sản phẩm</h3>
                     </div>
                     <!-- /.card-header -->

@@ -8,11 +8,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Thống kê</h1>
+                {{-- <h1>Thống kê</h1> --}}
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Thống kê</li>
                 </ol>
             </div>
@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <!-- AREA CHART -->
                 <div class="card card-primary">
-                    <div class="card-header">
+                    <div class="card-header bg-dark">
                         <h3 class="card-title">Doanh thu năm </h3>
                         <input type="text" style="height:20px; border:none; margin-left:15px;" class="yearpicker" id="yp_doanhthu" value="">
                         <div class="card-tools">
