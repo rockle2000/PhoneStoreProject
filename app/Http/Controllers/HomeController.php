@@ -97,6 +97,7 @@ class HomeController extends Controller
     {
         $discount = Discount::selectRaw('*,TIMEDIFF(NgayKetThuc,NOW()) as time')
             ->where("TrangThai",'=',1)
+            ->orderByRaw('DATEDIFF(NOW(),NgayKetThuc)')
             ->orderByRaw('GiamGia DESC')
             ->orderByRaw('SoLuong DESC')
             ->paginate(3);

@@ -93,61 +93,46 @@
                                         <div class="ht-setting-trigger"><span>Cài đặt</span></div>
                                         <div class="setting ht-setting">
                                             <ul class="ht-setting-list">
-
-                                                {{--<li><a href="login-register.html">My Account</a></li>
-                                                <li><a href="{{route('user.checkout')}}">Checkout</a>
+                                                @if(Auth::guard('customer')->check())
+                                                <li><a href="{{route('user.infocustomer',['id' => Auth::guard('customer')->user()->id])}}">Tài khoản </a></li>
+                                                <li><a href="{{route('user.orderByUser')}}">Đơn hàng</a></li>
+                                                <li><a href="{{ route('user.signout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Đăng xuất</a>
+                                                    <form action="{{ route('user.signout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                                </li>
+                                                @else
+                                                <li><a href="{{ route('user.login')}}">Đăng nhập</a></li>
+                                                @if (Route::has('user.register'))
+                                                <li><a href="{{route('user.register')}}">Đăng ký</a></li>
+                                                @endif
+                                                @endif
+                                            </ul>
+                                        </div>
                                     </li>
-                                    <!-- Authentication Links -->
-                                    @if (Route::has('user.login'))
-                                    @auth('customer')
-                                    <li><a href="{{ route('user-logout')  }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ Auth::guard('customer')->user()->name }}</a>
-                                        <form action="{{ route('user-logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
-                                        --}}
-
-                                        {{-- <li><a href="checkout.html">Checkout</a></li> --}}
-                                        <!-- Authentication Links -->
-                                        {{-- @if (Route::has('user.login')) --}}
-                                        @if(Auth::guard('customer')->check())
-                                        {{-- @auth --}}
-                                    <li><a href="{{route('user.infocustomer',['id' => Auth::guard('customer')->user()->id])}}">Tài khoản </a></li>
-                                    <li><a href="{{route('user.orderByUser')}}">Đơn hàng</a></li>
-                                    <li><a href="{{ route('user.signout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Đăng xuất</a>
-                                        <form action="{{ route('user.signout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
+                                    <!-- Setting Area End Here -->
+                                    <!-- Begin Currency Area -->
+                                    <li>
+                                        <span class="currency-selector-wrapper">Đơn vị thanh toán :</span>
+                                        <div class="ht-currency-trigger"><span>VNĐ ₫</span></div>
+                                        <div class="currency ht-currency">
+                                            <ul class="ht-setting-list">
+                                                {{-- <li><a href="#">EUR €</a></li> --}}
+                                                <li class="active"><a href="#">VNĐ ₫</a></li>
+                                            </ul>
+                                        </div>
                                     </li>
-                                    @else
-                                    <li><a href="{{ route('user.login')}}">Đăng nhập</a></li>
-                                    @if (Route::has('user.register'))
-                                    <li><a href="{{route('user.register')}}">Đăng ký</a></li>
-                                    @endif
-                                    @endif
-                                </ul>
-                            </div>
-                            </li>
-                            <!-- Setting Area End Here -->
-                            <!-- Begin Currency Area -->
-                            <li>
-                                <span class="currency-selector-wrapper">Đơn vị thanh toán :</span>
-                                <div class="ht-currency-trigger"><span>VNĐ ₫</span></div>
-                                <div class="currency ht-currency">
-                                    <ul class="ht-setting-list">
-                                        {{-- <li><a href="#">EUR €</a></li> --}}
-                                        <li class="active"><a href="#">VNĐ ₫</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Currency Area End Here -->
-                            <!-- Begin Language Area -->
-                            <li>
-                                <span class="language-selector-wrapper">Ngôn ngữ :</span>
-                                <div class="ht-language-trigger"><span>Tiếng Việt</span></div>
-                                <div class="language ht-language">
-                                    <ul class="ht-setting-list">
-                                        <li class="active"><a href="#"><img src="{{asset('public/frontend/images/menu/flag-icon/vietnam.png')}}" alt="">Tiếng Việt</a></li>
-                                        <li><a href="#"><img src="{{asset('public/frontend/images/menu/flag-icon/1.jpg')}}" alt="">English</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- Language Area End Here -->
+                                    <!-- Currency Area End Here -->
+                                    <!-- Begin Language Area -->
+                                    <li>
+                                        <span class="language-selector-wrapper">Ngôn ngữ :</span>
+                                        <div class="ht-language-trigger"><span>Tiếng Việt</span></div>
+                                        <div class="language ht-language">
+                                            <ul class="ht-setting-list">
+                                                <li class="active"><a href="#"><img src="{{asset('public/frontend/images/menu/flag-icon/vietnam.png')}}" alt="">Tiếng Việt</a></li>
+                                                <li><a href="#"><img src="{{asset('public/frontend/images/menu/flag-icon/1.jpg')}}" alt="">English</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!-- Language Area End Here -->
                             </ul>
                         </div>
                     </div>

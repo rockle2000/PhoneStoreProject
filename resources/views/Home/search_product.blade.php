@@ -20,6 +20,20 @@
     @endforeach
 </div> --}}
 
+<style>
+#custom-search-item:hover{
+    /* box-shadow: -3px 5px 4px 0px rgb(0 0 0 / 20%); */
+    box-shadow: 0 0 11px rgba(33,33,33,.5); 
+}
+
+#custom-search-item{
+    transition: box-shadow .6s ease-out;
+    border-radius:5px;
+    padding: 10px;
+    height: 300px;
+}
+</style>
+
 
 <div class="breadcrumb-area">
     <div class="container">
@@ -51,22 +65,6 @@
                             <span class="h6">Tìm thấy {{ $result_found }} kết quả với từ khóa <span class="text-danger">{{ $keyWord }}</span></span>
                         </div>
                     </div>
-                    <!-- product-select-box start -->
-                    {{-- <div class="product-select-box">
-                        <div class="product-short">
-                            <p>Sort By:</p>
-                            <select class="nice-select">
-                                <option value="trending">Relevance</option>
-                                <option value="sales">Name (A - Z)</option>
-                                <option value="sales">Name (Z - A)</option>
-                                <option value="rating">Price (Low &gt; High)</option>
-                                <option value="date">Rating (Lowest)</option>
-                                <option value="price-asc">Model (A - Z)</option>
-                                <option value="price-asc">Model (Z - A)</option>
-                            </select>
-                        </div>
-                    </div> --}}
-                    <!-- product-select-box end -->
                 </div>
                 <!-- shop-top-bar end -->
                 <!-- shop-products-wrapper start -->
@@ -76,8 +74,9 @@
                             <div class="row">
                                 <div class="col">
                                     @foreach ($product as $s)
-                                    <div class="row product-layout-list">
-                                        <div class="col-lg-3 col-md-5 ">
+                                    <div clas="col-md-1"></div>
+                                    <div class="row col-md-10 product-layout-list" id="custom-search-item">
+                                        <div class="col-lg-3 col-md-5">
                                             <div class="product-image">
                                                 <a href="{{ url('product-detail/'.$s->MaDT) }}" class="pb-20">
                                                     {{-- <img src="images/product/large-size/12.jpg" alt="Li's Product Image"> --}}
@@ -86,7 +85,7 @@
                                                 {{-- <span class="sticker">New</span> --}}
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-9">
                                             <div class="product_desc">
                                                 <div class="product_desc_info">
                                                     <div class="product-review">
@@ -101,7 +100,6 @@
                                                                     <li class="no-star"><i class="fa fa-star-o"></i></li>
                                                                     @endif
                                                                     @endfor
-
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -112,16 +110,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        {{-- <div class="col-lg-3">
                                             <div class="shop-add-action mb-xs-30">
                                                 <ul class="add-actions-link">
-                                                    <li class="add-cart"><a href="{{ url('product-detail/'.$s->MaDT) }}">Chi tiết</a></li>
-                                                    <li class="wishlist"><a href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a></li>
-                                                    <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
+                                                    <li class="add-cart" style="margin-left:40px"><a href="{{ url('product-detail/'.$s->MaDT) }}">Xem Chi tiết</a></li>
+                                                    <li class="wishlist" style="visibility: hidden"><a href="wishlist.html"><i class="fa fa-heart-o"></i>Add to wishlist</a></li>
+                                                    <li style="visibility: hidden"><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i class="fa fa-eye"></i>Quick view</a></li>
                                                 </ul>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
+                                    <div clas="col-md-1"></div>
                                     @endforeach
                                 </div>
                             </div>
